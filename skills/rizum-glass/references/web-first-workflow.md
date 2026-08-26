@@ -1,6 +1,6 @@
 # Web-First Workflow
 
-Use this workflow for every new Rizum Glass interface, including interfaces that will later ship in GPUI.
+Use this workflow for every new Rizum Glass interface, including interfaces that will later ship in GPUI or WinUI 3.
 
 ## Baseline
 
@@ -21,7 +21,7 @@ This stack is the canonical reference environment because it gives design agents
 4. Exercise every important state: default, hover, pressed, focused, disabled, loading, empty, error, success, expanded, and compact where applicable.
 5. Verify desktop and compact viewports. Panels should be only as wide as their content contract requires, but never so narrow that labels and metadata collide.
 6. Capture screenshots or recordings of the approved states.
-7. If GPUI is a target, write a translation contract using the repository schema before writing Rust.
+7. If GPUI or WinUI 3 is a target, write the target-specific translation contract using the repository schema before writing native UI code.
 
 ## Reference Quality Gate
 

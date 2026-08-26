@@ -2,6 +2,13 @@
 
 All notable changes to Rizum Glass are documented here.
 
+## 1.2.0 - 2026-08-26
+
+- Added an optional WinUI 3 adapter with generated XAML resources and C# motion constants.
+- Added a WinUI reference contract so native Windows surfaces remain translations of approved web references.
+- Added WinUI-specific MVVM, code-behind, material, motion, accessibility, and scale-factor guidance to the reusable Skill.
+- Added a reusable WPF-to-WinUI adoption handoff for coding agents.
+
 ## 1.1.0 - 2026-08-26
 
 - Added an optional GPUI adapter with a generated `gpui-component` theme and Rust token constants.

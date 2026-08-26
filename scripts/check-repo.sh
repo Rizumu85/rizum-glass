@@ -22,9 +22,16 @@ adapters/gpui/reference-contract.schema.json
 adapters/gpui/reference-contract.example.json
 adapters/gpui/gallery/Cargo.toml
 adapters/gpui/gallery/src/main.rs
+adapters/winui/README.md
+adapters/winui/HANDOFF.md
+adapters/winui/generated/RizumGlass.Tokens.xaml
+adapters/winui/generated/RizumGlass.Motion.cs
+adapters/winui/reference-contract.schema.json
+adapters/winui/reference-contract.example.json
 skills/rizum-glass/SKILL.md
 skills/rizum-glass/agents/openai.yaml
 skills/rizum-glass/references/DESIGN.md
+skills/rizum-glass/references/winui-translation.md
 "
 
 for path in $required_files; do
@@ -54,8 +61,13 @@ if ! grep -q 'React + TypeScript + Vite + Tailwind CSS + shadcn/ui + Rizum Glass
   exit 1
 fi
 
-if ! grep -q 'GPUI as optional' skills/rizum-glass/SKILL.md; then
-  echo "The Rizum Glass Skill no longer marks GPUI as optional" >&2
+if ! grep -q 'GPUI and WinUI 3 as optional' skills/rizum-glass/SKILL.md; then
+  echo "The Rizum Glass Skill no longer marks native adapters as optional" >&2
+  exit 1
+fi
+
+if ! grep -q 'React + TypeScript + Vite + Tailwind CSS + shadcn/ui + Rizum Glass' adapters/winui/reference-contract.schema.json; then
+  echo "The WinUI reference contract no longer enforces the canonical web-first stack" >&2
   exit 1
 fi
 
@@ -67,6 +79,29 @@ const neutral = colors["primary.background"];
 for (const variant of ["danger", "info", "success", "warning"]) {
   if (colors[`${variant}.background`] !== neutral) {
     throw new Error(`${variant} button shell must remain neutral; express semantics through pointillist accents`);
+  }
+}
+NODE
+
+node <<'NODE'
+const fs = require("node:fs");
+const xaml = fs.readFileSync("adapters/winui/generated/RizumGlass.Tokens.xaml", "utf8");
+for (const style of ["RizumGlassButtonStyle", "RizumGlassConfirmButtonStyle", "RizumGlassDismissButtonStyle"]) {
+  if (!xaml.includes(`x:Key="${style}"`)) {
+    throw new Error(`Missing WinUI style: ${style}`);
+  }
+}
+for (const style of ["RizumGlassConfirmButtonStyle", "RizumGlassDismissButtonStyle"]) {
+  const neutralAlias = new RegExp(
+    `<Style\\s+x:Key="${style}"[^>]*BasedOn="\\{StaticResource RizumGlassButtonStyle\\}"\\s*/>`,
+  );
+  if (!neutralAlias.test(xaml)) {
+    throw new Error(`${style} must remain a direct alias of the neutral Rizum Glass button shell`);
+  }
+}
+for (const accent of ["AccentTeal", "AccentCyan", "AccentOrange", "AccentYellow", "AccentViolet", "AccentRose", "AccentMint"]) {
+  if (!xaml.includes(`RizumBrush${accent}`)) {
+    throw new Error(`Missing WinUI pointillist brush: ${accent}`);
   }
 }
 NODE

@@ -4,7 +4,7 @@
 
 `DESIGN.md` is the canonical design-language file. It follows the [google-labs-code/design.md](https://github.com/google-labs-code/design.md) structure: YAML front matter for tokens, followed by ordered design sections.
 
-The repository has four information layers:
+The repository separates canonical rules, derived assets, guidance, evidence, and adapters:
 
 | Layer | Purpose | Authority |
 | --- | --- | --- |
@@ -12,6 +12,7 @@ The repository has four information layers:
 | `docs/` | Rationale and workflow | Explanatory |
 | `tokens/` | Generated Tailwind v4 and DTCG exports | Derived from `DESIGN.md` |
 | `adapters/gpui/` | Optional GPUI theme, Rust constants, translation contract, and gallery | Derived adapter and verification surface |
+| `adapters/winui/` | Optional WinUI 3 resources, motion constants, translation contract, and handoff | Derived adapter and integration surface |
 | `skills/rizum-glass/` | Reusable agent workflow with a synchronized canonical snapshot | Derived guidance plus workflow |
 | `examples/` | Cross-domain transfer tests | Validation evidence |
 | `references/` | Product-specific snapshots | Historical visual evidence |
@@ -24,7 +25,7 @@ Use React, TypeScript, Vite, Tailwind CSS utilities, and shadcn/ui primitives. P
 
 Static HTML transfer tests are acceptable when they still use React component structure and Tailwind styling. Inline CSS should be limited to tokens, glass recipes, browser setup, and keyframes that utilities cannot express cleanly.
 
-This is the canonical design and reference environment, not a mandatory production runtime. A final product may use GPUI when native rendering, latency, or integration requirements justify it.
+This is the canonical design and reference environment, not a mandatory production runtime. A final product may use GPUI or WinUI 3 when native rendering, latency, platform integration, or distribution requirements justify it.
 
 ## Optional GPUI Path
 
@@ -38,6 +39,20 @@ GPUI must begin from an approved web reference rather than from prose or a scree
 6. Document material differences where browser backdrop filtering cannot map exactly to the target platform.
 
 The adapter pins versions only in its gallery smoke test. Consuming applications own their GPUI dependency versions and must verify APIs against their exact source.
+
+## Optional WinUI 3 Path
+
+WinUI 3 follows the same web-first translation boundary. It is a native Windows delivery target, not a second place to invent the visual language.
+
+1. Build and approve the interface in the canonical web stack.
+2. Record dimensions, state evidence, tokens, scale factors, motion, interruption behavior, accessibility, and material fallbacks in a JSON file conforming to `adapters/winui/reference-contract.schema.json`.
+3. Regenerate `RizumGlass.Tokens.xaml` and `RizumGlass.Motion.cs` with `./scripts/export-tokens.sh`.
+4. Translate behavior with standard WinUI controls before creating custom controls or Composition effects.
+5. Keep XAML views declarative, view state and commands in view models, and business logic in services. Limit code-behind to window lifecycle, visual-tree access, and narrow Composition interop.
+6. Compare the native result against the approved reference at matching content, state, dimensions, and display scale.
+7. Verify high contrast, transparency disabled, reduced motion, keyboard navigation, and long Chinese and English text.
+
+For new Windows applications, the recommended baseline is C# with .NET 8 or a newer supported release, WinUI 3 on the current stable Windows App SDK, CommunityToolkit.Mvvm, and Microsoft.Extensions.DependencyInjection. Consuming applications own those dependency versions and must verify unfamiliar APIs against current Microsoft documentation.
 
 ## Recommended Adoption: Git Submodule
 
@@ -87,7 +102,7 @@ Regenerate implementation tokens and adapter assets after any front-matter chang
 ./scripts/export-tokens.sh
 ```
 
-Do not edit files in `tokens/`, `adapters/gpui/themes/`, or `adapters/gpui/generated/` by hand. They are derived artifacts. The command also synchronizes `DESIGN.md` into the repository-owned Skill.
+Do not edit files in `tokens/`, `adapters/gpui/themes/`, `adapters/gpui/generated/`, or `adapters/winui/generated/` by hand. They are derived artifacts. The command also synchronizes `DESIGN.md` into the repository-owned Skill.
 
 Then generate a new transfer test under a domain unrelated to any existing reference. The test should include the component categories affected by the change, such as:
 

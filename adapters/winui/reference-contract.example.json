@@ -1,0 +1,70 @@
+{
+  "$schema": "./reference-contract.schema.json",
+  "reference": {
+    "stack": "React + TypeScript + Vite + Tailwind CSS + shadcn/ui + Rizum Glass",
+    "source": "examples/web-reference/index.html",
+    "approvedAt": "2026-08-26T12:00:00Z"
+  },
+  "target": {
+    "framework": "WinUI 3",
+    "dotnet": "8.0",
+    "windowsAppSdk": "current stable"
+  },
+  "viewport": {
+    "width": 960,
+    "height": 640,
+    "scale": 1.5
+  },
+  "components": [
+    {
+      "id": "confirmation-panel",
+      "primitive": "Border + TextBlock + Button",
+      "dimensions": {
+        "minWidth": 320,
+        "preferredWidth": 420,
+        "maxWidth": 480,
+        "preferredHeight": 184,
+        "padding": "16",
+        "gap": 12
+      },
+      "tokens": {
+        "background": "RizumBrushGlassPanel",
+        "border": "RizumBrushSurfaceLine",
+        "radius": "RizumRadiusPanel",
+        "title": "RizumGlassTitleTextStyle"
+      },
+      "states": [
+        {
+          "name": "default",
+          "evidence": "captures/confirmation-panel-default@150.png",
+          "notes": "Confirm and dismiss share the same neutral shell; the confirm icon alone uses accent teal."
+        },
+        {
+          "name": "confirmed",
+          "evidence": "captures/confirmation-panel-confirmed@150.png",
+          "notes": "Text and icon settle without changing button dimensions."
+        }
+      ]
+    }
+  ],
+  "motion": [
+    {
+      "id": "confirmation-settle",
+      "from": "default",
+      "to": "confirmed",
+      "durationMs": 320,
+      "easing": "soft spring with minimal overshoot",
+      "interruptible": true,
+      "reducedMotion": "Use a 120ms opacity transition with no scale change."
+    }
+  ],
+  "materialFallbacks": [
+    {
+      "webEffect": "Per-panel backdrop-filter blur",
+      "winuiStrategy": "Use a neutral translucent panel over a window-level Mica backdrop; use Desktop Acrylic only for transient overlays.",
+      "fallback": "Use RizumBrushGlassPanel with the same border, spacing, typography, and hierarchy when transparency is disabled.",
+      "acceptedDifference": "Per-element background refraction may be flatter than the approved web reference."
+    }
+  ]
+}
+

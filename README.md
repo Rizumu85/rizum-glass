@@ -2,7 +2,7 @@
 
 Rizum Glass is a reusable UI design language for compact software surfaces. It combines neutral liquid glass, paper-like editorial rhythm, restrained pointillist color, and tactile Apple/Arc-inspired motion.
 
-The visual language is reusable across products. The canonical design environment is intentionally specific: **React + TypeScript + Vite + Tailwind CSS + shadcn/ui**. Final products may optionally use the GPUI adapter after the web reference is approved; GPUI is not required.
+The visual language is reusable across products. The canonical design environment is intentionally specific: **React + TypeScript + Vite + Tailwind CSS + shadcn/ui**. Final products may optionally use the GPUI or WinUI 3 adapter after the web reference is approved; neither native target is required.
 
 ![Rizum Glass transfer test](assets/transfer-test-darkroom.png)
 
@@ -15,7 +15,8 @@ The visual language is reusable across products. The canonical design environmen
 | [`docs/implementation.md`](docs/implementation.md) | Adoption, validation, and synchronization workflow. |
 | [`tokens/`](tokens/) | Generated Tailwind v4 and DTCG token exports. |
 | [`adapters/gpui/`](adapters/gpui/) | Optional generated GPUI theme, Rust tokens, translation contract, and component gallery. |
-| [`skills/rizum-glass/`](skills/rizum-glass/) | Reusable Codex skill for web-first design and optional GPUI translation. |
+| [`adapters/winui/`](adapters/winui/) | Optional WinUI 3 resources, motion constants, translation contract, and migration handoff. |
+| [`skills/rizum-glass/`](skills/rizum-glass/) | Reusable Codex skill for web-first design and optional native translation. |
 | [`examples/transfer-test-darkroom-v12.html`](examples/transfer-test-darkroom-v12.html) | An unrelated product-domain test generated from the design language. |
 | [`references/`](references/) | Product-specific snapshots used as visual evidence, never as the source of truth. |
 
@@ -56,7 +57,7 @@ Then invoke it explicitly when useful:
 Use $rizum-glass to design this interface.
 ```
 
-The skill defaults to the web reference stack. It enters GPUI translation mode only when the consuming project explicitly chooses GPUI.
+The skill defaults to the web reference stack. It enters GPUI or WinUI 3 translation mode only when the consuming project explicitly chooses that target.
 
 ## Optional GPUI Delivery
 
@@ -70,10 +71,20 @@ cargo run
 
 See [`adapters/gpui/README.md`](adapters/gpui/README.md) for the translation boundary.
 
+## Optional WinUI 3 Delivery
+
+For a native Windows application, use WinUI 3 on the current stable Windows App SDK. Keep product state in view models and services rather than code-behind, merge the generated XAML resources once, and translate only from an approved web reference:
+
+```bash
+./scripts/export-tokens.sh
+```
+
+See [`adapters/winui/README.md`](adapters/winui/README.md) for integration details and [`adapters/winui/HANDOFF.md`](adapters/winui/HANDOFF.md) for a reusable migration prompt.
+
 ## Evolving The Style
 
 1. Change `DESIGN.md` first.
-2. Run `./scripts/export-tokens.sh` to regenerate web tokens, GPUI assets, and the skill snapshot.
+2. Run `./scripts/export-tokens.sh` to regenerate web tokens, native adapter assets, and the skill snapshot.
 3. Record the intent in `CHANGELOG.md`.
 4. Generate a new interface in an unrelated product domain using only `DESIGN.md`.
 5. Compare the result against the design principles, not against a product screenshot pixel for pixel.
