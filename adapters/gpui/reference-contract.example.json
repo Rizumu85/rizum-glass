@@ -1,0 +1,63 @@
+{
+  "$schema": "./reference-contract.schema.json",
+  "reference": {
+    "stack": "React + TypeScript + Vite + Tailwind CSS + shadcn/ui + Rizum Glass",
+    "source": "examples/web-reference/index.html",
+    "approvedAt": "2026-08-26T12:00:00Z"
+  },
+  "viewport": {
+    "width": 960,
+    "height": 640,
+    "scale": 2
+  },
+  "components": [
+    {
+      "id": "confirmation-panel",
+      "primitive": "Card + Button",
+      "dimensions": {
+        "minWidth": 320,
+        "preferredWidth": 420,
+        "maxWidth": 480,
+        "preferredHeight": 184,
+        "padding": "16px",
+        "gap": 12
+      },
+      "tokens": {
+        "background": "color.surface",
+        "border": "color.surface-line",
+        "radius": "rounded.xl",
+        "title": "typography.title-serif"
+      },
+      "states": [
+        {
+          "name": "default",
+          "evidence": "captures/confirmation-panel-default@2x.png",
+          "notes": "Neutral action shells; only the confirm icon uses accent teal."
+        },
+        {
+          "name": "confirmed",
+          "evidence": "captures/confirmation-panel-confirmed@2x.png",
+          "notes": "Text and icon settle without changing button dimensions."
+        }
+      ]
+    }
+  ],
+  "motion": [
+    {
+      "id": "confirmation-settle",
+      "from": "default",
+      "to": "confirmed",
+      "durationMs": 320,
+      "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+      "interruptible": true,
+      "reducedMotion": "Cross-fade for 120ms with no scale change."
+    }
+  ],
+  "materialFallbacks": [
+    {
+      "webEffect": "Per-panel backdrop-filter blur",
+      "gpuiStrategy": "Use a neutral translucent surface, light border, soft shadow, and optional window-level blur.",
+      "acceptedDifference": "Background refraction may be flatter on unsupported platforms."
+    }
+  ]
+}

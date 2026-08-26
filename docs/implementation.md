@@ -11,16 +11,33 @@ The repository has four information layers:
 | `DESIGN.md` | Tokens and enforceable UI/UX rules | Canonical |
 | `docs/` | Rationale and workflow | Explanatory |
 | `tokens/` | Generated Tailwind v4 and DTCG exports | Derived from `DESIGN.md` |
+| `adapters/gpui/` | Optional GPUI theme, Rust constants, translation contract, and gallery | Derived adapter and verification surface |
+| `skills/rizum-glass/` | Reusable agent workflow with a synchronized canonical snapshot | Derived guidance plus workflow |
 | `examples/` | Cross-domain transfer tests | Validation evidence |
 | `references/` | Product-specific snapshots | Historical visual evidence |
 
 Do not copy a product behavior into `DESIGN.md` merely because it appears in a reference. First express the reusable visual or interaction principle.
 
-## Implementation Baseline
+## Canonical Design Environment
 
-Use React components, Tailwind CSS utilities, and shadcn/ui primitives. Prefer existing shadcn primitives for behavior, accessibility, keyboard handling, focus management, and state semantics. Apply Rizum Glass through composition and tokens rather than replacing those behaviors with a hand-rolled visual framework.
+Use React, TypeScript, Vite, Tailwind CSS utilities, and shadcn/ui primitives. Prefer existing shadcn primitives for behavior, accessibility, keyboard handling, focus management, and state semantics. Apply Rizum Glass through composition and tokens rather than replacing those behaviors with a hand-rolled visual framework.
 
 Static HTML transfer tests are acceptable when they still use React component structure and Tailwind styling. Inline CSS should be limited to tokens, glass recipes, browser setup, and keyframes that utilities cannot express cleanly.
+
+This is the canonical design and reference environment, not a mandatory production runtime. A final product may use GPUI when native rendering, latency, or integration requirements justify it.
+
+## Optional GPUI Path
+
+GPUI must begin from an approved web reference rather than from prose or a screenshot. The web implementation exposes more reliable layout, state, computed-style, and motion parameters to both humans and coding agents.
+
+1. Build and approve the interface in the canonical web stack.
+2. Record component dimensions, tokens, states, evidence, motion timing, easing, interruption behavior, and material fallbacks in a JSON file conforming to `adapters/gpui/reference-contract.schema.json`.
+3. Regenerate the `gpui-component` theme and Rust constants with `./scripts/export-tokens.sh`.
+4. Translate behavior with `gpui-component` primitives before writing custom controls.
+5. Compare the native result against the approved reference at matching states and dimensions.
+6. Document material differences where browser backdrop filtering cannot map exactly to the target platform.
+
+The adapter pins versions only in its gallery smoke test. Consuming applications own their GPUI dependency versions and must verify APIs against their exact source.
 
 ## Recommended Adoption: Git Submodule
 
@@ -64,13 +81,13 @@ Lint the canonical file:
 npx @google/design.md lint DESIGN.md
 ```
 
-Regenerate implementation tokens after any front-matter change:
+Regenerate implementation tokens and adapter assets after any front-matter change:
 
 ```bash
 ./scripts/export-tokens.sh
 ```
 
-Do not edit files in `tokens/` by hand. They are derived artifacts.
+Do not edit files in `tokens/`, `adapters/gpui/themes/`, or `adapters/gpui/generated/` by hand. They are derived artifacts. The command also synchronizes `DESIGN.md` into the repository-owned Skill.
 
 Then generate a new transfer test under a domain unrelated to any existing reference. The test should include the component categories affected by the change, such as:
 
@@ -93,5 +110,11 @@ Evaluate the result at desktop and compact viewports. Check text wrapping, colli
 6. Visually inspect the test and a product reference side by side.
 7. Commit the canonical change and its evidence together.
 8. Update consuming projects intentionally rather than silently floating to the newest revision.
+
+## Reusable Skill
+
+Run `./scripts/install-skill.sh` to link `skills/rizum-glass` into `${CODEX_HOME:-$HOME/.codex}/skills`. A live link is preferred for local development because improvements remain versioned in this repository and become available across projects without copying files.
+
+The Skill may help identify reusable lessons in a consuming project, but it must not promote every local preference. A shared change must be product-neutral, update `DESIGN.md` first, pass an unrelated transfer test, regenerate all derived assets, and include a changelog entry.
 
 Product architecture, business flows, domain models, and feature inventories belong in their product repositories, not here.

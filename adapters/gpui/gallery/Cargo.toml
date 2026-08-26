@@ -1,0 +1,10 @@
+[package]
+name = "rizum-glass-gpui-gallery"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+gpui = { version = "=0.2.2", features = ["runtime_shaders"] }
+gpui-component = "=0.5.1"
+serde_json = "1"

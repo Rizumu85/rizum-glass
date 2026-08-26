@@ -5,13 +5,17 @@ Rizum Glass is a reusable UI design-language repository, not a product repositor
 - Read `DESIGN.md` before changing any UI guidance.
 - Keep `DESIGN.md` product-neutral. Generalize a lesson before promoting it from a reference snapshot.
 - Keep project files, code, comments, and technical documentation in English.
-- Use React, Tailwind CSS, and shadcn/ui for generated implementation examples.
+- Use React, TypeScript, Vite, Tailwind CSS, and shadcn/ui for canonical generated implementation examples.
+- Treat GPUI as an optional delivery adapter, never the default design environment.
+- Before writing GPUI UI code, require an approved web reference and a completed GPUI reference contract.
+- Verify unfamiliar GPUI and `gpui-component` APIs against the exact dependency source; both are pre-1.0.
 - Treat `references/` as evidence, not specification. Never infer missing rules from reference HTML.
 - Create a new versioned example or reference file instead of overwriting an earlier snapshot.
 - Validate a design change with an unrelated product-domain transfer test.
 - Keep large product feature specifications, architecture, and business rules out of this repository.
 - Update `CHANGELOG.md` when canonical guidance changes.
 - Regenerate `tokens/` with `scripts/export-tokens.sh` after token changes.
+- Let `scripts/export-tokens.sh` regenerate GPUI assets and synchronize the repository-owned Skill; do not hand-edit generated adapter files or the Skill's `DESIGN.md` snapshot.
 
 Verification:
 
@@ -19,4 +23,5 @@ Verification:
 npx @google/design.md lint DESIGN.md
 sh scripts/export-tokens.sh
 bash scripts/check-repo.sh
+cd adapters/gpui/gallery && cargo check
 ```
