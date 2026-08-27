@@ -11,6 +11,14 @@
   --color-surface-muted: #f4f4f5;
   --color-surface-line: #e4e4e7;
   --color-glass-border: #ffffff;
+  --color-dark-canvas: #111113;
+  --color-dark-surface: #27272a;
+  --color-dark-surface-muted: #3f3f46;
+  --color-dark-surface-line: #3f3f46;
+  --color-dark-ink: #f4f4f5;
+  --color-dark-ink-soft: #d4d4d8;
+  --color-dark-ink-muted: #a1a1aa;
+  --color-dark-caption: #9898a2;
   --color-accent-teal: #2dd4bf;
   --color-accent-cyan: #67e8f9;
   --color-accent-orange: #f59e0b;

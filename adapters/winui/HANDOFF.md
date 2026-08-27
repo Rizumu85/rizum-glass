@@ -23,7 +23,7 @@ Rizum Glass integration:
 1. Add or update [path-to-rizum-glass] as `design/rizum-glass`.
 2. Read `design/rizum-glass/DESIGN.md` first.
 3. Read `design/rizum-glass/adapters/winui/README.md` and `design/rizum-glass/skills/rizum-glass/references/winui-translation.md`.
-4. Include `adapters/winui/generated/RizumGlass.Tokens.xaml` as a linked XAML Page and merge it into `App.xaml`. Include `RizumGlass.Motion.cs` without copying its values into a second constants file.
+4. Include `adapters/winui/generated/RizumGlass.Tokens.xaml` as a linked XAML Page and merge it into `App.xaml`. Use its `Default`, `Dark`, and `HighContrast` theme dictionaries as generated. Include `RizumGlass.Motion.cs` without copying its values into a second constants file.
 5. For each non-trivial surface, first build or locate the approved React + TypeScript + Vite + Tailwind CSS + shadcn/ui reference. Complete a WinUI reference contract before translating the surface.
 6. Start with standard WinUI controls. Apply Rizum Glass through generated resources, composition, layout, typography, material, and motion rather than replacing control behavior.
 7. Keep confirm, cancel, dismiss, and ordinary action buttons on the same neutral shell. Express semantics through wording and a sparse icon accent, not large colored button fills.

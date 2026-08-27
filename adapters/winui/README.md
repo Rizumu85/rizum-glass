@@ -24,7 +24,7 @@ Keep XAML views declarative. View models own UI state and commands; services own
 
 | Path | Purpose |
 | --- | --- |
-| `generated/RizumGlass.Tokens.xaml` | Colors, brushes, type roles, spacing, radii, panel treatment, and neutral button styles. |
+| `generated/RizumGlass.Tokens.xaml` | Light, dark, and high-contrast colors and brushes plus type roles, spacing, radii, panel treatment, and neutral button styles. |
 | `generated/RizumGlass.Motion.cs` | Timing constants explicitly defined by the canonical design language. |
 
 Regenerate both files from `DESIGN.md`:
@@ -57,6 +57,8 @@ Include or link `generated/RizumGlass.Tokens.xaml` as a XAML `Page` in the WinUI
 
 The exact MSBuild include path depends on where the submodule sits. Treat a successful Windows build as the authority; do not copy generated values into a second hand-maintained dictionary.
 
+The generated `Default`, `Dark`, and `HighContrast` resource dictionaries allow WinUI to follow the application theme without a second hand-maintained palette. Dark mode keeps a solid neutral window background and does not add cursor-following lighting.
+
 ## Material Boundary
 
 - Use Mica or Mica Alt as a window-level backdrop when it supports the product hierarchy.
@@ -75,4 +77,3 @@ Verify current APIs against Microsoft documentation because Windows App SDK capa
 - [Windows App SDK](https://learn.microsoft.com/windows/apps/windows-app-sdk/)
 - [Materials](https://learn.microsoft.com/windows/apps/develop/ui/materials)
 - [XAML and Composition interop](https://learn.microsoft.com/windows/apps/develop/composition/xaml-comp-interop)
-

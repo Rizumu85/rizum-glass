@@ -25,6 +25,7 @@ Use the web implementation as the design instrument. Treat GPUI and WinUI 3 only
 - Use shadcn/ui, `gpui-component`, or standard WinUI controls before writing custom controls. Custom styling may compose primitives; it should not discard accessibility, focus, keyboard, or state behavior.
 - Keep product features, domain models, and architecture out of `DESIGN.md`.
 - Treat product reference files as evidence, not specifications.
+- Use `references/rizum-glass-ui-gallery-v11.html` and `references/rizum-glass-ui-gallery-dark-v11.html` as the only active visual references. Do not use older galleries, archived Nolnol, or darkroom files to guide new UI.
 - Prefer content-aware panel dimensions over a universal maximum width. Verify text fit and right-side metadata at compact and desktop sizes.
 - Keep color semantic and restrained. Neutral shells come first; pointillist accents identify meaning, not decoration.
 - Verify motion as a sequence of states, not just a final screenshot. Respect reduced-motion settings.

@@ -135,6 +135,94 @@
         "hex": "#ffffff"
       }
     },
+    "dark-canvas": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.067,
+          0.067,
+          0.075
+        ],
+        "hex": "#111113"
+      }
+    },
+    "dark-surface": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.153,
+          0.153,
+          0.165
+        ],
+        "hex": "#27272a"
+      }
+    },
+    "dark-surface-muted": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.247,
+          0.247,
+          0.275
+        ],
+        "hex": "#3f3f46"
+      }
+    },
+    "dark-surface-line": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.247,
+          0.247,
+          0.275
+        ],
+        "hex": "#3f3f46"
+      }
+    },
+    "dark-ink": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.957,
+          0.957,
+          0.961
+        ],
+        "hex": "#f4f4f5"
+      }
+    },
+    "dark-ink-soft": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.831,
+          0.831,
+          0.847
+        ],
+        "hex": "#d4d4d8"
+      }
+    },
+    "dark-ink-muted": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.631,
+          0.631,
+          0.667
+        ],
+        "hex": "#a1a1aa"
+      }
+    },
+    "dark-caption": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.596,
+          0.596,
+          0.635
+        ],
+        "hex": "#9898a2"
+      }
+    },
     "accent-teal": {
       "$value": {
         "colorSpace": "srgb",

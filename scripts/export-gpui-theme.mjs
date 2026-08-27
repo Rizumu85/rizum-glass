@@ -65,6 +65,14 @@ const ink = color("ink");
 const inkSoft = color("ink-soft");
 const inkMuted = color("ink-muted");
 const caption = color("caption");
+const darkCanvas = color("dark-canvas");
+const darkSurface = color("dark-surface");
+const darkSurfaceMuted = color("dark-surface-muted");
+const darkSurfaceLine = color("dark-surface-line");
+const darkInk = color("dark-ink");
+const darkInkSoft = color("dark-ink-soft");
+const darkInkMuted = color("dark-ink-muted");
+const darkCaption = color("dark-caption");
 const teal = color("accent-teal");
 const cyan = color("accent-cyan");
 const yellow = color("accent-yellow");
@@ -203,6 +211,91 @@ const theme = {
   ],
 };
 
+const darkTheme = structuredClone(theme.themes[0]);
+darkTheme.is_default = false;
+darkTheme.name = "Rizum Glass Dark";
+darkTheme.mode = "dark";
+Object.assign(darkTheme.colors, {
+  "accent.background": darkSurfaceMuted,
+  "accent.foreground": darkInkSoft,
+  "accordion.background": darkSurface,
+  background: darkCanvas,
+  border: darkSurfaceLine,
+  "group_box.background": darkSurface,
+  "group_box.foreground": darkInkSoft,
+  caret: darkInk,
+  "danger.background": darkSurface,
+  "danger.active.background": darkSurfaceMuted,
+  "danger.foreground": darkInkSoft,
+  "danger.hover.background": darkSurfaceMuted,
+  "description_list.label.background": darkSurfaceMuted,
+  "description_list.label.foreground": darkInkMuted,
+  foreground: darkInk,
+  "info.background": darkSurface,
+  "info.active.background": darkSurfaceMuted,
+  "info.foreground": darkInkSoft,
+  "info.hover.background": darkSurfaceMuted,
+  "input.border": darkSurfaceLine,
+  link: darkInkSoft,
+  "link.active": darkInk,
+  "link.hover": darkInk,
+  "list.background": darkSurface,
+  "list.even.background": darkSurface,
+  "list.head.background": darkSurfaceMuted,
+  "list.hover.background": darkSurfaceMuted,
+  "muted.background": darkSurfaceMuted,
+  "muted.foreground": darkInkMuted,
+  "popover.background": darkSurface,
+  "popover.foreground": darkInkSoft,
+  "primary.background": darkSurface,
+  "primary.active.background": darkSurfaceMuted,
+  "primary.foreground": darkInkSoft,
+  "primary.hover.background": darkSurfaceMuted,
+  "scrollbar.thumb.background": `${darkCaption}80`,
+  "scrollbar.thumb.hover.background": darkCaption,
+  "secondary.background": darkSurface,
+  "secondary.active.background": darkSurfaceMuted,
+  "secondary.foreground": darkInkSoft,
+  "secondary.hover.background": darkSurfaceMuted,
+  "sidebar.background": darkSurface,
+  "sidebar.accent.background": darkSurfaceMuted,
+  "sidebar.accent.foreground": darkInkSoft,
+  "sidebar.border": darkSurfaceLine,
+  "sidebar.foreground": darkInkSoft,
+  "sidebar.primary.background": darkSurface,
+  "sidebar.primary.foreground": darkInkSoft,
+  "skeleton.background": darkSurfaceMuted,
+  "slider.background": darkSurfaceLine,
+  "slider.thumb.background": darkInkMuted,
+  "success.background": darkSurface,
+  "success.active.background": darkSurfaceMuted,
+  "success.foreground": darkInkSoft,
+  "success.hover.background": darkSurfaceMuted,
+  "switch.background": darkSurfaceLine,
+  "switch.thumb.background": darkInkSoft,
+  "tab.active.background": darkSurface,
+  "tab.active.foreground": darkInkSoft,
+  "tab_bar.background": darkSurfaceMuted,
+  "tab_bar.segmented.background": darkSurfaceMuted,
+  "tab.foreground": darkInkMuted,
+  "table.background": darkSurface,
+  "table.even.background": darkSurface,
+  "table.head.background": darkSurfaceMuted,
+  "table.head.foreground": darkInkMuted,
+  "table.hover.background": darkSurfaceMuted,
+  "table.row.border": darkSurfaceLine,
+  "tiles.background": darkSurface,
+  "title_bar.background": darkCanvas,
+  "title_bar.border": darkSurfaceLine,
+  "warning.background": darkSurface,
+  "warning.active.background": darkSurfaceMuted,
+  "warning.foreground": darkInkSoft,
+  "warning.hover.background": darkSurfaceMuted,
+  overlay: "#00000052",
+  "window.border": darkSurfaceLine,
+});
+theme.themes.push(darkTheme);
+
 const rustColors = [
   "ink",
   "ink-soft",
@@ -212,6 +305,14 @@ const rustColors = [
   "surface",
   "surface-muted",
   "surface-line",
+  "dark-canvas",
+  "dark-surface",
+  "dark-surface-muted",
+  "dark-surface-line",
+  "dark-ink",
+  "dark-ink-soft",
+  "dark-ink-muted",
+  "dark-caption",
   "accent-teal",
   "accent-cyan",
   "accent-orange",

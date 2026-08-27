@@ -29,6 +29,8 @@ Decoration never gets to repair weak hierarchy.
 
 The canvas is a quiet neutral grey with extremely faint violet, cyan-green, and amber ambient light. It must still read as grey at a glance. A yellow bottom wash, a blue-green page gradient, or a strong purple atmosphere changes the identity too much.
 
+Dark appearance is deliberately stricter: its canvas is one solid near-black neutral. It does not inherit the light appearance's ambient gradients, because colored light becomes much louder against black and quickly turns the interface into a themed demo. Depth comes from neutral surface values, translucency, border light, and shadow.
+
 Glass is made from translucency, high blur, a white inner highlight, a fine white border, and a restrained neutral shadow. Glass should feel airy rather than milky or glossy. White light is the default highlight; colored glow is exceptional.
 
 Color behaves like pointillism. Teal, orange, violet, rose, mint, cyan, and yellow appear in dots, icon strokes, small stamps, status fills, and other tiny semantic marks. A large colored button or tinted panel usually spends too much of the color budget at once.
@@ -67,6 +69,8 @@ Motion should preserve an object's identity across states. A control moves rathe
 
 Good motion uses transforms and opacity, short preparation and settle beats, mild overshoot, and small stagger. It should be easy to follow at normal speed and still look coherent frame by frame. Avoid abrupt keyframe swaps, corrective end-of-animation slides, gratuitous bounce, and multiple simultaneous flourishes competing for attention.
 
+Cursor-following glow is intentionally excluded. It decorates pointer position rather than explaining state, competes with the restrained pointillist color budget, and makes large dark surfaces feel busier without improving their operation. Hover feedback should stay attached to the control or panel being used.
+
 ## Editorial And Playful Moments
 
 Editorial asymmetry, stamps, slips, card decks, and collectible glyphs are optional expressive patterns. They belong where the content has a narrative, reward, or artifact quality. They are not generic decorations for settings and utility panels.
@@ -85,5 +89,5 @@ These moments still obey the neutral shell and small color budget. A creative co
 - Dividers after every row or subtitle.
 - Serif type leaking into ordinary controls.
 - Animation that hides state, resets continuity, or delays routine work.
+- Cursor-following canvas glow or panel spotlight effects.
 - Visible design-audit copy inside a product sample.
-

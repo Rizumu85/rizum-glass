@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nolnol — v14.2</title>
+  <title>Rizum Glass — UI Reference Gallery</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config = {
@@ -192,75 +192,6 @@ body {
 }
 .ob-choice:hover { background: rgba(255,255,255,.44); }
 .api-dot { width: 4px; height: 4px; border-radius: 999px; flex-shrink: 0; opacity: .82; }
-.mod-pocket-note {
-  display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  color: rgba(161,161,170,.58); font-size: 9px; line-height: 1; letter-spacing: .16em; text-transform: uppercase;
-}
-.mod-chip {
-  display: inline-flex; align-items: center; gap: 4px; padding: 3px 6px;
-  border-radius: 999px; background: rgba(255,255,255,.28); border: 1px solid rgba(255,255,255,.30);
-  color: rgba(113,113,122,.58); font-size: 8.5px; line-height: 1;
-}
-.mod-gem {
-  width: 36px; height: 36px; border-radius: 11px; flex: 0 0 auto; position: relative;
-  display: grid; place-items: center; color: rgba(82,82,91,.56);
-  background: rgba(255,255,255,.48); border: 1px solid rgba(255,255,255,.52);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.82), 0 7px 16px rgba(0,0,0,.035);
-  overflow: hidden;
-}
-.mod-gem::before {
-  content: ""; position: absolute; inset: 11px; border-radius: 999px;
-  border: 1px solid rgba(161,161,170,.16); background: rgba(255,255,255,.34);
-}
-.mod-gem svg, .mod-gem .api-dot { position: relative; z-index: 1; }
-.mod-alert {
-  position: absolute; top: -2px; right: -2px; width: 9px; height: 9px; border-radius: 999px;
-  background: #fbbf24; border: 2px solid rgba(255,255,255,.88); box-shadow: 0 3px 8px rgba(251,191,36,.22);
-}
-.mod-capsule {
-  width: 100%; display: flex; align-items: center; gap: 11px; text-align: left;
-  padding: 9px 10px; border-radius: 15px; background: rgba(255,255,255,.38);
-  border: 1px solid rgba(255,255,255,.42);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.68), 0 2px 8px rgba(0,0,0,.018);
-  transition: background .24s cubic-bezier(.22,1,.36,1), border-color .2s, transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;
-}
-.mod-capsule:hover, .mod-capsule.on {
-  background: rgba(255,255,255,.56); border-color: rgba(255,255,255,.58);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.78), 0 10px 24px rgba(0,0,0,.035);
-  transform: translateY(-1px);
-}
-.mod-capsule:active { transform: scale(.982); }
-.mod-shelf {
-  display: flex; flex-direction: column; gap: 5px; padding: 6px; border-radius: 18px;
-  background: rgba(255,255,255,.22); border: 1px solid rgba(255,255,255,.30);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.54);
-}
-.mod-divider-soft { width: 38px; height: 1px; margin: 2px auto; border-radius: 999px; background: rgba(212,212,216,.42); }
-.mod-receipt {
-  padding: 13px 14px; border-radius: 15px; background: rgba(255,255,255,.28);
-  border: 1px solid rgba(255,255,255,.42); box-shadow: inset 0 1px 0 rgba(255,255,255,.62);
-}
-.mod-receipt-row {
-  display: flex; justify-content: space-between; gap: 12px; padding: 6.5px 0;
-  border-bottom: 1px dashed rgba(161,161,170,.22);
-  font-family: "SF Mono", Menlo, monospace; font-size: 10px; color: rgba(82,82,91,.66);
-}
-.mod-receipt-row:last-child { border-bottom: 0; padding-bottom: 0; }
-.mod-receipt-row:first-child { padding-top: 0; }
-.mod-mini-action {
-  height: 24px; border-radius: 8px; padding: 0 9px; background: rgba(255,255,255,.52);
-  border: 1px solid rgba(255,255,255,.48); color: rgba(63,63,70,.66); font-size: 10px;
-  box-shadow: 0 1px 0 rgba(255,255,255,.72) inset, 0 5px 12px rgba(0,0,0,.035);
-}
-.mod-mini-action:hover { background: rgba(255,255,255,.68); transform: translateY(-1px); }
-.mod-load-btn {
-  min-height: 34px; border-radius: 10px; padding: 0 12px; background: rgba(255,255,255,.62);
-  border: 1px solid rgba(255,255,255,.58); color: rgba(63,63,70,.76); font-size: 11px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.76), 0 7px 16px rgba(0,0,0,.04);
-  transition: transform .22s cubic-bezier(.34,1.56,.64,1), background .18s, box-shadow .18s;
-}
-.mod-load-btn:hover { background: rgba(255,255,255,.76); transform: translateY(-1px); }
-.mod-load-btn:active { transform: scale(.975); }
 .menu-sep-inset { height: 1px; background: #e4e4e7; margin: 6px 12px; opacity: .48; }
 .bar-fill-teal { background: #2dd4bf; opacity: .72; }
 .bar-fill-amber { background: #fbbf24; opacity: .74; }
@@ -280,8 +211,67 @@ body {
 .mi { width: 100%; text-align: left; padding: 7px 12px; border: 0; border-radius: 6px; background: transparent; font-size: 13px; color: #3f3f46; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background .1s; }
 .mi:hover { background: rgba(0,0,0,.03); }
 
-.dd { width: 100%; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.35); font-size: 12.5px; color: #3f3f46; outline: none; -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a1a1aa' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; transition: border-color .2s; }
-.dd:focus { border-color: rgba(0,0,0,.08); }
+.dd {
+  width: 100%; min-height: 30px; padding: 6px 10px; border-radius: 8px;
+  background: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.35);
+  font-size: 12px; color: #3f3f46; outline: none;
+  transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.dd:focus { border-color: rgba(0,0,0,.09); background: rgba(255,255,255,.62); box-shadow: 0 0 0 3px rgba(255,255,255,.42); }
+
+.rg-select { position: relative; width: 100%; }
+.rg-select.open { z-index: 50; }
+.a-slide:has(.rg-select.open), .model-tier-row:has(.rg-select.open) { position: relative; z-index: 60; }
+.rg-select-trigger {
+  width: 100%; min-height: 30px; padding: 5px 28px 5px 10px; position: relative;
+  display: flex; align-items: center; text-align: left; border-radius: 8px;
+  background: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.35);
+  color: #3f3f46; font-size: 12px; line-height: 1.35; cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55);
+  transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.rg-select-trigger:hover { background: rgba(255,255,255,.64); border-color: rgba(255,255,255,.58); }
+.rg-select-trigger:focus-visible { outline: none; border-color: rgba(45,212,191,.3); box-shadow: 0 0 0 3px rgba(45,212,191,.08), inset 0 1px 0 rgba(255,255,255,.62); }
+.rg-select.open .rg-select-trigger { background: rgba(255,255,255,.72); border-color: rgba(255,255,255,.66); }
+.rg-select-chevron {
+  position: absolute; right: 9px; top: 50%; width: 11px; height: 11px;
+  color: #a1a1aa; transform: translateY(-50%); pointer-events: none;
+  transition: transform .24s cubic-bezier(.34,1.56,.64,1), color .18s ease;
+}
+.rg-select.open .rg-select-chevron { color: #71717a; transform: translateY(-50%) rotate(180deg); }
+.rg-select-menu {
+  position: absolute; top: calc(100% + 6px); left: 0; width: 100%; min-width: max-content;
+  padding: 4px; border-radius: 10px; z-index: 70;
+  background: rgba(255,255,255,.96); border: 1px solid rgba(255,255,255,.82);
+  backdrop-filter: blur(36px) saturate(165%); -webkit-backdrop-filter: blur(36px) saturate(165%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.82), 0 16px 36px rgba(0,0,0,.1);
+  opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-4px) scale(.98); transform-origin: top center;
+  transition: opacity .16s ease, visibility .16s ease, transform .22s cubic-bezier(.22,1,.36,1);
+}
+.rg-select.drop-up .rg-select-menu { top: auto; bottom: calc(100% + 6px); transform: translateY(4px) scale(.98); transform-origin: bottom center; }
+.rg-select.open .rg-select-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
+.rg-select-option {
+  width: 100%; min-height: 28px; padding: 5px 28px 5px 8px; position: relative;
+  display: flex; align-items: center; border: 0; border-radius: 7px;
+  background: transparent; color: #52525b; font-size: 11.5px; text-align: left; white-space: nowrap; cursor: pointer;
+  transition: background .12s ease, color .12s ease;
+}
+.rg-select-option:hover, .rg-select-option:focus-visible { outline: none; background: rgba(0,0,0,.035); color: #27272a; }
+.rg-select-option[aria-selected="true"] { color: #3f3f46; background: rgba(0,0,0,.025); }
+.rg-select-option[aria-selected="true"]::after {
+  content: ''; position: absolute; right: 9px; top: 50%; width: 8px; height: 4px;
+  border-left: 1.5px solid #2dd4bf; border-bottom: 1.5px solid #2dd4bf;
+  transform: translateY(-65%) rotate(-45deg);
+}
+.model-tier-list {
+  padding: 3px 5px; border-radius: 12px;
+  background: rgba(255,255,255,.26); border: 1px solid rgba(255,255,255,.3);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5);
+}
+.model-tier-row {
+  min-height: 39px; display: grid; grid-template-columns: 76px minmax(0,1fr);
+  gap: 10px; align-items: center; padding: 4px 3px 4px 8px;
+}
 
 .sep { height: 1px; background: #e4e4e7; margin: 0 8px; opacity: .5; }
 
@@ -617,29 +607,26 @@ body {
 <body class="font-sans">
 
 <nav class="flex flex-col gap-0.5 p-4 bg-white border-r border-[#e4e4e7] overflow-y-auto text-xs">
-  <h1 class="text-[9px] font-bold text-[#a1a1aa]/40 tracking-[.1em] px-2.5 pb-2 uppercase">v14.2</h1>
-  <p class="text-[8px] font-semibold text-[#a1a1aa]/30 uppercase tracking-[.12em] px-2.5 pt-1 pb-0.5">面板</p>
+  <h1 class="text-[9px] font-bold text-[#a1a1aa]/40 tracking-[.1em] px-2.5 pb-2 uppercase">Rizum Glass · Reference 03</h1>
+  <p class="text-[8px] font-semibold text-[#a1a1aa]/30 uppercase tracking-[.12em] px-2.5 pt-1 pb-0.5">基础界面</p>
   <button class="nb on" data-p="settings">偏好设置</button>
   <button class="nb" data-p="onboarding">新手引导</button>
   <button class="nb" data-p="bubble">对话</button>
   <button class="nb" data-p="menu">菜单</button>
   <button class="nb" data-p="input">快捷输入</button>
   <button class="nb" data-p="status">状态</button>
-  <button class="nb" data-p="profile">档案</button>
+  <button class="nb" data-p="profile">内容档案</button>
   <button class="nb" data-p="model">模型与密钥</button>
-  <button class="nb" data-p="skins">皮肤</button>
+  <button class="nb" data-p="skins">外观包</button>
   <button class="nb" data-p="webdav">同步</button>
-  <div class="h-px bg-[#e4e4e7]/40 my-1.5 mx-2"></div>
-  <p class="text-[8px] font-semibold text-[#a1a1aa]/30 uppercase tracking-[.12em] px-2.5 pt-1 pb-0.5">扩展</p>
-  <button class="nb" data-p="mods">能力库</button>
   <div class="h-px bg-[#e4e4e7]/40 my-1.5 mx-2"></div>
   <p class="text-[8px] font-semibold text-[#a1a1aa]/30 uppercase tracking-[.12em] px-2.5 pt-1 pb-0.5">创意</p>
   <button class="nb" data-p="switcher">面板切换</button>
-  <button class="nb" data-p="mood">心情日历</button>
-  <button class="nb" data-p="gacha">抽卡</button>
-  <button class="nb" data-p="daily">日报</button>
+  <button class="nb" data-p="mood">活动日历</button>
+  <button class="nb" data-p="gacha">随机卡片</button>
+  <button class="nb" data-p="daily">工作简报</button>
   <button class="nb" data-p="syshealth">系统健康</button>
-  <button class="nb" data-p="memory">记忆搜索</button>
+  <button class="nb" data-p="memory">资料搜索</button>
   <button class="nb" data-p="weather">天气</button>
   <button class="nb" data-p="ticker">事件流</button>
 </nav>
@@ -658,6 +645,20 @@ function sw(on=false){return `<label class="sw"><input type="checkbox"${on?' che
 function btnStar(label,extra=''){return `<button class="btn btn-star ${extra}">${starSvg}${label}</button>`}
 function btnSpecial(icon,label,extra=''){return `<button class="btn btn-star btn-special ${extra}">${icon}${label}</button>`}
 function btnAction(icon,label,attrs=''){return `<button class="btn btn-star btn-special" ${attrs}>${icon}${label}</button>`}
+let glassSelectId=0;
+function glassSelect(options, extra=''){
+  const id=`glass-select-${++glassSelectId}`;
+  const values=options.map(option=>typeof option==='string'?{label:option,value:option}:option);
+  return `<div class="rg-select ${extra}" data-rg-select>
+    <button type="button" class="rg-select-trigger" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="${id}">
+      <span data-rg-value>${values[0].label}</span>
+      <svg class="rg-select-chevron" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="m2.5 4.5 3.5 3 3.5-3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="rg-select-menu" id="${id}" role="listbox" aria-hidden="true">
+      ${values.map((option,index)=>`<button type="button" class="rg-select-option" role="option" data-value="${option.value}" aria-selected="${index===0}">${option.label}</button>`).join('')}
+    </div>
+  </div>`;
+}
 
 const P={
 
@@ -667,20 +668,20 @@ onboarding(){return `
   <div class="px-6 pt-6 pb-2">
     <div class="flex items-start justify-between pr-7">
       <div>
-        <h2 class="text-[19px] font-bold font-serif tracking-tight">初次设置</h2>
-        <p class="text-[11px] text-[#a1a1aa]/45 mt-1">一件一件来，任何一步都可以以后补</p>
+        <h2 class="text-[19px] font-bold font-serif tracking-tight">工作台设置</h2>
+        <p class="text-[11px] text-[#a1a1aa]/45 mt-1">逐项完成，未决定的内容可以稍后补充</p>
       </div>
       <span class="text-[9px] text-[#a1a1aa]/40 font-mono mt-1" id="ob-progress">1 / 8</span>
     </div>
     <div class="flex items-center justify-between mt-4">
       <div class="ob-rail" aria-label="初次设置步骤">
         <button class="ob-step on" data-ob="0" data-title="开始" aria-label="开始"></button>
-        <button class="ob-step" data-ob="1" data-title="昵称" aria-label="昵称"></button>
-        <button class="ob-step" data-ob="2" data-title="语气" aria-label="语气"></button>
+        <button class="ob-step" data-ob="1" data-title="名称" aria-label="名称"></button>
+        <button class="ob-step" data-ob="2" data-title="回复" aria-label="回复"></button>
         <button class="ob-step" data-ob="3" data-title="密钥" aria-label="密钥"></button>
         <button class="ob-step" data-ob="4" data-title="模型" aria-label="模型"></button>
         <button class="ob-step" data-ob="5" data-title="同步" aria-label="同步"></button>
-        <button class="ob-step" data-ob="6" data-title="皮肤" aria-label="皮肤"></button>
+        <button class="ob-step" data-ob="6" data-title="外观" aria-label="外观"></button>
         <button class="ob-step" data-ob="7" data-title="教程" aria-label="教程"></button>
       </div>
       <span class="text-[10px] text-[#a1a1aa]/45 font-serif" id="ob-title">开始</span>
@@ -691,8 +692,8 @@ onboarding(){return `
     <div class="ob-panel on" data-ob-panel="0" data-w="340">
       <div>
         <p class="text-[8px] text-[#a1a1aa]/35 uppercase tracking-[.18em] mb-3 font-serif">Welcome</p>
-        <h3 class="text-[16px] font-bold font-serif mb-2">先让系统宝醒来</h3>
-        <p class="text-[12.5px] leading-relaxed text-black/52">第一次只需要决定几件会影响体验的事：它怎么称呼你、用哪个模型、数据要不要同步、先用哪套皮肤。</p>
+        <h3 class="text-[16px] font-bold font-serif mb-2">先完成基础设置</h3>
+        <p class="text-[12.5px] leading-relaxed text-black/52">第一次只需要确认显示名称、默认模型、数据存储位置和外观方案。</p>
       </div>
       <div class="flex justify-between items-center mt-5">
         <button class="btn text-[#a1a1aa]" onclick="cur='input';render()">先跳过</button>
@@ -703,9 +704,9 @@ onboarding(){return `
     <div class="ob-panel" data-ob-panel="1" data-w="300">
       <div>
         <p class="text-[8px] text-[#a1a1aa]/35 uppercase tracking-[.18em] mb-3 font-serif">Profile</p>
-        <h3 class="text-[16px] font-bold font-serif mb-2">它怎么称呼你？</h3>
-        <p class="text-[12px] leading-relaxed text-black/48 mb-4">没想法就先用默认昵称，之后在档案里随时改。</p>
-        <input class="dd" value="Rizum" style="background-image:none" aria-label="昵称">
+        <h3 class="text-[16px] font-bold font-serif mb-2">设置显示名称</h3>
+        <p class="text-[12px] leading-relaxed text-black/48 mb-4">名称会显示在通知和简报里，之后可以随时修改。</p>
+        <input class="dd" value="小林" style="background-image:none" aria-label="显示名称">
       </div>
       <div class="flex justify-between items-center mt-5">
         <button class="btn text-[#a1a1aa]" data-ob-goto="0">返回</button>
@@ -716,13 +717,13 @@ onboarding(){return `
     <div class="ob-panel" data-ob-panel="2" data-w="322">
       <div>
         <p class="text-[8px] text-[#a1a1aa]/35 uppercase tracking-[.18em] mb-3 font-serif">Tone</p>
-        <h3 class="text-[16px] font-bold font-serif mb-2">先选一种相处方式</h3>
-        <p class="text-[12px] leading-relaxed text-black/48 mb-4">这只是初始语气，不会把它锁死。</p>
+        <h3 class="text-[16px] font-bold font-serif mb-2">选择默认回复方式</h3>
+        <p class="text-[12px] leading-relaxed text-black/48 mb-4">这是初始偏好，可以在不同任务中切换。</p>
         <div class="flex flex-wrap gap-1.5">
-          <button class="nc on"><span class="nd bg-[#2dd4bf]"></span><span class="nt">温柔一点</span></button>
-          <button class="nc"><span class="nd bg-[#a78bfa]"></span><span class="nt">更像朋友</span></button>
+          <button class="nc on"><span class="nd bg-[#2dd4bf]"></span><span class="nt">简洁</span></button>
+          <button class="nc"><span class="nd bg-[#a78bfa]"></span><span class="nt">详细</span></button>
           <button class="nc"><span class="nd bg-[#fbbf24]"></span><span class="nt">少提醒</span></button>
-          <button class="nc"><span class="nd bg-[#86efac]"></span><span class="nt">更主动</span></button>
+          <button class="nc"><span class="nd bg-[#86efac]"></span><span class="nt">主动建议</span></button>
         </div>
       </div>
       <div class="flex justify-between items-center mt-5">
@@ -754,7 +755,7 @@ onboarding(){return `
         <p class="text-[12px] leading-relaxed text-black/48 mb-4">不知道怎么选就用“日常”，之后在模型与密钥里按任务切换。</p>
         <div class="space-y-2">
           <button class="ob-choice w-full text-left"><span class="text-[12px] font-serif text-black/62">日常</span><span class="block text-[10px] text-[#a1a1aa]/48 mt-0.5">聊天、提醒、轻量总结</span></button>
-          <button class="ob-choice w-full text-left"><span class="text-[12px] font-serif text-black/62">认真想</span><span class="block text-[10px] text-[#a1a1aa]/48 mt-0.5">规划、代码解释、长记忆</span></button>
+          <button class="ob-choice w-full text-left"><span class="text-[12px] font-serif text-black/62">认真想</span><span class="block text-[10px] text-[#a1a1aa]/48 mt-0.5">规划、代码解释、长文档</span></button>
         </div>
       </div>
       <div class="flex justify-between items-center mt-5">
@@ -782,15 +783,15 @@ onboarding(){return `
     <div class="ob-panel" data-ob-panel="6" data-w="342">
       <div>
         <p class="text-[8px] text-[#a1a1aa]/35 uppercase tracking-[.18em] mb-3 font-serif">Skin</p>
-        <h3 class="text-[16px] font-bold font-serif mb-2">先用默认皮肤吗？</h3>
-        <p class="text-[12px] leading-relaxed text-black/48 mb-4">没有素材不用现在画。默认皮肤能完整运行，新建皮肤会给模板引导。</p>
+        <h3 class="text-[16px] font-bold font-serif mb-2">选择默认外观</h3>
+        <p class="text-[12px] leading-relaxed text-black/48 mb-4">可以先使用内置方案，也可以稍后导入自己的图片和动作素材。</p>
         <div class="flex items-center gap-3 rounded-xl bg-white/38 border border-white/30 p-3">
           <div class="w-[64px] h-[64px] rounded-2xl bg-white/40 border border-white/30 flex items-center justify-center">
             <div class="relative w-[40px] h-[48px]"><div class="absolute left-1 top-0 w-8 h-10 rounded-[16px_16px_13px_13px] bg-white/72 border border-white/60"></div><span class="absolute left-[14px] top-[20px] w-1 h-1 rounded-full bg-black/35"></span><span class="absolute left-[25px] top-[20px] w-1 h-1 rounded-full bg-black/35"></span><span class="absolute left-[17px] top-[31px] w-3 h-[2px] rounded-full bg-[#2dd4bf]/45"></span></div>
           </div>
           <div class="flex-1 space-y-2">
-            <button class="btn w-full justify-start text-left" data-ob-goto="7">先用默认</button>
-            <button class="btn w-full justify-start text-left" onclick="cur='skinEditor';render()">新建皮肤</button>
+            <button class="btn w-full justify-start text-left" data-ob-goto="7">使用内置方案</button>
+            <button class="btn w-full justify-start text-left" onclick="cur='skinEditor';render()">新建外观包</button>
           </div>
         </div>
       </div>
@@ -806,8 +807,8 @@ onboarding(){return `
         <h3 class="text-[16px] font-bold font-serif mb-2">只记住三个入口</h3>
         <div class="space-y-2.5 mt-4">
           <div class="flex gap-2 text-[12px] text-black/52"><span class="api-dot bg-[#2dd4bf] mt-1.5"></span><span>快捷输入：文字、语音、截图给 AI 看。</span></div>
-          <div class="flex gap-2 text-[12px] text-black/52"><span class="api-dot bg-[#fbbf24] mt-1.5"></span><span>状态：看经验、系统币、每日抽卡。</span></div>
-          <div class="flex gap-2 text-[12px] text-black/52"><span class="api-dot bg-[#a78bfa] mt-1.5"></span><span>面板切换：像挑专辑一样打开小工具。</span></div>
+          <div class="flex gap-2 text-[12px] text-black/52"><span class="api-dot bg-[#fbbf24] mt-1.5"></span><span>状态：查看进度、同步和今日活动。</span></div>
+          <div class="flex gap-2 text-[12px] text-black/52"><span class="api-dot bg-[#a78bfa] mt-1.5"></span><span>面板切换：从紧凑卡片中打开常用工具。</span></div>
         </div>
       </div>
       <div class="flex justify-between items-center mt-5">
@@ -823,17 +824,17 @@ settings(){return `
   <button class="absolute top-4 right-4 w-6 h-6 rounded-md text-[#a1a1aa]/40 text-xs flex items-center justify-center hover:bg-black/5 transition">✕</button>
   <div class="px-6 pt-6 pb-2">
     <h2 class="text-[19px] font-bold font-serif tracking-tight">偏好设置</h2>
-    <p class="text-[11px] text-[#a1a1aa]/60 mt-1">系统宝的行为和显示方式</p>
+    <p class="text-[11px] text-[#a1a1aa]/60 mt-1">通知、显示、声音与连接方式</p>
   </div>
   <div class="mx-6"><div class="sep"></div></div>
   <div class="px-6 pb-6 pt-4">
     <div class="mb-5">
       <h3 class="text-[11.5px] font-semibold text-[#71717a] mb-1.5 font-serif">主动通知</h3>
-      <p class="text-[11px] text-[#a1a1aa]/60 mb-3">点击开关系统宝主动弹出的消息</p>
+      <p class="text-[11px] text-[#a1a1aa]/60 mb-3">选择允许主动弹出的消息类型</p>
       <div class="flex flex-wrap gap-1.5 a-slide d1">
         <button class="nc on"><span class="nd bg-[#86efac]"></span><span class="nt">待办提醒</span></button>
         <button class="nc on"><span class="nd bg-[#fbbf24]"></span><span class="nt">成就奖励</span></button>
-        <button class="nc on"><span class="nd bg-[#a78bfa]"></span><span class="nt">对话回复</span></button>
+        <button class="nc on"><span class="nd bg-[#a78bfa]"></span><span class="nt">任务更新</span></button>
         <button class="nc"><span class="nd bg-[#fb7185]"></span><span class="nt">操作确认</span></button>
         <button class="nc"><span class="nd bg-[#2dd4bf]"></span><span class="nt">开发动态</span></button>
       </div>
@@ -857,7 +858,7 @@ settings(){return `
       <h3 class="text-[11.5px] font-semibold text-[#71717a] mb-4 font-serif">语音</h3>
       <div class="space-y-4 a-slide d3">
         <div class="flex justify-between items-center">
-          <span class="text-[13px]">对话时发出声音</span>
+          <span class="text-[13px]">状态变化时发出声音</span>
           <div class="sound-wave on" id="voice-toggle" onclick="toggleSoundWave(this)">
             <span class="bar" data-delay="0" style="height:3px"></span>
             <span class="bar" data-delay="150" style="height:7px"></span>
@@ -868,11 +869,7 @@ settings(){return `
         </div>
         <div class="flex justify-between items-center">
           <span class="text-[13px]">声音</span>
-          <select class="dd w-auto" style="width:130px">
-            <option>温柔 · soft-pop</option><option>活泼 · bright-pip</option>
-            <option>舒缓 · mellow-hum</option><option>微光 · tiny-spark</option>
-            <option disabled>── 更多即将加入 ──</option>
-          </select>
+          ${glassSelect(['温柔 · soft-pop','活泼 · bright-pip','舒缓 · mellow-hum','微光 · tiny-spark'],'w-[142px]')}
         </div>
         <div>
           <div class="flex justify-between items-center mb-2"><span class="text-[13px]">语速</span><span class="text-[11px] text-[#a1a1aa] tabular-nums">1.00×</span></div>
@@ -923,7 +920,7 @@ bubble(){return `
   <div class="flex flex-col items-center gap-3">
     <p class="text-[8px] text-[#a1a1aa]/30 uppercase tracking-[.18em]">系统事件</p>
     <div class="glass-s rounded-xl max-w-[240px] px-4 py-3 a-pop d4">
-      <p class="text-[12px] text-black/40 leading-relaxed"><span class="text-[#a1a1aa]/30 text-[9px] uppercase tracking-wider flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>discord</span>有人在 #general 提到了你</p>
+      <p class="text-[12px] text-black/40 leading-relaxed"><span class="text-[#a1a1aa]/30 text-[9px] uppercase tracking-wider flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2 2h14a2 2 0 0 1 2 2z"/></svg>团队消息</span>有人在 #design 提到了你</p>
     </div>
     <div class="flex gap-1.5 a-slide d5">
       <button class="btn text-[11px]">打开</button>
@@ -983,24 +980,24 @@ input(){return `
 status(){return `
 <div class="w-[340px] min-h-[420px] flex flex-col justify-center items-center py-10 gap-4">
   <div class="glass-s rounded-full px-3.5 py-1.5 flex items-center gap-2 text-[11px] text-black/40 a-float">
-    <span class="text-[9px] text-[#a1a1aa]/35">Lv.3</span>
+    <span class="text-[9px] text-[#a1a1aa]/35">本周</span>
     <span class="w-px h-2.5 bg-[#e4e4e7]/40"></span>
     <span class="tabular-nums">42</span>
-    <span class="text-[9px] text-[#a1a1aa]/35">coin</span>
+    <span class="text-[9px] text-[#a1a1aa]/35">points</span>
   </div>
   <div class="w-[240px] glass rounded-2xl p-5 a-pop d1">
-    <h3 class="text-[16px] font-bold font-serif">系统宝</h3>
+    <h3 class="text-[16px] font-bold font-serif">今日状态</h3>
     <div class="mt-4 space-y-4">
       <div class="flex items-center gap-2.5">
         <span class="text-base" style="animation:bounce-s 3s ease-in-out infinite">☺</span>
         <div>
-          <p class="text-[13px] font-medium">心情不错</p>
-          <p class="text-[10px] text-[#a1a1aa]/45">最近完成了几件事</p>
+          <p class="text-[13px] font-medium">进展顺利</p>
+          <p class="text-[10px] text-[#a1a1aa]/45">今天完成了 5 项工作</p>
         </div>
       </div>
       <div>
         <div class="flex justify-between text-[11px] mb-1.5">
-          <span class="text-[#a1a1aa]/50 font-serif">经验</span>
+          <span class="text-[#a1a1aa]/50 font-serif">本周进度</span>
           <span class="tabular-nums font-medium text-black/55">320 / 500</span>
         </div>
         <div class="h-[3px] rounded-full bg-black/[.03] overflow-hidden">
@@ -1009,60 +1006,59 @@ status(){return `
       </div>
       <div class="sep"></div>
       <div class="space-y-2">
-        <div class="flex justify-between text-[12px]"><span class="text-black/40">可以抽取</span><span class="font-medium">3 个奖励</span></div>
-        <div class="flex justify-between text-[12px]"><span class="text-black/40">已保存</span><span class="text-[#a1a1aa]">1 个</span></div>
+        <div class="flex justify-between text-[12px]"><span class="text-black/40">灵感卡片</span><span class="font-medium">3 张可用</span></div>
+        <div class="flex justify-between text-[12px]"><span class="text-black/40">已收藏</span><span class="text-[#a1a1aa]">1 张</span></div>
       </div>
-      <button class="btn btn-star btn-special draw-choice d single mt-2" onclick="document.querySelector('[data-p=gacha]').click()">${starSvg}抽一个看看</button>
+      <button class="btn btn-star btn-special draw-choice d single mt-2" onclick="document.querySelector('[data-p=gacha]').click()">${starSvg}抽一张</button>
     </div>
     <p class="text-[9px] text-[#a1a1aa]/30 mt-4 text-center">已连接 · 本机存储</p>
   </div>
 </div>`},
 
 model(){return `
-<div class="w-[380px] glass rounded-2xl relative a-float">
+<div class="w-[440px] glass rounded-2xl relative a-float">
   <button class="absolute top-4 right-4 w-6 h-6 rounded-md text-[#a1a1aa]/40 text-xs flex items-center justify-center hover:bg-black/5 transition">✕</button>
   <div class="px-6 pt-6 pb-2">
     <h2 class="text-[19px] font-bold font-serif tracking-tight">模型与密钥</h2>
-    <p class="text-[11px] text-[#a1a1aa]/45 mt-1">管理 API Token、服务商和不同任务的模型档位</p>
+    <p class="text-[11px] text-[#a1a1aa]/45 mt-1">管理密钥、服务商和不同任务的模型档位</p>
   </div>
   <div class="mx-6"><div class="sep"></div></div>
-  <div class="px-6 pb-6 pt-4 space-y-5">
+  <div class="px-6 pb-6 pt-4 space-y-4">
     <div class="a-slide">
-      <div class="flex items-center justify-between mb-3">
+      <div class="flex items-center justify-between mb-2.5">
         <h3 class="text-[14px] font-bold font-serif">密钥</h3>
         <span class="flex items-center gap-1.5 text-[10px] text-[#a1a1aa]/48"><span class="api-dot bg-[#fb7185]"></span>未验证</span>
       </div>
-      <div class="space-y-2.5">
-        <div><label class="text-[10px] text-[#a1a1aa]/35 uppercase tracking-[.06em] block mb-1.5">API Token</label><input type="password" class="dd" placeholder="sk-..." style="background-image:none"></div>
-        <p class="text-[10px] leading-relaxed text-[#a1a1aa]/42">密钥只保存在本机；如果之后开启 WebDAV，也默认不会同步 token。</p>
-      </div>
+      <label class="text-[10px] text-[#a1a1aa]/35 uppercase tracking-[.06em] block mb-1.5">API Token</label>
+      <input type="password" class="dd" placeholder="sk-...">
+      <p class="text-[9.5px] leading-relaxed text-[#a1a1aa]/42 mt-1.5">仅保存在本机，默认不随同步上传。</p>
     </div>
     <div class="sep"></div>
     <div class="a-slide d1">
-      <h3 class="text-[14px] font-bold font-serif mb-3.5">服务商</h3>
-      <div class="grid grid-cols-[1fr_1.1fr] gap-2.5">
-        <div><label class="text-[10px] text-[#a1a1aa]/35 uppercase tracking-[.06em] block mb-1.5">Provider</label><select class="dd"><option>OpenAI compatible</option><option>自定义端点</option><option>本地模型</option></select></div>
-        <div><label class="text-[10px] text-[#a1a1aa]/35 uppercase tracking-[.06em] block mb-1.5">Base URL</label><input class="dd" placeholder="https://api.example.com/v1" style="background-image:none"></div>
+      <h3 class="text-[14px] font-bold font-serif mb-2.5">服务商</h3>
+      <div class="grid grid-cols-[1fr_1.2fr] gap-2.5">
+        <div><label class="text-[10px] text-[#a1a1aa]/35 uppercase tracking-[.06em] block mb-1.5">Provider</label>${glassSelect(['OpenAI compatible','自定义端点','本地模型'])}</div>
+        <div><label class="text-[10px] text-[#a1a1aa]/35 uppercase tracking-[.06em] block mb-1.5">Base URL</label><input class="dd" placeholder="https://api.example.com/v1"></div>
       </div>
     </div>
     <div class="sep"></div>
     <div class="a-slide d2">
-      <div class="flex items-center justify-between mb-3">
+      <div class="flex items-center justify-between mb-2.5">
         <h3 class="text-[14px] font-bold font-serif">模型档位</h3>
         <button class="btn text-[11px] px-2.5 py-1.5">恢复推荐</button>
       </div>
-      <div class="space-y-2.5">
-        <div class="ob-choice grid grid-cols-[72px_1fr] gap-3 items-center">
+      <div class="model-tier-list">
+        <div class="model-tier-row">
           <span class="text-[11.5px] font-serif text-black/58">日常</span>
-          <select class="dd"><option>daily-small</option><option>daily-fast</option><option>local-chat</option></select>
+          ${glassSelect(['daily-small','daily-fast','local-chat'])}
         </div>
-        <div class="ob-choice grid grid-cols-[72px_1fr] gap-3 items-center">
+        <div class="model-tier-row">
           <span class="text-[11.5px] font-serif text-black/58">认真想</span>
-          <select class="dd"><option>reasoning-large</option><option>reasoning-balanced</option><option>custom-reasoner</option></select>
+          ${glassSelect(['reasoning-large','reasoning-balanced','custom-reasoner'])}
         </div>
-        <div class="ob-choice grid grid-cols-[72px_1fr] gap-3 items-center">
+        <div class="model-tier-row">
           <span class="text-[11.5px] font-serif text-black/58">看截图</span>
-          <select class="dd"><option>vision-enabled</option><option>vision-fast</option><option>custom-vision</option></select>
+          ${glassSelect(['vision-enabled','vision-fast','custom-vision'])}
         </div>
       </div>
     </div>
@@ -1073,188 +1069,45 @@ model(){return `
   </div>
 </div>`},
 
-mods(){return `
-<div class="w-[348px] glass rounded-2xl relative a-float">
-  <button class="absolute top-4 right-4 w-6 h-6 rounded-md text-[#a1a1aa]/40 text-xs flex items-center justify-center hover:bg-black/5 transition">✕</button>
-  <div class="px-6 pt-6 pb-1">
-    <div class="flex items-start justify-between pr-7">
-      <div>
-        <p class="text-[8px] text-[#a1a1aa]/35 uppercase tracking-[.18em] font-serif mb-1">0.0 pocket</p>
-        <h2 class="text-[19px] font-bold font-serif tracking-tight">Nolnol 的口袋</h2>
-        <p class="text-[11px] text-[#a1a1aa]/45 mt-1">已经装了 2 个能力 · 1 个要补设置</p>
-      </div>
-      <button class="mod-mini-action mt-1" onclick="cur='modStudio';render()">＋</button>
-    </div>
-  </div>
-  <div class="px-6 pb-6 pt-3 space-y-4">
-    <div class="a-slide space-y-2">
-      <div class="mod-pocket-note px-1"><span>已装载</span><span>2</span></div>
-      <div class="mod-shelf">
-        <button class="mod-capsule on" onclick="cur='modDetail';render()">
-          <span class="mod-gem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span class="mod-alert"></span></span>
-          <div class="min-w-0 flex-1">
-            <div class="flex items-center justify-between gap-2"><p class="text-[13px] font-serif font-bold text-black/70 truncate">TickTick 助手</p><span class="text-[9px] text-[#f59e0b]/70">待授权</span></div>
-            <p class="text-[10px] text-[#a1a1aa]/52 mt-0.5 truncate">同步今日待办，提醒快到期的事</p>
-          </div>
-        </button>
-        <button class="mod-capsule" onclick="cur='modDetail';render()">
-          <span class="mod-gem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-          <div class="min-w-0 flex-1">
-            <div class="flex items-center justify-between gap-2"><p class="text-[13px] font-serif font-bold text-black/70 truncate">番茄钟与白噪音</p><span class="text-[9px] text-[#2dd4bf]/70">运行中</span></div>
-            <p class="text-[10px] text-[#a1a1aa]/52 mt-0.5 truncate">专注时让 Nolnol 安静陪着</p>
-          </div>
-        </button>
-      </div>
-    </div>
-    <div class="mod-divider-soft a-slide d1"></div>
-    <div class="a-slide d2 space-y-2">
-      <div class="mod-pocket-note px-1"><span>发现新胶囊</span><span>shop</span></div>
-      <button class="mod-capsule" onclick="cur='modDetail';render()">
-        <div class="flex items-center gap-3">
-          <span class="mod-gem"><span class="api-dot bg-[#a78bfa]"></span></span>
-          <div class="min-w-0 flex-1">
-            <div class="flex items-center justify-between gap-2"><p class="text-[13px] font-serif font-bold text-black/70 truncate">网页信息提取</p><span class="text-[9px] text-[#a1a1aa]/56">未安装</span></div>
-            <p class="text-[10px] text-[#a1a1aa]/52 mt-0.5 truncate">拖拽链接给 Nolnol，让它整理摘要</p>
-          </div>
-        </div>
-      </button>
-      <button class="mod-capsule" onclick="cur='modDetail';render()">
-        <div class="flex items-center gap-3">
-          <span class="mod-gem"><span class="api-dot bg-[#fbbf24]"></span></span>
-          <div class="min-w-0 flex-1">
-            <div class="flex items-center justify-between gap-2"><p class="text-[13px] font-serif font-bold text-black/70 truncate">天气小剧场</p><span class="text-[9px] text-[#f59e0b]/70">需设置</span></div>
-            <p class="text-[10px] text-[#a1a1aa]/52 mt-0.5 truncate">给皮肤加下雨、降温和晴天动作</p>
-          </div>
-        </div>
-      </button>
-    </div>
-    <div class="mod-divider-soft a-slide d3"></div>
-    <div class="text-center a-slide d3">
-      <button class="text-[10px] text-[#a1a1aa]/52 hover:text-[#71717a] transition" onclick="cur='modStudio';render()">进入能力制作台</button>
-    </div>
-  </div>
-</div>`},
-
-modDetail(){return `
-<div class="w-[348px] glass rounded-2xl relative a-float">
-  <button class="absolute top-4 right-4 w-6 h-6 rounded-md text-[#a1a1aa]/40 text-xs flex items-center justify-center hover:bg-black/5 transition">✕</button>
-  <div class="px-6 pt-6 pb-2">
-    <button class="text-[10px] text-[#a1a1aa]/45 mb-2 hover:text-[#71717a]" onclick="cur='mods';render()">‹ 返回能力库</button>
-    <div class="flex flex-col items-center text-center pr-7">
-      <span class="mod-gem !w-14 !h-14 !rounded-2xl mb-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span class="mod-alert"></span></span>
-      <p class="text-[8px] text-[#a1a1aa]/35 uppercase tracking-[.18em] font-serif mb-1">能力背面</p>
-      <h2 class="text-[19px] font-bold font-serif tracking-tight">TickTick 助手</h2>
-      <p class="text-[11px] text-[#a1a1aa]/48 mt-1 leading-relaxed">允许 Nolnol 读取今日待办，在合适的时候提醒你。</p>
-    </div>
-  </div>
-  <div class="px-6 pb-6 pt-3 space-y-4">
-    <div class="mod-receipt a-slide">
-      <div class="mod-receipt-row"><span>[ 加入 ]</span><span>今日待办面板</span></div>
-      <div class="mod-receipt-row"><span>[ 需要 ]</span><span class="text-[#f59e0b]/80">CLI 路径</span></div>
-      <div class="mod-receipt-row"><span>[ 允许 ]</span><span>通知 / 读取摘要</span></div>
-      <div class="mod-receipt-row"><span>[ 状态 ]</span><span class="text-[#f59e0b]/80">待授权</span></div>
-    </div>
-    <div class="a-slide d1 space-y-2">
-      <div class="grid grid-cols-[64px_1fr] gap-2 items-center"><span class="text-[10.5px] text-black/42 font-serif">CLI 路径</span><input class="dd" value="/opt/homebrew/bin/ticktick" style="background-image:none"></div>
-      <div class="grid grid-cols-[64px_1fr] gap-2 items-center"><span class="text-[10.5px] text-black/42 font-serif">清单</span><select class="dd"><option>Inbox</option><option>Work</option><option>Personal</option></select></div>
-    </div>
-    <div class="a-slide d2 space-y-2 text-[11px]">
-      <div class="flex items-center justify-between"><span class="text-black/48">装入口袋</span>${sw(true)}</div>
-      <div class="flex items-center justify-between"><span class="text-black/48">发送提醒</span>${sw(true)}</div>
-      <div class="flex items-center justify-between"><span class="text-black/48">运行本地 CLI</span>${sw(true)}</div>
-    </div>
-    <div class="mod-divider-soft"></div>
-    <div class="grid grid-cols-2 gap-2 a-slide d3">
-      <button class="mod-load-btn">${confirmSvg} 配置并装载</button>
-      <button class="mod-load-btn">先看看</button>
-    </div>
-  </div>
-</div>`},
-
-modStudio(){return `
-<div class="w-[348px] glass rounded-2xl relative a-float">
-  <button class="absolute top-4 right-4 w-6 h-6 rounded-md text-[#a1a1aa]/40 text-xs flex items-center justify-center hover:bg-black/5 transition">✕</button>
-  <div class="px-6 pt-6 pb-2">
-    <button class="text-[10px] text-[#a1a1aa]/45 mb-2 hover:text-[#71717a]" onclick="cur='mods';render()">‹ 返回能力库</button>
-    <div class="flex items-start justify-between pr-7 gap-3">
-      <div class="min-w-0">
-        <p class="text-[8px] text-[#a1a1aa]/35 uppercase tracking-[.18em] font-serif mb-1">capsule bench</p>
-        <h2 class="text-[19px] font-bold font-serif tracking-tight">胶囊制作台</h2>
-        <p class="text-[11px] text-[#a1a1aa]/45 mt-1">捏一个自己的能力小物件。</p>
-      </div>
-      <button class="mod-mini-action mt-1">${editorSvg} 编辑器</button>
-    </div>
-  </div>
-  <div class="px-6 pb-6 pt-4 space-y-4">
-    <div class="grid grid-cols-2 gap-3 a-slide">
-      <button class="mod-capsule !flex-col !items-start !gap-3 !p-3">
-        <span class="mod-gem !w-9 !h-9"><span class="api-dot bg-[#a78bfa]"></span></span>
-        <div class="text-left">
-          <p class="text-[12px] font-serif font-bold text-black/68">用 AI 起草</p>
-          <p class="text-[9px] text-[#a1a1aa]/50 mt-0.5">对话生成结构</p>
-        </div>
-      </button>
-      <button class="mod-capsule !flex-col !items-start !gap-3 !p-3">
-        <span class="mod-gem !w-9 !h-9"><span class="api-dot bg-[#fbbf24]"></span></span>
-        <div class="text-left">
-          <p class="text-[12px] font-serif font-bold text-black/68">导入本地</p>
-          <p class="text-[9px] text-[#a1a1aa]/50 mt-0.5">私有或付费包</p>
-        </div>
-      </button>
-    </div>
-    <div class="a-slide d1">
-      <div class="mod-pocket-note px-1 mb-2"><span>基础模具卡</span><span>6</span></div>
-      <div class="mod-shelf !bg-transparent !border-0 !shadow-none !p-0">
-        ${['浮窗面板','快捷指令','皮肤动作','MCP 桥','Gateway Hook','Mind 模块'].map((x,i)=>`<button class="mod-capsule !py-2"><span class="mod-gem !w-7 !h-7 !rounded-lg"><span class="api-dot ${['bg-[#2dd4bf]','bg-[#fbbf24]','bg-[#a78bfa]','bg-[#86efac]','bg-[#fb7185]','bg-[#67e8f9]'][i]}"></span></span><span class="text-[12px] font-serif text-black/62">${x}</span></button>`).join('')}
-      </div>
-    </div>
-    <div class="mod-divider-soft"></div>
-    <div class="flex items-center justify-between a-slide d2">
-      <p class="text-[10px] text-[#a1a1aa]/42">先本地测试，再自用安装或提交商场。</p>
-      <button class="mod-load-btn">${confirmSvg} 创建草稿</button>
-    </div>
-  </div>
-</div>`},
-
 profile(){return `
 <div class="w-[340px] glass rounded-2xl relative a-float">
   <button class="absolute top-4 right-4 w-6 h-6 rounded-md text-[#a1a1aa]/40 text-xs flex items-center justify-center hover:bg-black/5 transition">✕</button>
   <div class="px-6 pt-6 pb-3">
-    <h2 class="text-[19px] font-bold font-serif tracking-tight">档案</h2>
-    <p class="text-[11px] text-[#a1a1aa]/45 mt-1">系统宝的性格和对你的了解</p>
+    <h2 class="text-[19px] font-bold font-serif tracking-tight">内容档案</h2>
+    <p class="text-[11px] text-[#a1a1aa]/45 mt-1">集中编辑回复规则、用户偏好和项目背景</p>
   </div>
   <div class="px-6 pb-5 space-y-3.5">
     <div class="rounded-xl bg-white/50 border border-white/30 p-3.5 a-slide">
       <div class="flex items-center justify-between mb-2">
-        <h4 class="text-[10px] font-semibold text-[#a1a1aa]/45 uppercase tracking-[.06em] font-serif">性格设定</h4>
-        <span class="text-[9px] text-[#d4d4d8]">persona.md</span>
+        <h4 class="text-[10px] font-semibold text-[#a1a1aa]/45 uppercase tracking-[.06em] font-serif">回复规则</h4>
+        <span class="text-[9px] text-[#d4d4d8]">assistant.md</span>
       </div>
       <div class="text-[12px] leading-[1.8] text-black/50 font-mono">
-        <p class="text-[#d4d4d8] text-[10px]"># Persona</p>
-        <p class="mt-1">- 温暖、随意、不啰嗦</p>
-        <p>- 不主动翻旧账</p>
-        <p>- 关心但不过度关心</p>
+        <p class="text-[#d4d4d8] text-[10px]"># Response rules</p>
+        <p class="mt-1">- 简洁、直接、说明依据</p>
+        <p>- 不重复已经确认的信息</p>
+        <p>- 重要操作先请求确认</p>
       </div>
     </div>
     <div class="rounded-xl bg-white/50 border border-white/30 p-3.5 a-slide d1">
       <div class="flex items-center justify-between mb-2">
-        <h4 class="text-[10px] font-semibold text-[#a1a1aa]/45 uppercase tracking-[.06em] font-serif">关于你</h4>
-        <span class="text-[9px] text-[#d4d4d8]">memory.md</span>
+        <h4 class="text-[10px] font-semibold text-[#a1a1aa]/45 uppercase tracking-[.06em] font-serif">用户偏好</h4>
+        <span class="text-[9px] text-[#d4d4d8]">preferences.md</span>
       </div>
       <div class="text-[12px] leading-[1.8] text-black/50 font-mono">
-        <p class="text-[#d4d4d8] text-[10px]"># Memory</p>
-        <p class="mt-1">- 重视设计质量</p>
-        <p>- 每天打游戏放松</p>
+        <p class="text-[#d4d4d8] text-[10px]"># Preferences</p>
+        <p class="mt-1">- 优先保证设计质量</p>
+        <p>- 通知尽量集中显示</p>
       </div>
     </div>
     <div class="rounded-xl bg-white/50 border border-white/30 p-3.5 a-slide d2">
       <div class="flex items-center justify-between mb-2">
-        <h4 class="text-[10px] font-semibold text-[#a1a1aa]/45 uppercase tracking-[.06em] font-serif">世界书</h4>
-        <span class="text-[9px] text-[#d4d4d8]">worldbook.md</span>
+        <h4 class="text-[10px] font-semibold text-[#a1a1aa]/45 uppercase tracking-[.06em] font-serif">项目背景</h4>
+        <span class="text-[9px] text-[#d4d4d8]">projects.md</span>
       </div>
       <div class="text-[12px] leading-[1.8] text-black/50 font-mono">
-        <p class="text-[#d4d4d8] text-[10px]"># Worldbook</p>
-        <p class="mt-1">- 3 个实体已录入</p>
+        <p class="text-[#d4d4d8] text-[10px]"># Projects</p>
+        <p class="mt-1">- 3 个活跃项目已录入</p>
       </div>
     </div>
     <div class="flex gap-2 mt-1 a-slide d3">
@@ -1268,13 +1121,13 @@ skins(){return `
 <div class="w-[370px] glass rounded-2xl relative a-float">
   <button class="absolute top-4 right-4 w-6 h-6 rounded-md text-[#a1a1aa]/40 text-xs flex items-center justify-center hover:bg-black/5 transition">✕</button>
   <div class="px-6 pt-6 pb-2">
-    <h2 class="text-[19px] font-bold font-serif tracking-tight">皮肤管理</h2>
-    <p class="text-[11px] text-[#a1a1aa]/45 mt-1">选择使用的皮肤，或进入编辑流程</p>
+    <h2 class="text-[19px] font-bold font-serif tracking-tight">外观包管理</h2>
+    <p class="text-[11px] text-[#a1a1aa]/45 mt-1">选择界面外观，或编辑自定义素材和状态</p>
   </div>
   <div class="mx-6"><div class="sep"></div></div>
   <div class="px-6 pb-6 pt-4 space-y-3.5">
     <div class="a-slide">
-      <h3 class="text-[11.5px] font-semibold text-[#71717a] mb-3 font-serif">皮肤</h3>
+      <h3 class="text-[11.5px] font-semibold text-[#71717a] mb-3 font-serif">外观包</h3>
       <div class="space-y-2">
         <div class="rounded-xl bg-white/55 border border-white/45 p-3 shadow-[0_1px_0_rgba(255,255,255,.65)_inset]">
           <div class="grid grid-cols-[42px_1fr_auto] gap-3 items-center">
@@ -1285,8 +1138,8 @@ skins(){return `
               <span class="absolute left-[19px] top-[28px] w-3.5 h-[2px] rounded-full bg-[#2dd4bf]/45"></span>
             </div>
             <div>
-              <div class="flex items-center gap-1.5"><span class="text-[12.5px] text-black/65">默认 · 玻璃小宝</span><span class="w-1 h-1 rounded-full bg-[#2dd4bf]/70"></span></div>
-              <p class="text-[9.5px] text-[#a1a1aa]/45 mt-0.5">当前使用 · 内置 · 12 个动作</p>
+              <div class="flex items-center gap-1.5"><span class="text-[12.5px] text-black/65">默认 · 玻璃浮窗</span><span class="w-1 h-1 rounded-full bg-[#2dd4bf]/70"></span></div>
+              <p class="text-[9.5px] text-[#a1a1aa]/45 mt-0.5">当前使用 · 内置 · 12 个状态</p>
             </div>
             <button class="btn btn-star btn-special text-[11px] px-2.5 py-1.5" onclick="cur='skinEditor';render()">${editorSvg}编辑</button>
           </div>
@@ -1300,8 +1153,8 @@ skins(){return `
               <span class="absolute left-[7px] bottom-1 w-5 h-5 rounded-full bg-[#a78bfa]/12 blur-sm"></span>
             </div>
             <div>
-              <p class="text-[12.5px] text-black/45">雨天外套</p>
-              <p class="text-[9.5px] text-[#a1a1aa]/38 mt-0.5">已安装 · 8 个动作 · 2 个缺失</p>
+              <p class="text-[12.5px] text-black/45">雨天主题</p>
+              <p class="text-[9.5px] text-[#a1a1aa]/38 mt-0.5">已安装 · 8 个状态 · 2 个缺失</p>
             </div>
             <div class="flex gap-1.5">
               <button class="btn text-[11px] px-2.5 py-1.5 text-[#a1a1aa]">使用</button>
@@ -1315,8 +1168,8 @@ skins(){return `
     <div class="rounded-xl bg-white/25 border border-white/25 px-3 py-2.5 a-slide d1">
       <div class="grid grid-cols-[1fr_auto] gap-3 items-center">
         <div>
-          <p class="text-[12.5px] text-black/55">新建皮肤</p>
-          <p class="text-[9.5px] text-[#a1a1aa]/42 mt-0.5">导入自定义皮肤素材</p>
+          <p class="text-[12.5px] text-black/55">新建外观包</p>
+          <p class="text-[9.5px] text-[#a1a1aa]/42 mt-0.5">导入自定义图片和动作素材</p>
         </div>
         <button class="btn text-[11px] px-2.5 py-1.5" onclick="cur='skinEditor';render()">新建</button>
       </div>
@@ -1328,9 +1181,9 @@ skinEditor(){return `
 <div class="w-[430px] glass rounded-2xl relative a-float">
   <button class="absolute top-4 right-4 w-6 h-6 rounded-md text-[#a1a1aa]/40 text-xs flex items-center justify-center hover:bg-black/5 transition">✕</button>
   <div class="px-6 pt-6 pb-2">
-    <button class="text-[10px] text-[#a1a1aa]/45 hover:text-[#71717a] mb-2" onclick="cur='skins';render()">‹ 返回皮肤管理</button>
-    <h2 class="text-[19px] font-bold font-serif tracking-tight">编辑皮肤</h2>
-    <p class="text-[11px] text-[#a1a1aa]/45 mt-1">已有素材显示当前动作，缺失素材显示模板引导</p>
+    <button class="text-[10px] text-[#a1a1aa]/45 hover:text-[#71717a] mb-2" onclick="cur='skins';render()">‹ 返回外观包管理</button>
+    <h2 class="text-[19px] font-bold font-serif tracking-tight">编辑外观包</h2>
+    <p class="text-[11px] text-[#a1a1aa]/45 mt-1">已有素材显示当前状态，缺失素材显示模板引导</p>
   </div>
   <div class="mx-6"><div class="sep"></div></div>
   <div class="px-6 pb-6 pt-4 space-y-5">
@@ -1348,10 +1201,10 @@ skinEditor(){return `
       <div class="space-y-3">
         <div>
           <label class="text-[10px] text-[#a1a1aa]/35 uppercase tracking-[.06em] block mb-1.5">名称</label>
-          <input class="dd" placeholder="皮肤名称" value="雨天外套" style="background-image:none">
+          <input class="dd" placeholder="外观包名称" value="雨天主题" style="background-image:none">
         </div>
         <div class="rounded-xl bg-white/35 border border-white/25 p-3">
-          <p class="text-[11px] text-black/45 leading-relaxed">新建时这里会显示模板图；编辑时优先显示已导入动作，没导入的动作继续用模板占位。</p>
+          <p class="text-[11px] text-black/45 leading-relaxed">新建时显示模板图；编辑时优先显示已导入素材，缺失状态继续用模板占位。</p>
         </div>
         <div class="flex gap-2">
           <button class="btn text-[11px]">预览</button>
@@ -1360,30 +1213,30 @@ skinEditor(){return `
       </div>
     </div>
     <div class="a-slide d1">
-      <h3 class="text-[11.5px] font-semibold text-[#71717a] mb-3 font-serif">基础动作</h3>
+      <h3 class="text-[11.5px] font-semibold text-[#71717a] mb-3 font-serif">基础状态</h3>
       <div class="space-y-2.5">
         <div class="grid grid-cols-[72px_54px_1fr_auto] gap-3 items-center text-[11px] rounded-xl bg-white/35 border border-white/25 p-2">
           <div class="w-[72px] h-[72px] rounded-xl bg-white/55 border border-white/40 flex items-center justify-center"><span class="w-9 h-11 rounded-[18px_18px_15px_15px] bg-white/70 border border-white/55"></span></div>
-          <span class="font-serif text-black/60">待机</span>
-          <span class="text-[#a1a1aa]/55 leading-relaxed">已导入；默认状态，重心稳定，呼吸和眨眼要轻。</span>
+          <span class="font-serif text-black/60">默认</span>
+          <span class="text-[#a1a1aa]/55 leading-relaxed">已导入；用于空闲状态，变化幅度保持克制。</span>
           <button class="btn text-[11px] px-2.5 py-1.5">替换</button>
         </div>
         <div class="grid grid-cols-[72px_54px_1fr_auto] gap-3 items-center text-[11px] rounded-xl bg-white/35 border border-white/25 p-2">
           <div class="w-[72px] h-[72px] rounded-xl bg-white/55 border border-white/40 flex items-center justify-center"><span class="w-9 h-11 rounded-[18px_18px_15px_15px] bg-white/70 border border-white/55 relative"><span class="absolute left-[13px] top-[26px] w-3 h-[2px] rounded-full bg-[#2dd4bf]/45"></span></span></div>
-          <span class="font-serif text-black/60">说话</span>
-          <span class="text-[#a1a1aa]/55 leading-relaxed">已导入；回复时使用，嘴型变化小，眼神不要抢。</span>
+          <span class="font-serif text-black/60">响应</span>
+          <span class="text-[#a1a1aa]/55 leading-relaxed">已导入；收到输入后使用，动作短且清楚。</span>
           <button class="btn text-[11px] px-2.5 py-1.5">替换</button>
         </div>
         <div class="grid grid-cols-[72px_54px_1fr_auto] gap-3 items-center text-[11px] rounded-xl bg-white/28 border border-white/22 p-2">
           <div class="w-[72px] h-[72px] rounded-xl bg-white/18 border border-dashed border-[#d4d4d8]/70 flex items-center justify-center"><span class="text-[10px] text-[#d4d4d8]">模板</span></div>
-          <span class="font-serif text-black/60">思考</span>
-          <span class="text-[#a1a1aa]/55 leading-relaxed">未导入；等待 AI 时使用，停顿感比动作幅度重要。</span>
+          <span class="font-serif text-black/60">处理中</span>
+          <span class="text-[#a1a1aa]/55 leading-relaxed">未导入；等待结果时使用，停顿感比动作幅度重要。</span>
           <button class="btn text-[11px] px-2.5 py-1.5">导入</button>
         </div>
         <div class="grid grid-cols-[72px_54px_1fr_auto] gap-3 items-center text-[11px] rounded-xl bg-white/28 border border-white/22 p-2">
           <div class="w-[72px] h-[72px] rounded-xl bg-white/18 border border-dashed border-[#d4d4d8]/70 flex items-center justify-center"><span class="text-[10px] text-[#d4d4d8]">模板</span></div>
-          <span class="font-serif text-black/60">走动</span>
-          <span class="text-[#a1a1aa]/55 leading-relaxed">未导入；提醒和移动时使用，2-4 帧循环。</span>
+          <span class="font-serif text-black/60">通知</span>
+          <span class="text-[#a1a1aa]/55 leading-relaxed">未导入；新消息到达时使用，2-4 帧循环。</span>
           <button class="btn text-[11px] px-2.5 py-1.5">导入</button>
         </div>
       </div>
@@ -1391,12 +1244,12 @@ skinEditor(){return `
     <div class="a-slide d2">
       <h3 class="text-[11.5px] font-semibold text-[#71717a] mb-3 font-serif">可选显示</h3>
       <div class="flex flex-wrap gap-1.5">
-        <button class="nc on"><span class="nd bg-[#86efac]"></span><span class="nt">睡觉表情</span></button>
-        <button class="nc on"><span class="nd bg-[#a78bfa]"></span><span class="nt">下雨表情</span></button>
-        <button class="nc"><span class="nd bg-[#fbbf24]"></span><span class="nt">鼓励动作</span></button>
-        <button class="nc on"><span class="nd bg-[#2dd4bf]"></span><span class="nt">久坐提醒</span></button>
+        <button class="nc on"><span class="nd bg-[#86efac]"></span><span class="nt">夜间状态</span></button>
+        <button class="nc on"><span class="nd bg-[#a78bfa]"></span><span class="nt">雨天状态</span></button>
+        <button class="nc"><span class="nd bg-[#fbbf24]"></span><span class="nt">完成动画</span></button>
+        <button class="nc on"><span class="nd bg-[#2dd4bf]"></span><span class="nt">休息提醒</span></button>
       </div>
-      <p class="text-[10px] text-[#a1a1aa]/38 leading-relaxed mt-2.5">导入过的动作也可以关闭显示；素材仍会保留在皮肤包里。</p>
+      <p class="text-[10px] text-[#a1a1aa]/38 leading-relaxed mt-2.5">关闭某个状态不会删除素材，之后仍可重新启用。</p>
     </div>
   </div>
 </div>`},
@@ -1406,13 +1259,13 @@ webdav(){return `
   <button class="absolute top-4 right-4 w-6 h-6 rounded-md text-[#a1a1aa]/40 text-xs flex items-center justify-center hover:bg-black/5 transition">✕</button>
   <div class="px-6 pt-6 pb-1">
     <h2 class="text-[19px] font-bold font-serif tracking-tight">私有同步</h2>
-    <p class="text-[11px] text-[#a1a1aa]/45 mt-1">通过 WebDAV 在设备间同步记忆和设定</p>
+    <p class="text-[11px] text-[#a1a1aa]/45 mt-1">通过 WebDAV 在设备间同步文档和设置</p>
   </div>
   <div class="px-6 pb-5 pt-4 space-y-5">
     <div class="a-slide">
       <h3 class="text-[14px] font-bold font-serif mb-3.5">连接</h3>
       <div class="space-y-3">
-        <div><label class="text-[10px] text-[#a1a1aa]/35 uppercase tracking-[.06em] block mb-1.5">服务商</label><select class="dd"><option>自定义</option><option>Koofr</option><option>坚果云</option><option>Nextcloud</option></select></div>
+        <div><label class="text-[10px] text-[#a1a1aa]/35 uppercase tracking-[.06em] block mb-1.5">服务商</label>${glassSelect(['自定义','Koofr','坚果云','Nextcloud'])}</div>
         <div><label class="text-[10px] text-[#a1a1aa]/35 uppercase tracking-[.06em] block mb-1.5">服务器地址</label><input class="dd" placeholder="https://your-webdav.example" style="background-image:none"></div>
         <div class="grid grid-cols-2 gap-2.5">
           <div><label class="text-[10px] text-[#a1a1aa]/35 uppercase tracking-[.06em] block mb-1.5">账户</label><input class="dd" placeholder="username" style="background-image:none"></div>
@@ -1450,26 +1303,26 @@ mood(){
   }
   return `
   <div class="w-[260px] glass rounded-2xl a-float">
-    <div class="px-4 pt-4 pb-1.5"><h2 class="text-[15px] font-bold font-serif tracking-tight">心情日历</h2><p class="text-[10px] text-[#a1a1aa]/45 mt-0.5">情绪起伏</p></div>
+    <div class="px-4 pt-4 pb-1.5"><h2 class="text-[15px] font-bold font-serif tracking-tight">活动日历</h2><p class="text-[10px] text-[#a1a1aa]/45 mt-0.5">每日完成强度</p></div>
     <div class="px-4 pb-4 pt-1">
       <div class="flex items-center justify-between mb-2 a-slide"><button class="text-[#d4d4d8] hover:text-[#71717a] transition text-xs">‹</button><span class="text-[11px] font-serif font-medium">2026 年 5 月</span><button class="text-[#d4d4d8] hover:text-[#71717a] transition text-xs">›</button></div>
       <div class="grid grid-cols-7 gap-0 mb-0.5 a-slide d1">${days.map(d=>`<div class="text-center text-[8px] text-[#d4d4d8] py-0.5">${d}</div>`).join('')}</div>
       <div class="grid grid-cols-7 gap-0 a-slide d2">${g}</div>
       <div class="flex items-center gap-2.5 mt-2.5 text-[8px] text-[#a1a1aa]/40 a-slide d3">
-        <span class="flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full m-great"></span>很好</span>
-        <span class="flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full m-good"></span>还行</span>
-        <span class="flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full m-mid"></span>一般</span>
-        <span class="flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full m-low"></span>不太好</span>
+        <span class="flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full m-great"></span>高</span>
+        <span class="flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full m-good"></span>中</span>
+        <span class="flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full m-mid"></span>低</span>
+        <span class="flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full m-low"></span>暂停</span>
       </div>
       <div class="mt-2.5 rounded-lg bg-white/40 border border-white/25 p-2 a-slide d4">
-        <div class="flex items-center gap-2"><span class="text-[10px]">☺</span><div><p class="text-[10px] font-medium">5月15日 · 心情不错</p><p class="text-[8px] text-[#a1a1aa]/40">完成了 3 个任务</p></div></div>
+        <div class="flex items-center gap-2"><span class="w-[5px] h-[5px] rounded-full bg-[#2dd4bf]/70"></span><div><p class="text-[10px] font-medium">5月15日 · 完成 3 项任务</p><p class="text-[8px] text-[#a1a1aa]/40">专注 2 小时 15 分</p></div></div>
       </div>
     </div>
   </div>`},
 
 gacha(){return `
 <div class="w-[340px] min-h-[440px] flex flex-col justify-center items-center py-8 gap-5">
-  <p class="text-[8px] text-[#a1a1aa]/30 uppercase tracking-[.18em] font-serif">抽 卡</p>
+  <p class="text-[8px] text-[#a1a1aa]/30 uppercase tracking-[.18em] font-serif">灵 感 卡</p>
 
   <div class="gacha-deck a-pop" id="card-deck" data-state="idle">
     <div class="g-card"><div class="g-flipper"><div class="g-face g-face-back"></div></div></div>
@@ -1523,7 +1376,7 @@ switcher(){return `
     <div class="switcher-stage" data-active="1" data-open="0">
       <button class="switch-card" data-i="0" data-tool="mood">
         <span class="dot bg-[#86efac]"></span>
-        <p class="font-serif">心情日历</p>
+        <p class="font-serif">活动日历</p>
         <small>MOOD</small>
       </button>
       <button class="switch-card" data-i="1" data-tool="syshealth">
@@ -1533,7 +1386,7 @@ switcher(){return `
       </button>
       <button class="switch-card" data-i="2" data-tool="memory">
         <span class="dot bg-[#a78bfa]"></span>
-        <p class="font-serif">记忆搜索</p>
+        <p class="font-serif">资料搜索</p>
         <small>MEMO</small>
       </button>
       <button class="switch-card" data-i="3" data-tool="weather">
@@ -1551,11 +1404,11 @@ daily(){return `
     <div class="grid grid-cols-[1fr_1px_72px] gap-3 items-stretch">
       <div class="min-w-0">
         <div class="flex items-center gap-2">
-          <p class="text-[8px] daily-meta-soft tracking-[.16em] font-serif">系统宝日报</p>
+          <p class="text-[8px] daily-meta-soft tracking-[.16em] font-serif">工作简报</p>
           <span class="h-[3px] w-[3px] rounded-full bg-[#2dd4bf] opacity-35"></span>
-          <p class="text-[8px] uppercase tracking-[.16em] daily-meta-soft">SYSTEM DAILY</p>
+          <p class="text-[8px] uppercase tracking-[.16em] daily-meta-soft">DAILY DESK</p>
         </div>
-        <h2 class="daily-title mt-2 text-[30px] leading-[.95] text-black/82">THE<br><span>DAILY PET</span></h2>
+        <h2 class="daily-title mt-2 text-[30px] leading-[.95] text-black/82">THE<br><span>DAILY DESK</span></h2>
       </div>
       <div class="border-l border-dashed border-black/[.12]"></div>
       <div class="flex flex-col justify-between text-right">
@@ -1564,8 +1417,8 @@ daily(){return `
           <p>星期六 · 第47期</p>
         </div>
         <div class="text-[8px] leading-[1.6] daily-meta-soft uppercase tracking-[.08em]">
-          <p>晴 22° · LV.3</p>
-          <p class="font-serif normal-case tracking-[.04em]">心情不错</p>
+          <p>晴 22° · 进度 68%</p>
+          <p class="font-serif normal-case tracking-[.04em]">节奏稳定</p>
         </div>
         <div class="flex items-center justify-end gap-1.5">
           <span class="w-[3px] h-[3px] rounded-full bg-[#2dd4bf] opacity-45"></span>
@@ -1581,9 +1434,9 @@ daily(){return `
     <div class="space-y-3 a-slide d1">
       <div><p class="text-[8px] text-[#a1a1aa]/30 uppercase tracking-[.1em] font-serif mb-1 flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full bg-[#2dd4bf] opacity-50"></span>数据速览</p>
         <div class="space-y-1 text-[10.5px]">
-          <div class="flex justify-between"><span class="text-black/35 font-serif">对话次数</span><span class="tabular-nums font-medium count-num" data-order="1" data-value="8">0</span></div>
-          <div class="flex justify-between"><span class="text-black/35 font-serif">经验获得</span><span class="tabular-nums font-medium text-teal-600 count-num" data-order="2" data-value="65" data-prefix="+">0</span></div>
-          <div class="flex justify-between"><span class="text-black/35 font-serif">系统币</span><span class="tabular-nums font-medium count-num" data-order="3" data-value="42" data-suffix=" (+3)">0</span></div>
+          <div class="flex justify-between"><span class="text-black/35 font-serif">已完成</span><span class="tabular-nums font-medium count-num" data-order="1" data-value="8">0</span></div>
+          <div class="flex justify-between"><span class="text-black/35 font-serif">专注分钟</span><span class="tabular-nums font-medium text-teal-600 count-num" data-order="2" data-value="65" data-prefix="+">0</span></div>
+          <div class="flex justify-between"><span class="text-black/35 font-serif">已归档</span><span class="tabular-nums font-medium count-num" data-order="3" data-value="42" data-suffix=" (+3)">0</span></div>
           <div class="flex justify-between"><span class="text-black/35 font-serif">同步</span><span class="text-teal-600 text-[10px]">✓ 正常</span></div>
         </div>
       </div>
@@ -1594,9 +1447,9 @@ daily(){return `
       <div>
         <p class="text-[8px] text-[#a1a1aa]/30 uppercase tracking-[.1em] font-serif mb-1 flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full bg-[#fbbf24] opacity-55"></span>今日摘要</p>
         <h3 class="text-[12.5px] font-semibold font-serif leading-tight text-black/78">完成了 5 个待办</h3>
-        <p class="text-[10.5px] text-black/35 mt-1 leading-relaxed font-serif">包括两个设计任务和一次代码审查。连续完成第三天，经验 +45。</p>
+        <p class="text-[10.5px] text-black/35 mt-1 leading-relaxed font-serif">包括两个设计任务和一次代码审查。连续完成第三天，本周进度 +9%。</p>
       </div>
-      <div><h3 class="text-[12px] font-semibold font-serif leading-tight text-black/76">久坐提醒被接受</h3><p class="text-[10.5px] text-black/35 mt-1 leading-relaxed font-serif">下午两点的提醒后你去散了步，心情 +6。</p></div>
+      <div><h3 class="text-[12px] font-semibold font-serif leading-tight text-black/76">休息提醒已完成</h3><p class="text-[10.5px] text-black/35 mt-1 leading-relaxed font-serif">下午两点离开座位 10 分钟，随后继续工作。</p></div>
     </div>
     <div class="stamp streak-stamp absolute -bottom-1 -right-5 z-10 d5" style="animation-delay:.74s; --stamp-rot: 13deg"><span>连续<br>三天</span></div>
   </div>
@@ -1611,7 +1464,7 @@ daily(){return `
 
 syshealth(){return `
 <div class="w-[280px] glass rounded-2xl a-float">
-  <div class="px-5 pt-5 pb-2"><h2 class="text-[15px] font-bold font-serif tracking-tight">系统健康</h2><p class="text-[10px] text-[#a1a1aa]/45 mt-0.5">core 和设备的实时状态</p></div>
+  <div class="px-5 pt-5 pb-2"><h2 class="text-[15px] font-bold font-serif tracking-tight">系统健康</h2><p class="text-[10px] text-[#a1a1aa]/45 mt-0.5">应用服务和设备的实时状态</p></div>
   <div class="px-5 pb-5 pt-2 space-y-2.5">
     <div class="rounded-lg bg-white/40 border border-white/25 p-2.5 a-slide">
       <div class="flex justify-between items-center mb-1.5"><span class="text-[11px] text-black/50 font-serif">CPU</span><span class="text-[10px] tabular-nums font-medium">23%</span></div>
@@ -1626,17 +1479,17 @@ syshealth(){return `
     </div>
     <div class="sep"></div>
     <div class="rounded-lg bg-white/40 border border-white/25 p-2.5 a-slide d3">
-      <div class="flex items-center gap-2 mb-1.5"><span class="w-[4px] h-[4px] rounded-full bg-[#86efac]"></span><span class="text-[11px] font-medium font-serif">System Core</span></div>
+      <div class="flex items-center gap-2 mb-1.5"><span class="w-[4px] h-[4px] rounded-full bg-[#86efac]"></span><span class="text-[11px] font-medium font-serif">Local Service</span></div>
       <div class="space-y-1 text-[10px] text-[#a1a1aa]/45"><div class="flex justify-between"><span>运行</span><span class="tabular-nums">4h 23m</span></div><div class="flex justify-between"><span>队列</span><span class="tabular-nums">2 待处理</span></div></div>
     </div>
     <div class="rounded-lg bg-white/40 border border-white/25 p-2.5 a-slide d4">
-      <div class="flex items-center gap-2 mb-1.5"><span class="w-[4px] h-[4px] rounded-full bg-[#a78bfa]"></span><span class="text-[11px] font-medium font-serif">Discord Bridge</span></div>
+      <div class="flex items-center gap-2 mb-1.5"><span class="w-[4px] h-[4px] rounded-full bg-[#a78bfa]"></span><span class="text-[11px] font-medium font-serif">Message Bridge</span></div>
       <div class="space-y-1 text-[10px] text-[#a1a1aa]/45"><div class="flex justify-between"><span>状态</span><span>在线</span></div><div class="flex justify-between"><span>未读</span><span class="tabular-nums">3 条</span></div></div>
     </div>
     <div class="a-slide d5"><p class="text-[9px] text-[#a1a1aa]/30 uppercase tracking-[.08em] mb-1.5 font-serif">最近事件</p>
       <div class="space-y-1 text-[10px]">
-        <div class="flex gap-2"><span class="text-[#d4d4d8] text-[9px] tabular-nums w-7 text-right flex-shrink-0 mt-px">2分</span><span class="text-black/30 flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"><path d="M23 4 11.5 15.5 7 11"/></svg>TickTick 同步完成</span></div>
-        <div class="flex gap-2"><span class="text-[#d4d4d8] text-[9px] tabular-nums w-7 text-right flex-shrink-0 mt-px">15分</span><span class="text-black/30 flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Discord 新消息</span></div>
+        <div class="flex gap-2"><span class="text-[#d4d4d8] text-[9px] tabular-nums w-7 text-right flex-shrink-0 mt-px">2分</span><span class="text-black/30 flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"><path d="M23 4 11.5 15.5 7 11"/></svg>任务同步完成</span></div>
+        <div class="flex gap-2"><span class="text-[#d4d4d8] text-[9px] tabular-nums w-7 text-right flex-shrink-0 mt-px">15分</span><span class="text-black/30 flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>团队消息已更新</span></div>
         <div class="flex gap-2"><span class="text-[#d4d4d8] text-[9px] tabular-nums w-7 text-right flex-shrink-0 mt-px">1时</span><span class="text-black/30 flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>备份成功</span></div>
       </div>
     </div>
@@ -1649,27 +1502,27 @@ memory(){return `
     <span class="absolute top-3 right-4 flex gap-1"><span class="w-[3px] h-[3px] rounded-full bg-[#2dd4bf] opacity-45"></span><span class="w-[3px] h-[3px] rounded-full bg-[#fbbf24] opacity-40"></span><span class="w-[3px] h-[3px] rounded-full bg-[#a78bfa] opacity-35"></span></span>
     <div class="flex items-center gap-2 px-3.5 py-2.5 border-b border-white/15">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" class="flex-shrink-0 opacity-70"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <input class="flex-1 bg-transparent text-[12.5px] outline-none placeholder:text-[#d4d4d8]" placeholder="搜索记忆..." value="设计">
+      <input class="flex-1 bg-transparent text-[12.5px] outline-none placeholder:text-[#d4d4d8]" placeholder="搜索资料..." value="设计">
     </div>
     <div class="py-1 px-1 max-h-[260px] overflow-y-auto">
-      <p class="text-[8px] font-semibold text-[#71717a]/90 uppercase tracking-[.08em] px-2.5 py-1 font-serif flex items-center gap-1.5"><span class="w-[3px] h-[3px] rounded-full bg-[#86efac] opacity-55"></span>记忆</p>
+      <p class="text-[8px] font-semibold text-[#71717a]/90 uppercase tracking-[.08em] px-2.5 py-1 font-serif flex items-center gap-1.5"><span class="w-[3px] h-[3px] rounded-full bg-[#86efac] opacity-55"></span>笔记</p>
       <button class="w-full text-left px-2.5 py-1.5 rounded-md hover:bg-white/30 transition a-row border-l-2 border-l-transparent hover:border-l-[#2dd4bf]/40">
         <p class="text-[11px] text-black/50">重视<mark class="bg-teal-100/35 text-black/50 rounded px-0.5">设计</mark>质量</p>
-        <p class="text-[8px] text-[#d4d4d8] mt-0.5 flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full bg-[#fb7185]/35"></span>memory.md · 14天前</p>
+        <p class="text-[8px] text-[#d4d4d8] mt-0.5 flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full bg-[#fb7185]/35"></span>notes.md · 14天前</p>
       </button>
       <button class="w-full text-left px-2.5 py-1.5 rounded-md hover:bg-white/30 transition a-row d1 border-l-2 border-l-transparent hover:border-l-[#a78bfa]/35">
         <p class="text-[11px] text-black/50">喜欢 Apple 的<mark class="bg-violet-100/35 text-black/50 rounded px-0.5">设计</mark>风格</p>
-        <p class="text-[8px] text-[#d4d4d8] mt-0.5 flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full bg-[#fbbf24]/35"></span>memory.md · 1天前</p>
+        <p class="text-[8px] text-[#d4d4d8] mt-0.5 flex items-center gap-1"><span class="w-[3px] h-[3px] rounded-full bg-[#fbbf24]/35"></span>notes.md · 1天前</p>
       </button>
       <button class="w-full text-left px-2.5 py-1.5 rounded-md hover:bg-white/30 transition a-row d2 border-l-2 border-l-transparent hover:border-l-[#fbbf24]/35">
         <p class="text-[11px] text-black/50">讨厌大面积黑色<mark class="bg-amber-100/35 text-black/50 rounded px-0.5">设计</mark></p>
         <p class="text-[8px] text-[#d4d4d8] mt-0.5">对话 · 刚刚</p>
       </button>
       <div class="my-0.5"></div>
-      <p class="text-[8px] font-semibold text-[#71717a]/90 uppercase tracking-[.08em] px-2.5 py-1 font-serif flex items-center gap-1.5"><span class="w-[3px] h-[3px] rounded-full bg-[#a78bfa] opacity-55"></span>世界书</p>
+      <p class="text-[8px] font-semibold text-[#71717a]/90 uppercase tracking-[.08em] px-2.5 py-1 font-serif flex items-center gap-1.5"><span class="w-[3px] h-[3px] rounded-full bg-[#a78bfa] opacity-55"></span>项目</p>
       <button class="w-full text-left px-2.5 py-1.5 rounded-md hover:bg-white/30 transition a-row d3 border-l-2 border-l-transparent hover:border-l-[#86efac]/40">
-        <p class="text-[11px] text-black/50">系统宝 UI <mark class="bg-teal-100/35 text-black/50 rounded px-0.5">设计</mark>项目</p>
-        <p class="text-[8px] text-[#d4d4d8] mt-0.5">worldbook.md · 进行中</p>
+        <p class="text-[11px] text-black/50">桌面工具 UI <mark class="bg-teal-100/35 text-black/50 rounded px-0.5">设计</mark>项目</p>
+        <p class="text-[8px] text-[#d4d4d8] mt-0.5">projects.md · 进行中</p>
       </button>
     </div>
     <div class="border-t border-white/15 px-3 py-1.5 flex items-center justify-between">
@@ -1709,11 +1562,11 @@ ticker(){return `
   <p class="text-[8px] text-[#a1a1aa]/30 uppercase tracking-[.18em] font-serif">异形组件 · 事件流</p>
   <div class="w-[300px] glass-s rounded-full px-4 py-2 ticker-wrap a-pop">
     <div class="ticker-inner text-[11px] text-black/30">
-      <span class="flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"><path d="M23 4 11.5 15.5 7 11"/></svg> TickTick 同步完成</span>
-      <span class="flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Discord 新消息</span>
+      <span class="flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"><path d="M23 4 11.5 15.5 7 11"/></svg> 任务同步完成</span>
+      <span class="flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 团队消息已更新</span>
       <span class="flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> 备份成功</span>
       <span class="flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#86efac" stroke-width="2" stroke-linecap="round"><path d="M23 4 11.5 15.5 7 11"/></svg> 完成：UI 原型设计</span>
-      <span class="flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg> 经验 +15</span>
+      <span class="flex items-center gap-1"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg> 本周进度 +3%</span>
     </div>
   </div>
   <p class="text-[8px] text-[#a1a1aa]/30 uppercase tracking-[.18em] font-serif mt-4">堆叠提示</p>
@@ -1724,7 +1577,7 @@ ticker(){return `
       <span class="ico w-[15px] h-[15px]">${eventCheckSvg}</span>
       <div class="flex-1 min-w-0">
         <div class="flex items-center justify-between gap-2"><p class="text-[11px] text-black/45 font-medium truncate">完成：UI 原型设计</p><span class="text-[9px] text-[#d4d4d8] flex-shrink-0">刚刚</span></div>
-        <p class="text-[9px] text-[#a1a1aa]/40 mt-0.5">经验 +15 · 心情 +3</p>
+        <p class="text-[9px] text-[#a1a1aa]/40 mt-0.5">3 个文件已归档 · 用时 42 分钟</p>
       </div>
     </div>
   </div>
@@ -1733,11 +1586,11 @@ ticker(){return `
 };
 
 const rewardPool = [
-  {svg:'<span class="reward-icon-gem yellow"><img src="./icons/game-icon-pack/music.svg" alt=""></span>',n:'新音效：水滴',t:'普通'},
-  {svg:'<span class="reward-icon-gem teal"><img src="./icons/game-icon-pack/diamond.svg" alt=""></span>',n:'闪光特效',t:'稀有'},
-  {svg:'<span class="reward-icon-gem violet"><img src="./icons/game-icon-pack/paintbrush.svg" alt=""></span>',n:'彩虹皮肤',t:'传说'},
-  {svg:'<span class="reward-icon-gem rose"><img src="./icons/game-icon-pack/message.svg" alt=""></span>',n:'毒舌台词包',t:'普通'},
-  {svg:'<span class="reward-icon-gem green"><img src="./icons/game-icon-pack/trophy.svg" alt=""></span>',n:'完成音：轻敲',t:'普通'},
+  {svg:'<span class="reward-icon-gem yellow"><img src="./icons/game-icon-pack/music.svg" alt=""></span>',n:'完成音：水滴',t:'常用'},
+  {svg:'<span class="reward-icon-gem teal"><img src="./icons/game-icon-pack/diamond.svg" alt=""></span>',n:'高光效果',t:'精选'},
+  {svg:'<span class="reward-icon-gem violet"><img src="./icons/game-icon-pack/paintbrush.svg" alt=""></span>',n:'柔光主题',t:'特别'},
+  {svg:'<span class="reward-icon-gem rose"><img src="./icons/game-icon-pack/message.svg" alt=""></span>',n:'通知模板',t:'常用'},
+  {svg:'<span class="reward-icon-gem green"><img src="./icons/game-icon-pack/trophy.svg" alt=""></span>',n:'完成音：轻敲',t:'常用'},
 ];
 let rewardDeck = rewardPool.slice(0, 5);
 let currentReward = null;
@@ -1918,11 +1771,69 @@ function initOnboarding(){
   setStep(0);
 }
 
+function closeGlassSelect(root, returnFocus=false){
+  if(!root) return;
+  root.classList.remove('open','drop-up');
+  const trigger=root.querySelector('.rg-select-trigger');
+  const menu=root.querySelector('.rg-select-menu');
+  trigger?.setAttribute('aria-expanded','false');
+  menu?.setAttribute('aria-hidden','true');
+  if(returnFocus) trigger?.focus();
+}
+
+function openGlassSelect(root, focusOption=false){
+  vp.querySelectorAll('[data-rg-select].open').forEach(other=>{ if(other!==root) closeGlassSelect(other); });
+  const trigger=root.querySelector('.rg-select-trigger');
+  const menu=root.querySelector('.rg-select-menu');
+  root.classList.add('open');
+  trigger?.setAttribute('aria-expanded','true');
+  menu?.setAttribute('aria-hidden','false');
+  const rect=root.getBoundingClientRect();
+  const menuHeight=menu?.scrollHeight || 0;
+  root.classList.toggle('drop-up',rect.bottom+menuHeight+16>window.innerHeight&&rect.top>menuHeight+16);
+  if(focusOption) root.querySelector('.rg-select-option[aria-selected="true"]')?.focus();
+}
+
+function initGlassSelects(){
+  vp.querySelectorAll('[data-rg-select]').forEach(root=>{
+    const trigger=root.querySelector('.rg-select-trigger');
+    const value=root.querySelector('[data-rg-value]');
+    const options=[...root.querySelectorAll('.rg-select-option')];
+    const choose=option=>{
+      options.forEach(item=>item.setAttribute('aria-selected',String(item===option)));
+      if(value) value.textContent=option.textContent;
+      closeGlassSelect(root,true);
+    };
+    trigger?.addEventListener('click',e=>{
+      e.stopPropagation();
+      root.classList.contains('open')?closeGlassSelect(root):openGlassSelect(root);
+    });
+    trigger?.addEventListener('keydown',e=>{
+      if(!['ArrowDown','ArrowUp','Enter',' ','Escape'].includes(e.key)) return;
+      e.preventDefault(); e.stopPropagation();
+      if(e.key==='Escape') closeGlassSelect(root);
+      else if(!root.classList.contains('open')) openGlassSelect(root,true);
+    });
+    options.forEach((option,index)=>{
+      option.addEventListener('click',e=>{e.stopPropagation();choose(option)});
+      option.addEventListener('keydown',e=>{
+        if(e.key==='Escape'){e.preventDefault();e.stopPropagation();closeGlassSelect(root,true);return;}
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();choose(option);return;}
+        if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+          e.preventDefault();e.stopPropagation();
+          options[(index+(e.key==='ArrowDown'?1:-1)+options.length)%options.length].focus();
+        }
+      });
+    });
+  });
+}
+
 let cur='settings';
 const vp=document.getElementById('vp');
 function render(){
+  glassSelectId=0;
   vp.innerHTML=P[cur]();
-  document.querySelectorAll('.nb').forEach(b=>b.classList.toggle('on',b.dataset.p===cur||(cur==='skinEditor'&&b.dataset.p==='skins')||(['modDetail','modStudio'].includes(cur)&&b.dataset.p==='mods')));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.toggle('on',b.dataset.p===cur||(cur==='skinEditor'&&b.dataset.p==='skins')));
   vp.querySelectorAll('.nc').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('on')));
   vp.querySelectorAll('.seg').forEach(s=>{
     const buttons=[...s.querySelectorAll('button')];
@@ -1936,6 +1847,7 @@ function render(){
     }));
   });
   vp.querySelectorAll('.sound-wave.on').forEach(startSoundWave);
+  initGlassSelects();
   initToolSwitcher();
   initOnboarding();
   animateDailyCounts();
@@ -1967,8 +1879,12 @@ function animateDailyCounts(){
   });
 }
 document.querySelectorAll('.nb').forEach(b=>b.addEventListener('click',()=>{cur=b.dataset.p;render()}));
+document.addEventListener('click',e=>{
+  if(e.target.closest('[data-rg-select]')) return;
+  vp.querySelectorAll('[data-rg-select].open').forEach(root=>closeGlassSelect(root));
+});
 document.addEventListener('keydown',e=>{
-  if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;
+  if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)||e.target.closest('[data-rg-select]'))return;
   const stage=vp.querySelector('.switcher-stage');
   if(cur==='switcher'&&stage&&(e.key==='ArrowDown'||e.key==='ArrowUp'||e.key==='Enter'||e.key===' ')){
     e.preventDefault();

@@ -14,8 +14,9 @@ The repository separates canonical rules, derived assets, guidance, evidence, an
 | `adapters/gpui/` | Optional GPUI theme, Rust constants, translation contract, and gallery | Derived adapter and verification surface |
 | `adapters/winui/` | Optional WinUI 3 resources, motion constants, translation contract, and handoff | Derived adapter and integration surface |
 | `skills/rizum-glass/` | Reusable agent workflow with a synchronized canonical snapshot | Derived guidance plus workflow |
-| `examples/` | Cross-domain transfer tests | Validation evidence |
-| `references/` | Product-specific snapshots | Historical visual evidence |
+| `examples/` | Temporary cross-domain transfer tests | Validation evidence, not references |
+| `references/` | Complete product-neutral gallery plus historical archive | Active visual reference and archived evidence |
+| `archive/` | Retired transfer-test series | Historical evidence only |
 
 Do not copy a product behavior into `DESIGN.md` merely because it appears in a reference. First express the reusable visual or interaction principle.
 
@@ -104,7 +105,7 @@ Regenerate implementation tokens and adapter assets after any front-matter chang
 
 Do not edit files in `tokens/`, `adapters/gpui/themes/`, `adapters/gpui/generated/`, or `adapters/winui/generated/` by hand. They are derived artifacts. The command also synchronizes `DESIGN.md` into the repository-owned Skill.
 
-Then generate a new transfer test under a domain unrelated to any existing reference. The test should include the component categories affected by the change, such as:
+Then generate a new transfer test under a domain unrelated to the active gallery. The test should include the component categories affected by the change, such as:
 
 - content-aware panels with different intrinsic widths;
 - a menu with left labels and right metadata;
@@ -113,7 +114,9 @@ Then generate a new transfer test under a domain unrelated to any existing refer
 - an interactive alternative to a standard toggle;
 - a message or asynchronous state when motion rules change.
 
-Evaluate the result at desktop and compact viewports. Check text wrapping, collision, button consistency, divider restraint, readable contrast, animation continuity, and keyboard interaction. Do not repair the test with one-off CSS before deciding whether the missing rule belongs in `DESIGN.md`.
+Evaluate the result at desktop and compact viewports. Check text wrapping, collision, button consistency, divider restraint, readable contrast, animation continuity, and keyboard interaction. Compare only with `references/rizum-glass-ui-gallery-v11.html` or `references/rizum-glass-ui-gallery-dark-v11.html`; older galleries, archived product snapshots, and retired transfer tests must not guide the result. Do not repair the test with one-off CSS before deciding whether the missing rule belongs in `DESIGN.md`.
+
+Active galleries are curated implementation references rather than feature inventories. Remove an unfinished component family from the current gallery, including its unreachable template and styles, while preserving the earlier versioned snapshot for history.
 
 ## Change Workflow
 

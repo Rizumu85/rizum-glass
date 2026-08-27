@@ -13,7 +13,7 @@ If any visual input is missing, return to the web reference. Do not fill gaps by
 
 ## Translation Order
 
-1. Include `adapters/winui/generated/RizumGlass.Tokens.xaml` as a linked XAML Page and merge it into `App.xaml`.
+1. Include `adapters/winui/generated/RizumGlass.Tokens.xaml` as a linked XAML Page and merge it into `App.xaml`; use its `Default`, `Dark`, and `HighContrast` theme dictionaries instead of maintaining a second palette.
 2. Include the generated motion constants rather than copying timing values into product code.
 3. Use standard WinUI controls for buttons, inputs, menus, dialogs, lists, sliders, tabs, focus, keyboard behavior, and accessibility.
 4. Port layout from intrinsic, minimum, preferred, and maximum dimensions in the contract. Do not turn the web viewport width into a global native panel width.

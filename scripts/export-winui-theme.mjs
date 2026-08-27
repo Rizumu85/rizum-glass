@@ -33,6 +33,14 @@ function argb(name, alpha = "FF") {
   return `#${alpha}${color(name).slice(1)}`;
 }
 
+function darkTokenName(name) {
+  return name.startsWith("accent-") ? name : `dark-${name}`;
+}
+
+function darkArgb(name, alpha = "FF") {
+  return `#${alpha}${color(darkTokenName(name)).slice(1)}`;
+}
+
 function length(group, name) {
   const token = tokens[group]?.[name]?.$value;
   if (!token || typeof token.value !== "number") {
@@ -121,6 +129,13 @@ const rawColors = colorNames
   )
   .join("\n");
 
+const darkRawColors = colorNames
+  .map(
+    (name) =>
+      `  <Color x:Key="RizumColor${colorKey(name)}">${darkArgb(name)}</Color>`,
+  )
+  .join("\n");
+
 const display = type("display-serif");
 const title = type("title-serif");
 const subtitle = type("subtitle-serif");
@@ -144,6 +159,14 @@ ${rawColors
   .join("\n")}
 ${defaultBrushes}
       <SolidColorBrush x:Key="RizumBrushGlassPanel" Color="${argb("surface", "EB")}" />
+    </ResourceDictionary>
+    <ResourceDictionary x:Key="Dark">
+${darkRawColors
+  .split("\n")
+  .map((line) => `    ${line}`)
+  .join("\n")}
+${defaultBrushes}
+      <SolidColorBrush x:Key="RizumBrushGlassPanel" Color="${darkArgb("surface", "C2")}" />
     </ResourceDictionary>
     <ResourceDictionary x:Key="HighContrast">
 ${highContrastBrushes}

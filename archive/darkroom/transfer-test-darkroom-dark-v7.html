@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>暗房校样 · 深色定稿版 v7</title>
+  <meta name="color-scheme" content="dark" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#f4f4f5',
+            soft: '#d4d4d8',
+            muted: '#a1a1aa',
+            caption: '#9898a2',
+            fog: '#27272a',
+            line: '#3f3f46',
+            teal: '#5eead4',
+            yellow: '#facc15',
+            violet: '#c4b5fd',
+            rose: '#fda4af',
+            mint: '#a7f3d0'
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"PingFang SC"', 'system-ui', 'sans-serif'],
+            serif: ['"New York"', '"Noto Serif SC"', '"Songti SC"', 'Georgia', 'serif'],
+            mono: ['"SF Mono"', '"Fira Code"', 'Menlo', 'monospace']
+          },
+          keyframes: {
+            floatIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px) scale(.97)' },
+              '100%': { opacity: '1', transform: 'translateY(0) scale(1)' }
+            },
+            scaleIn: {
+              '0%': { opacity: '0', transform: 'scale(.94)' },
+              '100%': { opacity: '1', transform: 'scale(1)' }
+            },
+            slideDown: {
+              '0%': { opacity: '0', transform: 'translateY(-10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            waveBar: {
+              '0%, 100%': { height: '3px' },
+              '50%': { height: '10px' }
+            },
+            contPulse: {
+              '0%, 100%': { opacity: '.25', transform: 'translateX(0)' },
+              '50%': { opacity: '.5', transform: 'translateX(2px)' }
+            },
+            thinkingDot: {
+              '0%, 80%, 100%': { opacity: '.22', transform: 'translateY(0)' },
+              '40%': { opacity: '.72', transform: 'translateY(-2px)' }
+            }
+          },
+          animation: {
+            floatIn: 'floatIn .4s cubic-bezier(.34,1.56,.64,1) both',
+            scaleIn: 'scaleIn .3s cubic-bezier(.34,1.56,.64,1) both',
+            slideDown: 'slideDown .35s cubic-bezier(.22,1,.36,1) both',
+            waveBar: 'waveBar 1.2s ease-in-out infinite',
+            contPulse: 'contPulse 1.6s ease-in-out infinite',
+            thinkingDot: 'thinkingDot 1.25s ease-in-out infinite'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body, #root { height: 100%; }
+    html { color-scheme: dark; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      color: #f4f4f5;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", system-ui, sans-serif;
+      background: #111113;
+    }
+    button { -webkit-tap-highlight-color: transparent; }
+    button:focus { outline: none; }
+    button:focus-visible, input:focus-visible {
+      outline: 2px solid rgba(94,234,212,.5);
+      outline-offset: 3px;
+    }
+    .glass {
+      background: rgba(39,39,42,.76);
+      backdrop-filter: blur(42px) saturate(145%);
+      -webkit-backdrop-filter: blur(42px) saturate(145%);
+      border: 1px solid rgba(255,255,255,.105);
+      box-shadow: 0 1px 0 rgba(255,255,255,.09) inset, 0 24px 70px rgba(0,0,0,.34);
+    }
+    .sep { height: 1px; background: #3f3f46; margin: 0 8px; opacity: .62; }
+    .menu-sep-inset { height: 1px; background: #3f3f46; margin: 6px 12px; opacity: .6; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      white-space: nowrap;
+      padding: 6px 13px;
+      border: 1px solid #3f3f46;
+      border-radius: 8px;
+      background: rgba(39,39,42,.86);
+      color: #d4d4d8;
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 400;
+      cursor: pointer;
+      transition: all .18s cubic-bezier(.34,1.56,.64,1);
+      box-shadow: 0 1px 0 rgba(255,255,255,.045) inset, 0 2px 6px rgba(0,0,0,.16);
+    }
+    .btn:hover {
+      border-color: #52525b;
+      background: rgba(63,63,70,.72);
+      transform: translateY(-1px);
+      box-shadow: 0 1px 0 rgba(255,255,255,.065) inset, 0 6px 16px rgba(0,0,0,.24);
+    }
+    .btn:active { transform: scale(.97); }
+    .sl {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 2px;
+      border-radius: 1px;
+      background: #3f3f46;
+      outline: none;
+    }
+    .sl::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #a1a1aa;
+      cursor: pointer;
+      box-shadow: 0 0 8px 2px rgba(255,255,255,.08);
+      transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
+    }
+    .sl::-webkit-slider-thumb:hover {
+      transform: scale(1.3);
+      box-shadow: 0 0 14px 4px rgba(255,255,255,.12);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+
+    function cn(...parts) {
+      return parts.filter(Boolean).join(' ');
+    }
+
+    function CheckIcon() {
+      return (
+        <svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true">
+          <path d="M4.7 8.8 2.1 6.2l.9-.9 1.7 1.7L9.1 2.6l.9.9-5.3 5.3Z" fill="#5eead4" />
+        </svg>
+      );
+    }
+
+    function SaveIcon() {
+      return (
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" stroke="#fda4af" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M17 21v-8H7v8M7 3v5h8" stroke="#fda4af" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    }
+
+    function Button({ children, muted = false, icon = null }) {
+      return <button className={cn('btn', muted && 'text-caption')}>{icon}{children}</button>;
+    }
+
+    function Panel({ children, className = '', delay = '0ms' }) {
+      return (
+        <section className={cn('glass rounded-[20px] animate-floatIn', className)} style={{ animationDelay: delay }}>
+          {children}
+        </section>
+      );
+    }
+
+    function SectionTitle({ children, color }) {
+      return (
+        <h3 className="flex items-center gap-1.5 font-serif text-[11.5px] font-semibold text-muted">
+          {children}
+          <span className="h-[3px] w-[3px] rounded-full opacity-60" style={{ backgroundColor: color }} />
+        </h3>
+      );
+    }
+
+    function SoundWave() {
+      const [on, setOn] = useState(true);
+      const bars = [3, 7, 10, 5, 8];
+      return (
+        <button
+          aria-pressed={on}
+          aria-label={on ? '提示音开启' : '提示音关闭'}
+          onClick={() => setOn(!on)}
+          className="flex h-6 cursor-pointer items-end gap-0.5 rounded-md px-2 py-1 transition-colors duration-150 hover:bg-white/[.05]"
+        >
+          {bars.map((height, index) => (
+            <span
+              key={`${height}-${index}`}
+              className="w-0.5 animate-waveBar rounded-sm transition-colors duration-300"
+              style={{
+                height: `${height}px`,
+                animationDelay: `${index * 150}ms`,
+                backgroundColor: on ? '#a1a1aa' : '#52525b'
+              }}
+            />
+          ))}
+        </button>
+      );
+    }
+
+    function ThinkingDots() {
+      return (
+        <span className="inline-flex translate-y-0.5 gap-0.5 pl-1">
+          {[0, 160, 320].map((delay) => (
+            <span key={delay} className="h-[3px] w-[3px] animate-thinkingDot rounded-full bg-white/40" style={{ animationDelay: `${delay}ms` }} />
+          ))}
+        </span>
+      );
+    }
+
+    function PromptDots() {
+      return (
+        <div className="absolute bottom-[18px] right-[20px] flex gap-0.5">
+          {['#5eead4', '#c4b5fd', '#facc15'].map((color, index) => (
+            <span key={color} className="h-[3px] w-[3px] animate-contPulse rounded-full" style={{ backgroundColor: color, animationDelay: `${index * 200}ms` }} />
+          ))}
+        </div>
+      );
+    }
+
+    function NoticeChip({ active, color, children, onClick }) {
+      return (
+        <button
+          onClick={onClick}
+          className={cn(
+            'inline-flex items-center gap-[5px] rounded-lg border px-[11px] py-[5px] text-[12px] transition-all duration-200 ease-[cubic-bezier(.34,1.56,.64,1)]',
+            active ? 'border-line bg-white/[.06] text-soft' : 'border-transparent bg-transparent text-caption/65 hover:text-caption'
+          )}
+        >
+          <span className="h-1 w-1 rounded-full" style={{ backgroundColor: color, opacity: active ? .9 : .5 }} />
+          {children}
+        </button>
+      );
+    }
+
+    function Segmented({ value, setValue }) {
+      return (
+        <div className="inline-flex rounded-lg bg-white/[.055] p-0.5">
+          {['边缘', '色阶', '颗粒'].map((item) => (
+            <button
+              key={item}
+              onClick={() => setValue(item)}
+              className={cn(
+                'rounded-md px-3 py-1 text-[11.5px] transition-all duration-200',
+                value === item ? 'bg-white/[.10] text-ink shadow-[0_1px_0_rgba(255,255,255,.05)_inset,0_2px_8px_rgba(0,0,0,.18)]' : 'text-caption hover:text-muted'
+              )}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      );
+    }
+
+    function Menu() {
+      const rowClass = 'grid w-full grid-cols-[minmax(0,1fr)_max-content] items-center gap-4 rounded-md px-3 py-[7px] text-left text-[13px] font-normal text-soft transition-colors duration-100 hover:bg-white/[.05]';
+      return (
+        <Panel className="w-max min-w-[204px] max-w-[calc(100vw-44px)] rounded-xl px-1.5 py-1.5 animate-scaleIn" delay="80ms">
+          <button className={rowClass}><span>校样设置</span><span /></button>
+          <button className={rowClass}><span>批次档案</span><span /></button>
+          <div className="menu-sep-inset" />
+          <button className={rowClass}><span>对焦辅助</span><span className="text-[10px] text-caption">开启</span></button>
+          <button className={rowClass}><span>密度提示</span><span className="text-[10px] text-caption">柔和</span></button>
+          <div className="menu-sep-inset" />
+          <div className="px-2.5 py-1">
+            <p className="font-serif text-[11.5px] font-semibold text-muted">服务</p>
+          </div>
+          <button className={rowClass}><span>备份校样</span><span /></button>
+          <button className={rowClass}><span>同步暗房</span><span /></button>
+          <div className="menu-sep-inset" />
+          <button className={rowClass}><span>重置位置</span><span /></button>
+          <button className={rowClass}><span>暂时收起</span><span /></button>
+        </Panel>
+      );
+    }
+
+    function SettingsPanel() {
+      const [grain, setGrain] = useState(42);
+      const [mode, setMode] = useState('边缘');
+      const [active, setActive] = useState(['温度']);
+      const toggleChip = (label) => {
+        setActive((items) => items.includes(label) ? items.filter((item) => item !== label) : [...items, label]);
+      };
+
+      return (
+        <Panel className="w-[min(340px,calc(100vw-56px))] rounded-2xl">
+          <div className="px-6 pb-2 pt-6">
+            <h2 className="font-serif text-[19px] font-bold leading-tight tracking-tight text-ink">暗房校样</h2>
+            <p className="mt-1 text-[11px] text-caption">三张校样等着过片</p>
+          </div>
+          <div className="mx-6"><div className="sep" /></div>
+          <div className="px-6 pb-6 pt-4">
+            <div className="mb-5">
+              <SectionTitle color="#5eead4">暗房队列</SectionTitle>
+              <p className="mb-3 mt-1.5 text-[11px] text-caption">选择需要主动提醒的校样状态</p>
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  ['温度', '#a7f3d0'],
+                  ['显影液', '#facc15'],
+                  ['纸张', '#c4b5fd'],
+                  ['对焦', '#fda4af']
+                ].map(([label, color]) => (
+                  <NoticeChip key={label} color={color} active={active.includes(label)} onClick={() => toggleChip(label)}>
+                    {label}
+                  </NoticeChip>
+                ))}
+              </div>
+            </div>
+
+            <div className="sep" />
+            <div className="my-5">
+              <SectionTitle color="#c4b5fd">校样</SectionTitle>
+              <div className="mt-4 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-[13px] text-soft">查看通道</span>
+                  <Segmented value={mode} setValue={setMode} />
+                </div>
+                <div>
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-[13px] text-soft">颗粒强度</span>
+                    <span className="font-mono text-[11px] tabular-nums text-caption">{grain}%</span>
+                  </div>
+                  <input className="sl" type="range" min="18" max="78" value={grain} onChange={(event) => setGrain(event.target.value)} />
+                </div>
+              </div>
+            </div>
+
+            <div className="sep" />
+            <div className="my-5">
+              <SectionTitle color="#facc15">语音</SectionTitle>
+              <div className="mt-4 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-[13px] text-soft">对话时发出声音</span>
+                  <SoundWave />
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[13px] text-soft">提示方式</span>
+                  <span className="text-[11px] text-caption">短声 · 柔和</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="sep" />
+            <div className="mt-5">
+              <SectionTitle color="#a7f3d0">连接</SectionTitle>
+              <div className="mt-2 flex items-center gap-2 text-[12px] text-caption">
+                <span className="h-1.5 w-1.5 rounded-full bg-mint" />
+                本机暗房 · 已同步
+              </div>
+            </div>
+          </div>
+        </Panel>
+      );
+    }
+
+    function App() {
+      return (
+        <main className="min-h-full px-7 py-9">
+          <div className="grid grid-cols-[max-content_max-content] items-start gap-x-5 gap-y-4 max-[720px]:grid-cols-1">
+            <SettingsPanel />
+            <div className="space-y-4">
+              <Menu />
+              <Panel className="w-[min(278px,calc(100vw-56px))] px-5 py-4" delay="140ms">
+                <div className="grid grid-cols-[auto_1fr] items-center gap-3">
+                  <span className="h-[7px] w-[7px] rounded-full bg-teal opacity-80" />
+                  <div>
+                    <p className="font-serif text-[11.5px] font-semibold text-muted">扫描器</p>
+                    <p className="text-[13px] leading-relaxed text-soft">正在校准<ThinkingDots /></p>
+                  </div>
+                </div>
+              </Panel>
+            </div>
+
+            <div className="col-span-2 flex flex-wrap items-start gap-4 max-[720px]:col-span-1">
+              <Panel className="relative w-[min(386px,calc(100vw-56px))] rounded-[22px] px-7 py-6" delay="210ms">
+                <p className="max-w-[296px] text-[14px] leading-[1.85] text-ink">
+                  2 号托盘的边缘密度偏浅。要不要先保存当前校样，再跑一轮短校准？
+                </p>
+                <PromptDots />
+              </Panel>
+
+              <div className="flex flex-wrap gap-2 pt-3 animate-floatIn" style={{ animationDelay: '280ms' }}>
+                <Button icon={<CheckIcon />}>保存并校准</Button>
+                <Button>稍后</Button>
+                <Button muted>不用了</Button>
+              </div>
+            </div>
+
+            <Panel className="w-[min(326px,calc(100vw-56px))] px-5 py-4" delay="330ms">
+              <div className="mb-3">
+                <h2 className="font-serif text-[15px] font-bold tracking-tight text-ink">最近校样</h2>
+                <p className="mt-0.5 text-[10px] text-caption">银盐纸 · 批次 04</p>
+              </div>
+              <div className="space-y-2.5">
+                <div className="grid grid-cols-[auto_1fr] gap-2">
+                  <span className="mt-2 h-[4px] w-[4px] rounded-full bg-yellow opacity-70" />
+                  <p className="text-[12px] leading-relaxed text-soft/75">高光区已经压住，暗部还可以多留一点空气感。</p>
+                </div>
+                <div className="grid grid-cols-[auto_1fr] gap-2">
+                  <span className="mt-2 h-[4px] w-[4px] rounded-full bg-violet opacity-70" />
+                  <p className="text-[12px] leading-relaxed text-soft/75">建议把蓝色通道回拉 3%。</p>
+                </div>
+              </div>
+              <div className="mt-4 flex justify-start gap-2">
+                <Button>重新预览</Button>
+                <Button icon={<SaveIcon />}>保存</Button>
+              </div>
+            </Panel>
+          </div>
+        </main>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

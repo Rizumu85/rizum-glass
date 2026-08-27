@@ -13,7 +13,7 @@ If any input is missing, return to the web reference. Do not fill gaps by taste 
 
 ## Translation Order
 
-1. Load the generated `gpui-component` theme from `adapters/gpui/themes/rizum-glass.json`.
+1. Load the generated `gpui-component` theme from `adapters/gpui/themes/rizum-glass.json` and select its approved light or dark entry rather than remapping colors locally.
 2. Use `gpui-component` primitives for buttons, inputs, menus, dialogs, lists, sliders, tabs, and focus behavior.
 3. Apply generated Rust constants from `adapters/gpui/generated/rizum_glass_tokens.rs` to custom surfaces and motion.
 4. Port layout from the recorded intrinsic, minimum, preferred, and maximum dimensions. Do not translate web viewport width into a global native panel width.

@@ -16,7 +16,7 @@ This order gives design agents a mature component vocabulary and inspectable CSS
 
 | Path | Purpose |
 | --- | --- |
-| `themes/rizum-glass.json` | Generated `gpui-component` theme. |
+| `themes/rizum-glass.json` | Generated light and dark `gpui-component` themes. |
 | `generated/rizum_glass_tokens.rs` | Generated Rust constants for custom GPUI surfaces and motion. |
 | `gallery/` | Compile-checked native component gallery and adapter smoke test. |
 
@@ -34,6 +34,8 @@ cargo run
 ```
 
 GPUI and `gpui-component` are pre-1.0 dependencies. Verify APIs against the versions pinned by the consuming project before porting a component. Never invent a GPUI method by analogy with React.
+
+The generated dark theme uses the approved solid neutral canvas and neutral dark surfaces. Do not add a cursor spotlight as a substitute for browser glass behavior.
 
 ## Material Boundary
 

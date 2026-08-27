@@ -10,7 +10,7 @@ Rizum Glass is a reusable UI design-language repository, not a product repositor
 - Before writing native UI code, require an approved web reference and the target-specific reference contract.
 - Verify unfamiliar GPUI and `gpui-component` APIs against the exact dependency source; both are pre-1.0.
 - Verify unfamiliar WinUI APIs against the consuming project's Windows App SDK version. Keep product state and business logic out of code-behind.
-- Treat `references/` as evidence, not specification. Never infer missing rules from reference HTML.
+- Use `references/rizum-glass-ui-gallery-v11.html` and `references/rizum-glass-ui-gallery-dark-v11.html` as the only active visual references. Never infer missing rules from them, and do not use older galleries, archived Nolnol, or darkroom files to guide new UI.
 - Create a new versioned example or reference file instead of overwriting an earlier snapshot.
 - Validate a design change with an unrelated product-domain transfer test.
 - Keep large product feature specifications, architecture, and business rules out of this repository.

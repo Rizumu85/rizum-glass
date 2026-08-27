@@ -1,8 +1,5 @@
 # Transfer Tests
 
-Transfer tests answer one question: can `DESIGN.md` reproduce the Rizum Glass character in an unrelated product without copying a reference application?
+Transfer tests are temporary validation artifacts, never visual references or starter templates. Generate them from `DESIGN.md`, compare them with the active `v5` product-neutral light or dark gallery, and retire them after their reusable findings have been promoted.
 
-`transfer-test-darkroom-v12.html` uses a darkroom proofing workflow rather than a companion, assistant, or pet domain. It exercises compact panels, menu spacing, buttons, sliders, chips, segmented controls, sound-wave state, message dots, and the ambient background.
-
-Transfer tests are validation artifacts, not starter templates. A new test should be generated from `DESIGN.md` alone, use a different product domain, and receive a new versioned filename.
-
+The completed darkroom series now lives in `../archive/darkroom/`. Its final `v7` artifact records the approved solid dark canvas and neutral dark glass without cursor-following lighting. The entire series is archived and must not guide new interface work.

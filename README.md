@@ -4,7 +4,7 @@ Rizum Glass is a reusable UI design language for compact software surfaces. It c
 
 The visual language is reusable across products. The canonical design environment is intentionally specific: **React + TypeScript + Vite + Tailwind CSS + shadcn/ui**. Final products may optionally use the GPUI or WinUI 3 adapter after the web reference is approved; neither native target is required.
 
-![Rizum Glass transfer test](assets/transfer-test-darkroom.png)
+The active visual references are the product-neutral [Rizum Glass UI Gallery](references/rizum-glass-ui-gallery-v11.html) and its [dark appearance](references/rizum-glass-ui-gallery-dark-v11.html). Archived product prototypes, older gallery snapshots, and transfer tests preserve history but must not guide new interface work.
 
 ## Repository Map
 
@@ -17,8 +17,10 @@ The visual language is reusable across products. The canonical design environmen
 | [`adapters/gpui/`](adapters/gpui/) | Optional generated GPUI theme, Rust tokens, translation contract, and component gallery. |
 | [`adapters/winui/`](adapters/winui/) | Optional WinUI 3 resources, motion constants, translation contract, and migration handoff. |
 | [`skills/rizum-glass/`](skills/rizum-glass/) | Reusable Codex skill for web-first design and optional native translation. |
-| [`examples/transfer-test-darkroom-v12.html`](examples/transfer-test-darkroom-v12.html) | An unrelated product-domain test generated from the design language. |
-| [`references/`](references/) | Product-specific snapshots used as visual evidence, never as the source of truth. |
+| [`references/rizum-glass-ui-gallery-v11.html`](references/rizum-glass-ui-gallery-v11.html) | Current curated product-neutral light appearance reference. |
+| [`references/rizum-glass-ui-gallery-dark-v11.html`](references/rizum-glass-ui-gallery-dark-v11.html) | Current curated product-neutral dark appearance reference. |
+| [`references/archive/`](references/archive/) | Historical product snapshots; not active design references. |
+| [`archive/darkroom/`](archive/darkroom/) | Retired transfer-test history, including the approved gradient-free dark exploration. |
 
 ## Use In A Project
 
@@ -87,10 +89,10 @@ See [`adapters/winui/README.md`](adapters/winui/README.md) for integration detai
 2. Run `./scripts/export-tokens.sh` to regenerate web tokens, native adapter assets, and the skill snapshot.
 3. Record the intent in `CHANGELOG.md`.
 4. Generate a new interface in an unrelated product domain using only `DESIGN.md`.
-5. Compare the result against the design principles, not against a product screenshot pixel for pixel.
-6. Add a new versioned example or reference file instead of overwriting history.
+5. Compare the result against the design principles and the appropriate complete product-neutral light or dark gallery, not archived product or darkroom snapshots.
+6. Add a new versioned gallery or validation file instead of overwriting history.
 7. Pull the update into consuming projects through the submodule or sync script. A locally linked Skill updates with the repository automatically.
 
 ## Status
 
-Version 1.0 was extracted from the long-running Nolnol prototype process. Product concepts remain in `references/`; reusable visual and interaction decisions live in `DESIGN.md`.
+Version 1.0 was extracted from the long-running Nolnol prototype process. The product-neutral light and dark galleries are the active visual references; reusable visual and interaction decisions live in `DESIGN.md`, and the original product material remains archived.

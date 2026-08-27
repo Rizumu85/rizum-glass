@@ -38,6 +38,39 @@
       <SolidColorBrush x:Key="RizumBrushAccentMint" Color="{StaticResource RizumColorAccentMint}" />
       <SolidColorBrush x:Key="RizumBrushGlassPanel" Color="#EBFFFFFF" />
     </ResourceDictionary>
+    <ResourceDictionary x:Key="Dark">
+      <Color x:Key="RizumColorInk">#FFF4F4F5</Color>
+      <Color x:Key="RizumColorInkSoft">#FFD4D4D8</Color>
+      <Color x:Key="RizumColorInkMuted">#FFA1A1AA</Color>
+      <Color x:Key="RizumColorCaption">#FF9898A2</Color>
+      <Color x:Key="RizumColorCanvas">#FF111113</Color>
+      <Color x:Key="RizumColorSurface">#FF27272A</Color>
+      <Color x:Key="RizumColorSurfaceMuted">#FF3F3F46</Color>
+      <Color x:Key="RizumColorSurfaceLine">#FF3F3F46</Color>
+      <Color x:Key="RizumColorAccentTeal">#FF2DD4BF</Color>
+      <Color x:Key="RizumColorAccentCyan">#FF67E8F9</Color>
+      <Color x:Key="RizumColorAccentOrange">#FFF59E0B</Color>
+      <Color x:Key="RizumColorAccentYellow">#FFFBBF24</Color>
+      <Color x:Key="RizumColorAccentViolet">#FFA78BFA</Color>
+      <Color x:Key="RizumColorAccentRose">#FFFB7185</Color>
+      <Color x:Key="RizumColorAccentMint">#FF86EFAC</Color>
+      <SolidColorBrush x:Key="RizumBrushInk" Color="{StaticResource RizumColorInk}" />
+      <SolidColorBrush x:Key="RizumBrushInkSoft" Color="{StaticResource RizumColorInkSoft}" />
+      <SolidColorBrush x:Key="RizumBrushInkMuted" Color="{StaticResource RizumColorInkMuted}" />
+      <SolidColorBrush x:Key="RizumBrushCaption" Color="{StaticResource RizumColorCaption}" />
+      <SolidColorBrush x:Key="RizumBrushCanvas" Color="{StaticResource RizumColorCanvas}" />
+      <SolidColorBrush x:Key="RizumBrushSurface" Color="{StaticResource RizumColorSurface}" />
+      <SolidColorBrush x:Key="RizumBrushSurfaceMuted" Color="{StaticResource RizumColorSurfaceMuted}" />
+      <SolidColorBrush x:Key="RizumBrushSurfaceLine" Color="{StaticResource RizumColorSurfaceLine}" />
+      <SolidColorBrush x:Key="RizumBrushAccentTeal" Color="{StaticResource RizumColorAccentTeal}" />
+      <SolidColorBrush x:Key="RizumBrushAccentCyan" Color="{StaticResource RizumColorAccentCyan}" />
+      <SolidColorBrush x:Key="RizumBrushAccentOrange" Color="{StaticResource RizumColorAccentOrange}" />
+      <SolidColorBrush x:Key="RizumBrushAccentYellow" Color="{StaticResource RizumColorAccentYellow}" />
+      <SolidColorBrush x:Key="RizumBrushAccentViolet" Color="{StaticResource RizumColorAccentViolet}" />
+      <SolidColorBrush x:Key="RizumBrushAccentRose" Color="{StaticResource RizumColorAccentRose}" />
+      <SolidColorBrush x:Key="RizumBrushAccentMint" Color="{StaticResource RizumColorAccentMint}" />
+      <SolidColorBrush x:Key="RizumBrushGlassPanel" Color="#C227272A" />
+    </ResourceDictionary>
     <ResourceDictionary x:Key="HighContrast">
       <SolidColorBrush x:Key="RizumBrushInk" Color="{ThemeResource SystemColorWindowTextColor}" />
       <SolidColorBrush x:Key="RizumBrushInkSoft" Color="{ThemeResource SystemColorWindowTextColor}" />
