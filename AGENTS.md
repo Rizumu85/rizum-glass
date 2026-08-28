@@ -19,6 +19,12 @@ Rizum Glass is a reusable UI design-language repository, not a product repositor
 - Regenerate `tokens/` with `scripts/export-tokens.sh` after token changes.
 - Let `scripts/export-tokens.sh` regenerate native adapter assets and synchronize the repository-owned Skill; do not hand-edit generated adapter files or the Skill's `DESIGN.md` snapshot.
 
+Version-control closeout:
+
+- At the end of every completed conversation turn that changes this repository, partition the work into cohesive commits by concern. Do not mix unrelated design guidance, examples, generated assets, or repository-governance changes in one commit.
+- Push each commit to the tracked remote immediately after creating it so every turn's changes are backed up remotely; do not defer the push to a later conversation.
+- If authentication, connectivity, divergence, or a remote policy blocks a push, preserve the local commits and report the exact blocker. Do not describe locally committed work as backed up until the remote contains it.
+
 Verification:
 
 ```bash
