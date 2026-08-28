@@ -349,6 +349,13 @@ Vertical rhythm belongs to sections, not individual leftovers. Define the close 
 
 Let compact utility windows follow meaningful content states. A status-only row may stay compact; the same row may grow when it gains an action, progress detail, or error explanation. Increase the content-sized window with that state instead of reserving permanent blank space or clipping the footer. A fixed utility whose complete task fits its window is not a scroll container. If future content no longer fits, introduce one deliberate bounded body or overlay rather than letting wheel events move the entire root surface.
 
+Classify the final visible region by semantic ownership rather than by its proximity to the window edge. Use two distinct closing rhythms for compact desktop utilities:
+
+- **Bottom action area:** Restore, Save, Confirm, Cancel, and similar page-level decisions form a compact action footer. Start with about 16px from the preceding content to its divider, 12px from the divider to the action row, a content-sized 32-34px action row, and a 16px bottom safe area. Keep related actions together instead of stretching them across the width. This footer should finish the task without borrowing the generous breathing room of a content section.
+- **Bottom result content:** A generated value, playback destination, export location, runtime state, or other outcome remains part of the content hierarchy even when it is the last region. Give it the normal major-group separation: about 18px before its divider and 14px from the divider to the result surface, then retain 14-16px below the completed result. Let the result surface and content-sized window grow together when its state gains detail or an action.
+
+These measurements are the starting rhythm for a compact utility at its calibrated native scale, not unrelated per-component overrides. Scale the complete spacing and control system coherently when native optical calibration requires it. Do not tighten a result into a button footer merely because it sits last, and do not give a small decision row the same large closure as primary content. When both are present, the result closes its content section first and the separate action footer follows with the compact action rhythm.
+
 Use separators sparingly, but follow the prototype rhythm when a panel is settings-like.
 
 Main/settings panel separator rhythm:

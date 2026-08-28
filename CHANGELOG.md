@@ -4,6 +4,7 @@ All notable changes to Rizum Glass are documented here.
 
 ## Unreleased
 
+- Distinguished compact bottom action areas from bottom-positioned result content, with separate divider, row, and bottom-safe-area rhythms based on semantic ownership rather than visual position.
 - Refined the motion contract after GPUIX hands-on use: one motion owner per replaceable region, stable shells for coarse feedback, direct updates for manipulated values, bounded busy indicators, immediate overlay dismissal when exit presence is unavailable, and cleanup of superseded feedback timers. Selection controls now disappear when resolved data contains only one meaningful option, with spacing and content-sized window geometry reclaimed.
 - Added a field-tested GPUIX native quality pass covering optical scale calibration, content-sized state variants, alignment grids, native editor geometry, selection and wheel ownership, sensitive fields, bounded asynchronous popovers, unified compact controls, premultiplied material calibration, rounded-child clipping, and deterministic complex-surface fallbacks.
 - Expanded the GPUIX reference contract with required native-calibration, interaction-ownership, and capability-fallback evidence, and added restrained motion degradation rules for keyboard input, reduced motion, coarse status feedback, static continuous-motion fallbacks, and immediate native window resizing.
