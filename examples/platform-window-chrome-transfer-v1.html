@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Studio Queue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@19",
+          "react-dom/client": "https://esm.sh/react-dom@19/client"
+        }
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --canvas: #f0f0f0;
+        --surface: rgba(255, 255, 255, 0.68);
+        --surface-strong: rgba(255, 255, 255, 0.86);
+        --surface-muted: rgba(244, 244, 245, 0.72);
+        --line: rgba(228, 228, 231, 0.8);
+        --ink: #18181b;
+        --ink-soft: #3f3f46;
+        --muted: #71717a;
+        --caption: #a1a1aa;
+        --teal: #2dd4bf;
+        --rose: #fb7185;
+        --violet: #a78bfa;
+        --frame-radius: 8px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --canvas: #111113;
+          --surface: rgba(39, 39, 42, 0.78);
+          --surface-strong: rgba(39, 39, 42, 0.9);
+          --surface-muted: rgba(63, 63, 70, 0.6);
+          --line: rgba(255, 255, 255, 0.105);
+          --ink: #f4f4f5;
+          --ink-soft: #d4d4d8;
+          --muted: #a1a1aa;
+          --caption: #9898a2;
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html, body, #root { width: 100%; min-height: 100%; margin: 0; }
+      body {
+        min-height: 100vh;
+        overflow: hidden;
+        background:
+          radial-gradient(ellipse at 20% 30%, rgba(167,139,250,.08), transparent 50%),
+          radial-gradient(ellipse at 80% 70%, rgba(129,230,217,.06), transparent 50%),
+          radial-gradient(ellipse at 50% 50%, rgba(251,191,36,.04), transparent 60%),
+          var(--canvas);
+        color: var(--ink-soft);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", system-ui, sans-serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        body { background: var(--canvas); }
+      }
+      button, input { font: inherit; }
+      button:focus-visible, input:focus-visible {
+        outline: 2px solid color-mix(in srgb, var(--teal) 68%, transparent);
+        outline-offset: 2px;
+      }
+      .stage {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 36px;
+      }
+      .window {
+        width: min(560px, calc(100vw - 48px));
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,.5);
+        border-radius: var(--frame-radius);
+        background: var(--surface);
+        box-shadow:
+          0 1px 0 rgba(255,255,255,.55) inset,
+          0 24px 70px rgba(0,0,0,.13);
+        backdrop-filter: blur(40px) saturate(190%);
+        transition: border-radius 180ms cubic-bezier(.22,1,.36,1), box-shadow 180ms cubic-bezier(.22,1,.36,1);
+      }
+      @media (prefers-color-scheme: dark) {
+        .window {
+          border-color: rgba(255,255,255,.105);
+          box-shadow: 0 1px 0 rgba(255,255,255,.09) inset, 0 24px 70px rgba(0,0,0,.34);
+          backdrop-filter: blur(42px) saturate(145%);
+        }
+      }
+      .window[data-platform="macos"] { --frame-radius: 12px; }
+      .window[data-state="expanded"] {
+        width: 100vw;
+        min-height: 100vh;
+        border-radius: 0;
+        border-color: transparent;
+        box-shadow: none;
+      }
+      .titlebar {
+        position: relative;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid color-mix(in srgb, var(--line) 58%, transparent);
+        user-select: none;
+      }
+      .identity {
+        position: absolute;
+        inset-inline-start: 16px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+      }
+      [data-platform="macos"] .identity { inset-inline-start: 82px; }
+      .identity-mark {
+        width: 16px;
+        height: 16px;
+        color: var(--rose);
+        flex: 0 0 auto;
+      }
+      .identity-title {
+        color: var(--ink);
+        font-family: "New York", "Noto Serif SC", "Songti SC", Georgia, serif;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .traffic-lights {
+        position: absolute;
+        inset-inline-start: 14px;
+        top: 0;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .traffic-lights i { width: 12px; height: 12px; border-radius: 999px; box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset; }
+      .traffic-lights i:nth-child(1) { background: #ff5f57; }
+      .traffic-lights i:nth-child(2) { background: #febc2e; }
+      .traffic-lights i:nth-child(3) { background: #28c840; }
+      .caption-buttons {
+        position: absolute;
+        inset-inline-end: 0;
+        top: 0;
+        height: 44px;
+        display: grid;
+        grid-template-columns: repeat(3, 46px);
+      }
+      .caption-buttons span { display: grid; place-items: center; color: var(--muted); font-size: 12px; }
+      .caption-buttons span:last-child:hover { color: white; background: #c42b1c; }
+      .content { padding: 24px; }
+      .eyebrow {
+        color: var(--muted);
+        font: 600 11.5px/1.35 "New York", "Noto Serif SC", Georgia, serif;
+      }
+      .task-title {
+        margin: 5px 0 4px;
+        color: var(--ink);
+        font: 700 19px/1.25 "New York", "Noto Serif SC", Georgia, serif;
+      }
+      .lede { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+      .separator { height: 1px; margin: 18px 8px; background: var(--line); opacity: .55; }
+      .row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+      .track { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+      .track strong { color: var(--ink-soft); font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .track span { color: var(--caption); font-size: 11px; }
+      .dot { width: 5px; height: 5px; border-radius: 999px; background: var(--teal); box-shadow: 0 0 0 3px color-mix(in srgb, var(--teal) 12%, transparent); }
+      .queue { display: grid; gap: 14px; }
+      .input-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+      input {
+        width: 100%; height: 30px; padding: 6px 10px;
+        color: var(--ink); background: var(--surface-strong);
+        border: 1px solid var(--line); border-radius: 8px;
+      }
+      .button {
+        height: 30px; padding: 6px 13px; border-radius: 8px;
+        color: var(--ink-soft); background: var(--surface-strong);
+        border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(0,0,0,.02);
+        font-size: 12px; cursor: pointer;
+        transition: transform 180ms cubic-bezier(.22,1,.36,1), box-shadow 180ms cubic-bezier(.22,1,.36,1);
+      }
+      .button:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.04); }
+      .button:active { transform: scale(.97); }
+      .status { display: flex; align-items: center; gap: 9px; color: var(--caption); font-size: 11px; }
+      @media (max-width: 560px) {
+        .stage { padding: 16px; }
+        .window { width: 100%; }
+        .caption-buttons { grid-template-columns: repeat(3, 42px); }
+        .identity-title { max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
+        [data-platform="windows"] .identity { inset-inline-end: 132px; }
+        .content { padding: 20px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import React from "react";
+      import { createRoot } from "react-dom/client";
+
+      const params = new URLSearchParams(location.search);
+      const requestedPlatform = params.get("platform");
+      const platform = requestedPlatform === "macos" || requestedPlatform === "windows"
+        ? requestedPlatform
+        : navigator.platform.toLowerCase().includes("mac") ? "macos" : "windows";
+      const windowState = params.get("state") === "expanded" ? "expanded" : "normal";
+
+      const Mark = () => React.createElement("svg", {
+        className: "identity-mark", viewBox: "0 0 16 16", fill: "none", "aria-hidden": true,
+      },
+        React.createElement("rect", { x: 2, y: 3, width: 12, height: 9, rx: 2, stroke: "currentColor", strokeWidth: 1.5 }),
+        React.createElement("path", { d: "M7 6.2 10.2 8 7 9.8V6.2Z", fill: "currentColor" }),
+      );
+
+      const Titlebar = () => React.createElement("header", { className: "titlebar" },
+        platform === "macos" && React.createElement("div", { className: "traffic-lights", "aria-hidden": true },
+          React.createElement("i"), React.createElement("i"), React.createElement("i"),
+        ),
+        React.createElement("div", { className: "identity" },
+          React.createElement(Mark),
+          React.createElement("span", { className: "identity-title" }, "Studio Queue"),
+        ),
+        platform === "windows" && React.createElement("div", { className: "caption-buttons", "aria-hidden": true },
+          React.createElement("span", null, "—"),
+          React.createElement("span", null, "□"),
+          React.createElement("span", null, "×"),
+        ),
+      );
+
+      const QueueRow = ({ name, note, color }) => React.createElement("div", { className: "row" },
+        React.createElement("div", { className: "track" },
+          React.createElement("strong", null, name),
+          React.createElement("span", null, note),
+        ),
+        React.createElement("span", { className: "dot", style: { background: color } }),
+      );
+
+      const App = () => React.createElement("main", { className: "stage" },
+        React.createElement("section", { className: "window", "data-platform": platform, "data-state": windowState },
+          React.createElement(Titlebar),
+          React.createElement("div", { className: "content" },
+            React.createElement("div", { className: "eyebrow" }, "Today’s session"),
+            React.createElement("h1", { className: "task-title" }, "Prepare the listening room"),
+            React.createElement("p", { className: "lede" }, "Three tracks are ready. Add one more before the room opens."),
+            React.createElement("div", { className: "separator" }),
+            React.createElement("div", { className: "queue" },
+              React.createElement(QueueRow, { name: "Blue Hour", note: "04:18 · mastered", color: "var(--teal)" }),
+              React.createElement(QueueRow, { name: "Paper Lanterns", note: "03:42 · notes attached", color: "var(--violet)" }),
+              React.createElement(QueueRow, { name: "Soft Current", note: "05:06 · awaiting cover", color: "var(--rose)" }),
+            ),
+            React.createElement("div", { className: "separator" }),
+            React.createElement("div", { className: "input-row" },
+              React.createElement("input", { "aria-label": "Track link", placeholder: "Paste a track link" }),
+              React.createElement("button", { className: "button", type: "button" }, "Add track"),
+            ),
+            React.createElement("div", { className: "status", style: { marginTop: 16 } },
+              React.createElement("span", { className: "dot" }),
+              React.createElement("span", null, "Room ready · changes saved locally"),
+            ),
+          ),
+        ),
+      );
+
+      createRoot(document.getElementById("root")).render(React.createElement(App));
+    </script>
+  </body>
+</html>

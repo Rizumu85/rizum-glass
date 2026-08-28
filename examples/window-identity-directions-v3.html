@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rizum Glass · Application shell archetypes v3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@19",
+          "react-dom/client": "https://esm.sh/react-dom@19/client"
+        }
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light;
+        --canvas: #f0f0f0;
+        --glass: rgba(255,255,255,.62);
+        --glass-strong: rgba(255,255,255,.84);
+        --glass-soft: rgba(255,255,255,.36);
+        --muted-surface: rgba(244,244,245,.72);
+        --line: rgba(228,228,231,.78);
+        --ink: #18181b;
+        --ink-soft: #3f3f46;
+        --ink-muted: #71717a;
+        --caption: #a1a1aa;
+        --teal: #2dd4bf;
+        --violet: #a78bfa;
+        --rose: #fb7185;
+        --spring: cubic-bezier(.22,1,.36,1);
+        --ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", system-ui, sans-serif;
+        --title: "New York", "New York Extra Large", "Noto Serif SC", "Songti SC", Georgia, serif;
+      }
+
+      * { box-sizing: border-box; }
+      html, body, #root { width: 100%; min-height: 100%; margin: 0; }
+      body {
+        min-height: 100vh;
+        color: var(--ink-soft);
+        background:
+          radial-gradient(ellipse at 20% 30%, rgba(167,139,250,.08) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 70%, rgba(129,230,217,.06) 0%, transparent 50%),
+          radial-gradient(ellipse at 50% 50%, rgba(251,191,36,.04) 0%, transparent 60%),
+          var(--canvas);
+        font-family: var(--ui);
+        -webkit-font-smoothing: antialiased;
+      }
+      button, input { font: inherit; }
+      button:focus-visible, input:focus-visible {
+        outline: 2px solid color-mix(in srgb, var(--teal) 58%, transparent);
+        outline-offset: 2px;
+      }
+      .stage { min-height: 100vh; display: grid; place-items: center; padding: 30px 28px 88px; }
+      .prototype-view { width: min(1220px, 100%); animation: enter 380ms var(--spring) both; }
+      .pair { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px; align-items: start; }
+      .sample { min-width: 0; }
+      .platform-label {
+        display: flex; align-items: center; gap: 8px;
+        margin: 0 0 9px 12px;
+        color: var(--ink-muted);
+        font: 600 11.5px/1.2 var(--title);
+      }
+      .platform-label::before { content: ""; width: 5px; height: 5px; border-radius: 999px; background: var(--violet); box-shadow: 0 0 0 3px rgba(167,139,250,.1); }
+      .sample:last-child .platform-label::before { background: var(--teal); box-shadow: 0 0 0 3px rgba(45,212,191,.1); }
+
+      .window {
+        container-type: inline-size;
+        width: 100%; height: 576px; overflow: hidden; position: relative; isolation: isolate;
+        display: flex; flex-direction: column;
+        border: 1px solid rgba(255,255,255,.54);
+        background: var(--glass);
+        box-shadow: 0 1px 0 rgba(255,255,255,.62) inset, 0 24px 70px rgba(0,0,0,.11);
+        backdrop-filter: blur(40px) saturate(200%);
+        -webkit-backdrop-filter: blur(40px) saturate(200%);
+      }
+      .window[data-platform="macos"] { border-radius: 12px; }
+      .window[data-platform="windows"] { border-radius: 8px; }
+      .window::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit; box-shadow: 0 1px 0 rgba(255,255,255,.3) inset; }
+
+      .titlebar {
+        position: relative; height: 42px; flex: 0 0 42px;
+        display: flex; align-items: center;
+        border-bottom: 1px solid rgba(228,228,231,.42);
+        user-select: none;
+      }
+      .titlebar.quiet { border-bottom-color: transparent; }
+      .traffic { position: absolute; left: 14px; inset-block: 0; display: flex; align-items: center; gap: 8px; pointer-events: none; }
+      .traffic i { width: 12px; height: 12px; border-radius: 999px; box-shadow: 0 0 0 1px rgba(0,0,0,.09) inset; }
+      .traffic i:nth-child(1) { background: #ff5f57; }
+      .traffic i:nth-child(2) { background: #febc2e; }
+      .traffic i:nth-child(3) { background: #28c840; }
+      .caption { position: absolute; right: 0; inset-block: 0; display: grid; grid-template-columns: repeat(3,46px); color: #62626a; pointer-events: none; }
+      .caption span { display: grid; place-items: center; }
+      .caption svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1.1; }
+      .titlebar-tools { display: flex; align-items: center; gap: 2px; }
+      [data-platform="macos"] .titlebar-tools { margin-left: 78px; }
+      [data-platform="windows"] .titlebar-tools { margin-left: 8px; }
+      .window-title {
+        min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+        color: var(--ink-soft); font-size: 12px;
+      }
+      [data-platform="macos"] .window-title.center {
+        position: absolute; left: 50%; max-width: calc(100% - 250px); transform: translateX(-50%); text-align: center;
+      }
+      [data-platform="windows"] .window-title { max-width: calc(100% - 250px); margin-left: 8px; }
+      .icon-button {
+        width: 28px; height: 28px; padding: 0; display: grid; place-items: center;
+        border: 0; border-radius: 7px; color: var(--ink-muted); background: transparent; cursor: pointer;
+        transition: color 150ms ease, background 150ms ease, transform 180ms var(--spring);
+      }
+      .icon-button:hover { color: var(--ink-soft); background: rgba(255,255,255,.48); transform: translateY(-1px); }
+      .icon-button:active { transform: scale(.96); }
+      .icon-button svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+      .body { flex: 1; min-height: 0; }
+      .content { padding: 24px; }
+      .eyebrow { color: var(--ink-muted); font: 600 11.5px/1.35 var(--title); }
+      .page-title { margin: 4px 0 3px; color: var(--ink); font: 700 19px/1.25 var(--title); }
+      .lede { margin: 0; color: var(--ink-muted); font-size: 11.5px; line-height: 1.55; }
+      .separator { height: 1px; margin: 0 8px; background: var(--line); opacity: .55; }
+      .dot { width: 5px; height: 5px; flex: 0 0 auto; border-radius: 999px; background: var(--teal); box-shadow: 0 0 0 3px rgba(45,212,191,.1); }
+      .button {
+        height: 30px; padding: 6px 13px; border: 1px solid var(--line); border-radius: 8px;
+        color: var(--ink-soft); background: var(--glass-strong); box-shadow: 0 1px 2px rgba(0,0,0,.02);
+        font-size: 12px; font-weight: 400; cursor: pointer;
+        transition: transform 180ms var(--spring), border-color 180ms ease, box-shadow 180ms ease;
+      }
+      .button:hover { transform: translateY(-1px); border-color: #d4d4d8; box-shadow: 0 3px 8px rgba(0,0,0,.04); }
+      .button:active { transform: scale(.97); }
+      .field { width: 100%; height: 30px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--glass-strong); color: var(--ink); font-size: 12px; }
+      .actions { display: flex; gap: 8px; }
+      .status { display: flex; align-items: center; gap: 9px; color: var(--caption); font-size: 11px; }
+
+      /* Single-purpose utility */
+      .utility-window { height: auto; min-height: 0; }
+      .utility-body { display: grid; place-items: center; padding: 0; }
+      .utility-sheet {
+        width: min(460px,100%); padding: 30px 28px 26px;
+      }
+      .sheet-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+      .utility-form { display: grid; gap: 8px; margin-top: 20px; }
+      .utility-form .actions { margin-top: 2px; }
+      .utility-sheet .separator { margin-top: 20px; margin-bottom: 16px; }
+
+      /* Back-stack utility */
+      .back-window { height: auto; min-height: 0; }
+      .back-content { padding: 28px 26px 26px; }
+      .back-card { margin-top: 22px; padding: 18px; border-radius: 14px; background: rgba(255,255,255,.3); box-shadow: 0 1px 0 rgba(255,255,255,.4) inset, 0 10px 28px rgba(0,0,0,.025); }
+      .detail-row { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; font-size: 12px; }
+      .detail-row + .detail-row { border-top: 1px solid rgba(228,228,231,.52); }
+      .detail-row span:first-child { color: var(--ink-muted); }
+      .detail-row span:last-child { color: var(--ink-soft); }
+
+      /* Workspace */
+      .workspace { display: flex; min-height: 0; }
+      .sidebar { width: 168px; flex: 0 0 auto; overflow: hidden; border-right: 1px solid rgba(228,228,231,.52); background: rgba(255,255,255,.18); transition: width 240ms var(--spring), opacity 160ms ease; }
+      .workspace[data-sidebar="closed"] .sidebar { width: 0; opacity: 0; }
+      .sidebar-inner { width: 168px; padding: 18px 12px; }
+      .workspace-name { margin: 0 8px 14px; color: var(--ink); font: 600 13.5px/1.2 var(--title); }
+      .nav { display: grid; gap: 3px; }
+      .nav button { width: 100%; padding: 7px 9px; border: 0; border-radius: 7px; background: transparent; color: var(--ink-muted); text-align: left; font-size: 11.5px; }
+      .nav button.active { background: rgba(255,255,255,.48); color: var(--ink); }
+      .workspace-main { flex: 1; min-width: 0; }
+      .workspace-header { padding: 22px 24px 17px; }
+      .workspace-content { padding: 20px 24px; }
+      .list { display: grid; gap: 8px; }
+      .list-row { display: grid; grid-template-columns: 1fr max-content; gap: 14px; align-items: center; padding: 10px 11px; border-radius: 10px; background: rgba(255,255,255,.2); box-shadow: 0 1px 0 rgba(255,255,255,.28) inset; }
+      .list-row strong { display: block; color: var(--ink-soft); font-size: 12.5px; font-weight: 500; }
+      .list-row small, .list-row time { color: var(--caption); font-size: 10.5px; }
+
+      /* Menu-driven app */
+      .menu-window { height: 522px; }
+      .titlebar-menubar { display: flex; align-items: center; gap: 2px; max-width: calc(100% - 144px); margin-left: 8px; overflow: hidden; }
+      .titlebar-menubar button { height: 26px; padding: 0 8px; border: 0; border-radius: 6px; color: var(--ink-muted); background: transparent; font-size: 11.5px; }
+      .titlebar-menubar button:hover { color: var(--ink-soft); background: rgba(255,255,255,.45); }
+      .editor-toolbar { height: 40px; display: flex; align-items: center; gap: 4px; padding: 0 18px; border-bottom: 1px solid rgba(228,228,231,.42); }
+      .editor { max-width: 430px; margin: 0 auto; padding: 36px 28px; }
+      .editor h1 { margin: 0 0 18px; color: var(--ink); font: 700 24px/1.25 var(--title); }
+      .editor p { margin: 0 0 13px; color: var(--ink-soft); font: 13px/1.75 var(--title); }
+
+      /* Panel canvas */
+      .canvas { position: relative; padding: 16px 24px 24px; }
+      .panels { height: 100%; display: grid; grid-template-columns: minmax(0,1.3fr) minmax(176px,.7fr); grid-template-rows: minmax(0,1fr) auto; gap: 14px; }
+      .compact-panel-tabs { display: none; }
+      .panel { min-width: 0; padding: 20px; border: 1px solid rgba(255,255,255,.46); border-radius: 16px; background: rgba(255,255,255,.36); box-shadow: 0 1px 0 rgba(255,255,255,.48) inset, 0 14px 34px rgba(0,0,0,.04); transition: transform 180ms var(--spring), background 180ms ease, box-shadow 180ms ease; }
+      .panel[data-active="true"] { transform: translateY(-1px); background: rgba(255,255,255,.48); box-shadow: 0 1px 0 rgba(255,255,255,.52) inset, 0 18px 38px rgba(0,0,0,.06); }
+      .panel.primary { grid-row: 1 / span 2; }
+      .panel .page-title { margin-top: 0; }
+      .metric { margin: 20px 0 17px; }
+      .metric-label { display: flex; justify-content: space-between; color: var(--ink-muted); font-size: 11px; }
+      .track { height: 2px; margin-top: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+      .fill { width: 68%; height: 100%; background: var(--teal); opacity: .72; }
+      .clip { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; font-size: 11.5px; }
+      .clip + .clip { border-top: 1px solid rgba(228,228,231,.5); }
+      .clip small { color: var(--caption); }
+      .panel-copy { margin: 12px 0 0; color: var(--ink-muted); font-size: 11.5px; line-height: 1.55; }
+
+      @container (max-width: 500px) {
+        .sidebar { width: 0; opacity: 0; }
+        .sidebar-inner { display: none; }
+        .canvas { padding-top: 12px; }
+        .compact-panel-tabs { display: flex; align-items: center; gap: 2px; width: fit-content; margin-bottom: 12px; padding: 2px; border-radius: 8px; background: rgba(0,0,0,.03); }
+        .compact-panel-tabs button { height: 26px; padding: 0 10px; border: 0; border-radius: 6px; color: var(--caption); background: transparent; font-size: 11px; }
+        .compact-panel-tabs button[aria-current="true"] { color: var(--ink-soft); background: rgba(255,255,255,.78); box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+        .panels { height: auto; grid-template-columns: 1fr; grid-template-rows: auto; }
+        .panel.primary { grid-row: auto; }
+        .canvas-window .panel { display: none; }
+        .canvas-window .panel[data-active="true"] { display: block; }
+        [data-platform="macos"] .window-title.center { left: 125px; max-width: 145px; transform: none; text-align: left; }
+      }
+      @media (max-width: 980px) { .pair { grid-template-columns: 1fr; } .prototype-view { width: min(600px,100%); } }
+      @media (max-width: 620px) { .stage { padding: 18px 12px 86px; } .window { height: 560px; } .caption { grid-template-columns: repeat(3,42px); } }
+      @keyframes enter { from { opacity: 0; transform: translateY(7px) scale(.995); } to { opacity: 1; transform: none; } }
+
+      .proto-picker {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2147483647;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        padding: 4px;
+        border-radius: 999px;
+        background: rgba(10, 10, 10, 0.82);
+        -webkit-backdrop-filter: blur(12px) saturate(1.4);
+        backdrop-filter: blur(12px) saturate(1.4);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+          0 8px 24px rgba(0, 0, 0, 0.24),
+          0 2px 6px rgba(0, 0, 0, 0.12);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 13px;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+
+      .proto-picker-highlight {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        height: 28px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        will-change: transform;
+      }
+
+      /* The slide is enabled only after first paint (data-ready), so load doesn't animate. */
+      .proto-picker[data-ready] .proto-picker-highlight {
+        transition:
+          transform 250ms cubic-bezier(0.23, 1, 0.32, 1),
+          width 250ms cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .proto-picker[data-ready] .proto-picker-highlight { transition: none; }
+      }
+
+      .proto-picker-item {
+        position: relative; /* sits above the highlight */
+        display: flex;
+        align-items: center;
+        height: 28px;
+        padding: 0 12px;
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.55);
+        font: inherit;
+        cursor: pointer;
+        transition: color 150ms ease-out;
+      }
+
+      .proto-picker-item:hover {
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .proto-picker-item:active {
+        transform: scale(0.97);
+      }
+
+      .proto-picker-item:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.4);
+        outline-offset: 2px;
+      }
+
+      .proto-picker-item[data-active] {
+        color: #fff;
+      }
+
+      .proto-picker-divider {
+        width: 1px;
+        height: 16px;
+        margin: 0 4px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .proto-picker-replay {
+        padding: 0 10px;
+        font-size: 14px;
+      }
+
+      .proto-picker[data-position="top"] {
+        bottom: auto;
+        top: 24px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+      import { createRoot } from "react-dom/client";
+
+      const h = React.createElement;
+
+      function Icon({ name }) {
+        const p = { viewBox: "0 0 16 16", "aria-hidden": true };
+        if (name === "sidebar") return h("svg", p, h("rect", { x: 2.3, y: 2.6, width: 11.4, height: 10.8, rx: 2 }), h("path", { d: "M5.6 2.9v10.2" }));
+        if (name === "back") return h("svg", p, h("path", { d: "m9.8 3.3-4.6 4.7 4.6 4.7" }));
+        if (name === "gear") return h("svg", p, h("circle", { cx: 8, cy: 8, r: 2.1 }), h("path", { d: "M8 2.3v1.2M8 12.5v1.2M13.7 8h-1.2M3.5 8H2.3M12 4l-.9.9M4.9 11.1l-.9.9M12 12l-.9-.9M4.9 4.9 4 4" }));
+        if (name === "panels") return h("svg", p, h("rect", { x: 2.5, y: 2.5, width: 4.5, height: 4.5, rx: 1 }), h("rect", { x: 9, y: 2.5, width: 4.5, height: 4.5, rx: 1 }), h("rect", { x: 2.5, y: 9, width: 4.5, height: 4.5, rx: 1 }), h("rect", { x: 9, y: 9, width: 4.5, height: 4.5, rx: 1 }));
+        if (name === "bold") return h("svg", p, h("path", { d: "M5 3h3.6a2.2 2.2 0 0 1 0 4.4H5zm0 4.4h4a2.6 2.6 0 0 1 0 5.2H5z" }));
+        return h("svg", p, h("circle", { cx: 8, cy: 8, r: 5.5 }));
+      }
+
+      function IconButton({ icon, label, onClick, className = "" }) {
+        return h("button", { className: `icon-button ${className}`, type: "button", "aria-label": label, title: label, onClick }, h(Icon, { name: icon }));
+      }
+
+      function SystemControls({ platform }) {
+        if (platform === "macos") return h("div", { className: "traffic", "aria-label": "macOS 原生窗口控制区（位置示意）" }, h("i"), h("i"), h("i"));
+        return h("div", { className: "caption", "aria-label": "Windows 原生窗口控制区（位置示意）" },
+          h("span", null, h("svg", { viewBox: "0 0 10 10" }, h("path", { d: "M1 7.5h8" }))),
+          h("span", null, h("svg", { viewBox: "0 0 10 10" }, h("rect", { x: 1.5, y: 1.5, width: 7, height: 7 }))),
+          h("span", null, h("svg", { viewBox: "0 0 10 10" }, h("path", { d: "m2 2 6 6M8 2 2 8" })))
+        );
+      }
+
+      function Titlebar({ platform, title, tools = [], menuItems = [], quiet = false }) {
+        return h("header", { className: `titlebar${quiet ? " quiet" : ""}` },
+          h(SystemControls, { platform }),
+          platform === "windows" && menuItems.length > 0 && h("nav", { className: "titlebar-menubar", "aria-label": "Application menu" }, menuItems.map(item => h("button", { type: "button", key: item }, item))),
+          tools.length > 0 && h("div", { className: "titlebar-tools" }, tools.map((tool, index) => h(IconButton, { ...tool, key: `${tool.icon}-${index}` }))),
+          title && h("div", { className: `window-title${platform === "macos" ? " center" : ""}` }, title)
+        );
+      }
+
+      function SingleUtility({ platform }) {
+        return h("section", { className: "window utility-window", "data-platform": platform },
+          h(Titlebar, { platform, quiet: true }),
+          h("main", { className: "body utility-body" },
+            h("section", { className: "utility-sheet" },
+              h("div", { className: "sheet-head" },
+                h("div", null, h("div", { className: "eyebrow" }, "Audio utility"), h("h1", { className: "page-title" }, "Clean one recording"), h("p", { className: "lede" }, "Drop in a file and keep the clearer version.")),
+                h(IconButton, { icon: "gear", label: "Settings" })
+              ),
+              h("div", { className: "utility-form" },
+                h("input", { className: "field", "aria-label": "Recording path", placeholder: "Choose a recording" }),
+                h("div", { className: "actions" }, h("button", { className: "button", type: "button" }, "Choose file"), h("button", { className: "button", type: "button" }, "Clear"))
+              ),
+              h("div", { className: "separator" }),
+              h("div", { className: "status" }, h("span", { className: "dot" }), h("span", null, "Ready · processing stays on this device"))
+            )
+          )
+        );
+      }
+
+      function BackStack({ platform }) {
+        return h("section", { className: "window back-window", "data-platform": platform },
+          h(Titlebar, { platform, title: "Export preset", tools: [{ icon: "back", label: "Back" }] }),
+          h("main", { className: "body back-content" },
+            h("div", { className: "eyebrow" }, "Recipe library"),
+            h("h1", { className: "page-title" }, "Quiet evening print"),
+            h("p", { className: "lede" }, "A single detail page reached from a short list.") ,
+            h("section", { className: "back-card" },
+              [["Paper", "Matte A4"], ["Margins", "18 mm"], ["Color", "Warm neutral"], ["Copies", "1"]].map(([label,value]) => h("div", { className: "detail-row", key: label }, h("span", null, label), h("span", null, value))),
+              h("div", { className: "actions", style: { marginTop: 16 } }, h("button", { className: "button", type: "button" }, "Export"), h("button", { className: "button", type: "button" }, "Cancel"))
+            )
+          )
+        );
+      }
+
+      function Workspace({ platform }) {
+        const [open, setOpen] = useState(true);
+        const tools = [
+          { icon: "sidebar", label: open ? "Hide sidebar" : "Show sidebar", onClick: () => setOpen(v => !v) },
+          { icon: "back", label: "Back" }
+        ];
+        return h("section", { className: "window", "data-platform": platform },
+          h(Titlebar, { platform, title: platform === "windows" ? "Research Desk" : null, tools }),
+          h("div", { className: "body workspace", "data-sidebar": open ? "open" : "closed" },
+            h("aside", { className: "sidebar" }, h("div", { className: "sidebar-inner" },
+              h("div", { className: "workspace-name" }, "Research Desk"),
+              h("nav", { className: "nav" }, ["Today","Interviews","Reading","Archive"].map((label,index) => h("button", { className: index === 1 ? "active" : "", type: "button", key: label }, label)))
+            )),
+            h("main", { className: "workspace-main" },
+              h("header", { className: "workspace-header" }, h("div", { className: "eyebrow" }, "Interviews"), h("h1", { className: "page-title" }, "Morning interview"), h("p", { className: "lede" }, "Three passages are ready to review.")),
+              h("div", { className: "separator" }),
+              h("div", { className: "workspace-content" }, h("div", { className: "list" },
+                [["The small-interface principle","Transcript","09:18"],["Search should feel local","Reading note","Yesterday"],["Window identity study","Draft","Mon"]].map(([title,kind,time]) => h("div", { className: "list-row", key: title }, h("div", null, h("strong", null, title), h("small", null, kind)), h("time", null, time)))
+              ))
+            )
+          )
+        );
+      }
+
+      function MenuApp({ platform }) {
+        const menuItems = ["File","Edit","View","Insert","Window","Help"];
+        return h("section", { className: "window menu-window", "data-platform": platform },
+          h(Titlebar, { platform, title: platform === "macos" ? "Untitled draft" : null, menuItems: platform === "windows" ? menuItems : [] }),
+          h("div", { className: "editor-toolbar" }, h(IconButton, { icon: "back", label: "Undo" }), h(IconButton, { icon: "bold", label: "Bold" }), h("div", { className: "status", style: { marginLeft: "auto" } }, h("span", { className: "dot" }), h("span", null, "Saved"))),
+          h("main", { className: "body editor" }, h("h1", null, "A quiet working title"), h("p", null, "Menu-driven applications keep commands available beyond the current page. On macOS, those menus live in the system menu bar rather than inside the window."), h("p", null, "The local toolbar contains only actions that operate on the current document."))
+        );
+      }
+
+      function PanelCanvas({ platform }) {
+        const [active,setActive] = useState("outline");
+        return h("section", { className: "window canvas-window", "data-platform": platform },
+          h(Titlebar, { platform, title: "Interview workspace" }),
+          h("main", { className: "body canvas" },
+            h("nav", { className: "compact-panel-tabs", "aria-label": "Panels" },
+              [["outline","Outline"],["sources","Sources"],["status","Status"]].map(([value,label]) => h("button", { type: "button", "aria-current": active === value ? "true" : undefined, onClick: () => setActive(value), key: value }, label))
+            ),
+            h("div", { className: "panels" },
+              h("section", { className: "panel primary", "data-active": active === "outline", tabIndex: 0, onClick: () => setActive("outline") },
+                h("h1", { className: "page-title" }, "Interview outline"), h("p", { className: "lede" }, "Notes grouped by recurring idea"),
+                h("div", { className: "metric" }, h("div", { className: "metric-label" }, h("span", null, "Review progress"), h("span", null, "68%")), h("div", { className: "track" }, h("div", { className: "fill" }))),
+                [["Quiet defaults","3 passages"],["Local context","5 passages"],["Window shape","2 passages"]].map(([name,count]) => h("div", { className: "clip", key: name }, h("span", null, name), h("small", null, count)))
+              ),
+              h("section", { className: "panel side", "data-active": active === "sources", tabIndex: 0, onClick: () => setActive("sources") }, h("div", { className: "eyebrow" }, "Sources"), h("h2", { className: "page-title" }, "Three linked files"), h("p", { className: "panel-copy" }, "Transcript, recording and one reading note.")),
+              h("section", { className: "panel side", "data-active": active === "status", tabIndex: 0, onClick: () => setActive("status") }, h("div", { className: "status" }, h("span", { className: "dot" }), h("span", null, "Local index ready")), h("p", { className: "panel-copy" }, "All changes are saved on this device."))
+            )
+          )
+        );
+      }
+
+      const variants = [
+        { name: "Single utility", component: SingleUtility },
+        { name: "Back stack", component: BackStack },
+        { name: "Workspace", component: Workspace },
+        { name: "Menu app", component: MenuApp },
+        { name: "Panel canvas", component: PanelCanvas }
+      ];
+
+      function Pair({ component: Component }) {
+        return h("div", { className: "prototype-view" }, h("div", { className: "pair" },
+          h("div", { className: "sample" }, h("div", { className: "platform-label" }, "macOS"), h(Component, { platform: "macos" })),
+          h("div", { className: "sample" }, h("div", { className: "platform-label" }, "Windows"), h(Component, { platform: "windows" }))
+        ));
+      }
+
+      function Picker({ current, onSelect, onReplay }) {
+        const pickerRef = useRef(null);
+        const itemRefs = useRef([]);
+        const highlightRef = useRef(null);
+        const moveHighlight = () => {
+          const el = itemRefs.current[current];
+          const highlight = highlightRef.current;
+          if (!el || !highlight) return;
+          highlight.style.width = `${el.offsetWidth}px`;
+          highlight.style.transform = `translateX(${el.offsetLeft}px)`;
+        };
+        useLayoutEffect(moveHighlight, [current]);
+        useEffect(() => {
+          const resize = () => moveHighlight();
+          window.addEventListener("resize", resize);
+          requestAnimationFrame(() => requestAnimationFrame(() => pickerRef.current?.setAttribute("data-ready", "")));
+          return () => window.removeEventListener("resize", resize);
+        }, []);
+        return h("nav", { className: "proto-picker", "aria-label": "Prototype variants", ref: pickerRef },
+          h("span", { className: "proto-picker-highlight", "aria-hidden": true, ref: highlightRef }),
+          variants.map((variant,index) => h("button", {
+            className: "proto-picker-item",
+            "data-active": index === current ? "" : undefined,
+            "aria-current": index === current ? "true" : undefined,
+            ref: el => itemRefs.current[index] = el,
+            onClick: () => onSelect(index),
+            key: variant.name
+          }, variant.name)),
+          h("span", { className: "proto-picker-divider", "aria-hidden": true }),
+          h("button", { className: "proto-picker-item proto-picker-replay", "aria-label": "Replay animation (R)", onClick: onReplay }, "↻")
+        );
+      }
+
+      function App() {
+        const q = new URLSearchParams(location.search);
+        const initial = Math.max(0, Math.min(variants.length - 1, (parseInt(q.get("v"),10) || 1) - 1));
+        const [current,setCurrent] = useState(initial);
+        const [nonce,setNonce] = useState(0);
+        const select = index => {
+          if (index < 0 || index >= variants.length) return;
+          setCurrent(index); setNonce(value => value + 1);
+          const url = new URL(location); url.searchParams.set("v",index + 1); history.replaceState(null,"",url);
+        };
+        const replay = () => setNonce(value => value + 1);
+        useEffect(() => {
+          const keydown = event => {
+            if (/^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName) || event.target.isContentEditable) return;
+            if (event.metaKey || event.ctrlKey || event.altKey) return;
+            const num = parseInt(event.key,10);
+            if (num >= 1 && num <= variants.length) select(num - 1);
+            else if (event.key === "ArrowRight") select((current + 1) % variants.length);
+            else if (event.key === "ArrowLeft") select((current - 1 + variants.length) % variants.length);
+            else if (event.key === "r" || event.key === "R") replay();
+          };
+          document.addEventListener("keydown",keydown);
+          return () => document.removeEventListener("keydown",keydown);
+        },[current]);
+        const Component = variants[current].component;
+        return h(React.Fragment,null,
+          h("main", { className: "stage", id: "stage" }, h(Pair, { component: Component, key: `${current}-${nonce}` })),
+          h(Picker, { current, onSelect: select, onReplay: replay })
+        );
+      }
+
+      createRoot(document.getElementById("root")).render(h(App));
+    </script>
+  </body>
+</html>
