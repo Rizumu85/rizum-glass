@@ -1,5 +1,5 @@
 interface:
   display_name: "Rizum Glass"
-  short_description: "Design on the web first, then optionally translate to native UI"
+  short_description: "Design on the web first, then deliver with GPUIX"
   brand_color: "#2DD4BF"
-  default_prompt: "Use $rizum-glass to design this interface with the web-first workflow and translate it to GPUI or WinUI 3 only when the project explicitly chooses that target."
+  default_prompt: "Use $rizum-glass to approve this interface in the web reference workflow, then deliver the desktop version with the project's pinned GPUIX stack and platform-native window chrome."

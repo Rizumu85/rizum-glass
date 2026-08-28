@@ -11,8 +11,9 @@ The repository separates canonical rules, derived assets, guidance, evidence, an
 | `DESIGN.md` | Tokens and enforceable UI/UX rules | Canonical |
 | `docs/` | Rationale and workflow | Explanatory |
 | `tokens/` | Generated Tailwind v4 and DTCG exports | Derived from `DESIGN.md` |
-| `adapters/gpui/` | Optional GPUI theme, Rust constants, translation contract, and gallery | Derived adapter and verification surface |
-| `adapters/winui/` | Optional WinUI 3 resources, motion constants, translation contract, and handoff | Derived adapter and integration surface |
+| `adapters/gpuix/` | Default desktop TypeScript constants and platform-aware reference contract | Derived adapter and delivery guidance |
+| `adapters/gpui/` | Direct GPUI theme, Rust constants, translation contract, and gallery | Lower-level adapter and verification surface |
+| `adapters/winui/` | Former WinUI 3 resources and handoff | Frozen legacy history only |
 | `skills/rizum-glass/` | Reusable agent workflow with a synchronized canonical snapshot | Derived guidance plus workflow |
 | `examples/` | Temporary cross-domain transfer tests | Validation evidence, not references |
 | `references/` | Complete product-neutral gallery plus historical archive | Active visual reference and archived evidence |
@@ -26,9 +27,23 @@ Use React, TypeScript, Vite, Tailwind CSS utilities, and shadcn/ui primitives. P
 
 Static HTML transfer tests are acceptable when they still use React component structure and Tailwind styling. Inline CSS should be limited to tokens, glass recipes, browser setup, and keyframes that utilities cannot express cleanly.
 
-This is the canonical design and reference environment, not a mandatory production runtime. A final product may use GPUI or WinUI 3 when native rendering, latency, platform integration, or distribution requirements justify it.
+This is the canonical design and reference environment, not the production renderer. The desktop delivery baseline is Bun, TypeScript, React 19, and an exact pinned `@gpuix/react` release. GPUIX renders through GPUI without Electron or a web view. Direct GPUI is reserved for a surface that needs lower-level Rust ownership or an unavailable GPUIX capability.
 
-## Optional GPUI Path
+## Default GPUIX Path
+
+GPUIX begins from an approved browser reference rather than from prose or a screenshot.
+
+1. Build and approve the interface in the canonical browser stack.
+2. Record dimensions, states, scale factors, native optical calibration, interaction ownership, motion, material and capability fallbacks, pinned runtime versions, and Windows/macOS window-chrome decisions in a JSON file conforming to `adapters/gpuix/reference-contract.schema.json`.
+3. Regenerate the GPUIX TypeScript values with `./scripts/export-tokens.sh`.
+4. Translate behavior with GPUIX host elements and supported headless components. Do not assume a DOM, CSS inheritance, or Tailwind utility support.
+5. Keep the root glass surface flush with the native window boundary and let the platform own outer corners, system controls, shadows, resize behavior, and maximized/full-screen geometry.
+6. Use runtime-measured title-bar and safe-area geometry. If the pinned runtime cannot report the required reserved region, retain the native title bar instead of hard-coding it.
+7. Compare matching states at their approved browser and calibrated native logical sizes. Document accepted material and behavior differences.
+
+The consuming application owns its Bun, React, `@gpuix/react`, and `@gpuix/native` versions. GPUIX is pre-1.0, so unfamiliar APIs must be verified against those exact installed files.
+
+## Direct GPUI Path
 
 GPUI must begin from an approved web reference rather than from prose or a screenshot. The web implementation exposes more reliable layout, state, computed-style, and motion parameters to both humans and coding agents.
 
@@ -41,19 +56,9 @@ GPUI must begin from an approved web reference rather than from prose or a scree
 
 The adapter pins versions only in its gallery smoke test. Consuming applications own their GPUI dependency versions and must verify APIs against their exact source.
 
-## Optional WinUI 3 Path
+## Frozen WinUI 3 History
 
-WinUI 3 follows the same web-first translation boundary. It is a native Windows delivery target, not a second place to invent the visual language.
-
-1. Build and approve the interface in the canonical web stack.
-2. Record dimensions, state evidence, tokens, scale factors, motion, interruption behavior, accessibility, and material fallbacks in a JSON file conforming to `adapters/winui/reference-contract.schema.json`.
-3. Regenerate `RizumGlass.Tokens.xaml` and `RizumGlass.Motion.cs` with `./scripts/export-tokens.sh`.
-4. Translate behavior with standard WinUI controls before creating custom controls or Composition effects.
-5. Keep XAML views declarative, view state and commands in view models, and business logic in services. Limit code-behind to window lifecycle, visual-tree access, and narrow Composition interop.
-6. Compare the native result against the approved reference at matching content, state, dimensions, and display scale.
-7. Verify high contrast, transparency disabled, reduced motion, keyboard navigation, and long Chinese and English text.
-
-For new Windows applications, the recommended baseline is C# with .NET 8 or a newer supported release, WinUI 3 on the current stable Windows App SDK, CommunityToolkit.Mvvm, and Microsoft.Extensions.DependencyInjection. Consuming applications own those dependency versions and must verify unfamiliar APIs against current Microsoft documentation.
+`adapters/winui/` is retained so existing consumers can resolve historical resources. The export workflow no longer regenerates it, the Skill no longer routes new work to it, and new desktop applications should use GPUIX.
 
 ## Recommended Adoption: Git Submodule
 
@@ -94,7 +99,7 @@ The script copies only the canonical file. The consuming project owns that snaps
 Lint the canonical file:
 
 ```bash
-npx @google/design.md lint DESIGN.md
+npx --yes --package=@google/design.md designmd lint DESIGN.md
 ```
 
 Regenerate implementation tokens and adapter assets after any front-matter change:
@@ -103,7 +108,7 @@ Regenerate implementation tokens and adapter assets after any front-matter chang
 ./scripts/export-tokens.sh
 ```
 
-Do not edit files in `tokens/`, `adapters/gpui/themes/`, `adapters/gpui/generated/`, or `adapters/winui/generated/` by hand. They are derived artifacts. The command also synchronizes `DESIGN.md` into the repository-owned Skill.
+Do not edit files in `tokens/`, `adapters/gpuix/generated/`, `adapters/gpui/themes/`, or `adapters/gpui/generated/` by hand. They are derived artifacts. The command also synchronizes `DESIGN.md` into the repository-owned Skill. Files under `adapters/winui/generated/` are frozen legacy outputs and are not regenerated.
 
 Then generate a new transfer test under a domain unrelated to the active gallery. The test should include the component categories affected by the change, such as:
 
@@ -113,8 +118,11 @@ Then generate a new transfer test under a domain unrelated to the active gallery
 - at least one numeric slider or other dense control;
 - an interactive alternative to a standard toggle;
 - a message or asynchronous state when motion rules change.
+- a dense alignment grid with long localized labels when compact native controls change;
+- a bounded floating surface with asynchronous content when overlay rules change;
+- a fixed utility state that proves wheel ownership and bottom safe-area behavior when window sizing changes.
 
-Evaluate the result at desktop and compact viewports. Check text wrapping, collision, button consistency, divider restraint, readable contrast, animation continuity, and keyboard interaction. Compare only with `references/rizum-glass-ui-gallery-v11.html` or `references/rizum-glass-ui-gallery-dark-v11.html`; older galleries, archived product snapshots, and retired transfer tests must not guide the result. Do not repair the test with one-off CSS before deciding whether the missing rule belongs in `DESIGN.md`.
+Evaluate the result at desktop and compact viewports. Check text wrapping, collision, button consistency, divider restraint, readable contrast, animation continuity, and keyboard interaction. For desktop delivery, also inspect physical legibility, caret placement, selection beyond the window edge, wheel routing, overlay containment, and reduced motion in the running native product. Compare only with `references/rizum-glass-ui-gallery-v11.html` or `references/rizum-glass-ui-gallery-dark-v11.html`; older galleries, archived product snapshots, and retired transfer tests must not guide the result. Do not repair the test with one-off CSS before deciding whether the missing rule belongs in `DESIGN.md`.
 
 Active galleries are curated implementation references rather than feature inventories. Remove an unfinished component family from the current gallery, including its unreachable template and styles, while preserving the earlier versioned snapshot for history.
 

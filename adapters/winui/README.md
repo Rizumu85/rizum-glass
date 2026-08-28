@@ -1,4 +1,6 @@
-# Optional WinUI 3 Adapter
+# Archived WinUI 3 Adapter
+
+This adapter is frozen for existing consumers and historical reference. It is no longer part of the active export or validation path and must not be selected for new Rizum Glass applications. Use the GPUIX adapter instead.
 
 WinUI 3 is an optional native Windows delivery target for Rizum Glass. It does not replace the canonical React reference workflow, and this adapter does not make WinUI a requirement for other products.
 

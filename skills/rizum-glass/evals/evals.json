@@ -1,0 +1,44 @@
+{
+  "skill_name": "rizum-glass",
+  "evals": [
+  {
+    "id": 1,
+    "name": "new-cross-platform-desktop-surface",
+    "prompt": "Use Rizum Glass for a new compact desktop app that must run on Windows 11 and macOS. Start from the approved reference, implement the native window shell, and translate a settings surface with an editable field, a long select value, a status row that gains progress detail, and no root scrolling.",
+    "expected_output": "Uses the browser reference workflow, selects Bun + TypeScript + React 19 + pinned GPUIX for delivery, keeps outer corners and window controls platform-owned, and treats the running native surface as an optical and interaction calibration rather than a numerical screenshot copy.",
+    "files": [],
+    "expectations": [
+      "Names GPUIX rather than WinUI 3 as the default desktop target",
+      "Keeps Windows caption buttons and macOS traffic lights native",
+      "Uses measured reserved regions or retains the native title bar when geometry is unavailable",
+      "Records coherent native scale corrections and any title exception in the reference contract",
+      "Keeps static copy non-selectable while the native editor owns caret geometry and selection beyond the field boundary",
+      "Bounds the long select label and reuses the shared select recipe",
+      "Grows the status section and content-sized window together instead of reserving blank space or enabling root scrolling"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "direct-gpui-exception",
+    "prompt": "This approved Rizum Glass surface needs a custom Rust-native editor element that the pinned GPUIX package cannot expose. Translate only that surface.",
+    "expected_output": "Uses the direct GPUI workflow as a documented lower-level exception while preserving the GPUIX boundary for ordinary React presentation.",
+    "files": [],
+    "expectations": [
+      "Distinguishes GPUI from GPUIX",
+      "Requires a documented reason for bypassing GPUIX",
+      "Preserves the same platform-window contract"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "existing-non-gpuix-project-boundary",
+    "prompt": "Our existing Qt application needs one settings label changed. Use Rizum Glass wording but do not migrate its toolkit.",
+    "expected_output": "Respects the existing toolkit and applies only the requested Rizum Glass change instead of introducing GPUIX or migrating the application.",
+    "files": [],
+    "expectations": [
+      "Does not migrate the existing application to GPUIX",
+      "Keeps the requested change scoped to the current project"
+    ]
+  }
+  ]
+}

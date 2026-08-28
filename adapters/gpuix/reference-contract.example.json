@@ -1,0 +1,110 @@
+{
+  "$schema": "./reference-contract.schema.json",
+  "reference": {
+    "stack": "React + TypeScript + Vite + Tailwind CSS + shadcn/ui + Rizum Glass",
+    "source": "examples/platform-window-chrome-transfer-v1.html",
+    "approvedAt": "2026-08-27T12:00:00Z"
+  },
+  "runtime": {
+    "bun": "1.2.x",
+    "react": "19.2.4",
+    "gpuixReact": "0.5.1",
+    "gpuixNative": "0.5.1"
+  },
+  "viewport": {
+    "width": 880,
+    "height": 620,
+    "scale": 1
+  },
+  "nativeCalibration": {
+    "referenceScale": 1,
+    "nativeScale": 1,
+    "strategy": "Real-device inspection found no coherent scale correction necessary for this example.",
+    "scaleTogether": [
+      "body typography",
+      "control and hit-target geometry",
+      "content insets and dense control widths",
+      "content-sized window bounds"
+    ],
+    "opticalExceptions": [
+      "The contextual title remains on the approved title-serif role."
+    ],
+    "evidence": [
+      "captures/platform-window-native-scale.png"
+    ]
+  },
+  "interactionOwnership": {
+    "staticTextSelection": "disabled",
+    "editableTextSelection": "native-editor",
+    "pointerCapture": "Native pointer capture; use a narrow platform adapter only when the pinned runtime cannot continue an active drag outside the product window.",
+    "wheelRouting": "The fixed shell does not scroll; only named bounded menus or content bodies own wheel input.",
+    "sensitiveValues": "Not applicable to this example; products with secrets keep plaintext outside presentation state and reveal it only on explicit request."
+  },
+  "platformChrome": [
+    {
+      "platform": "windows",
+      "controlOwnership": "system",
+      "reservedRegionSource": "native-titlebar",
+      "outerCornerSource": "platform",
+      "unsupportedFallback": "Keep the native Windows title bar until the pinned runtime reports the caption-button region.",
+      "evidence": "captures/platform-window-windows.png"
+    },
+    {
+      "platform": "macos",
+      "controlOwnership": "system",
+      "reservedRegionSource": "runtime-measured",
+      "outerCornerSource": "platform",
+      "unsupportedFallback": "Keep the native macOS title bar and standard window buttons.",
+      "evidence": "captures/platform-window-macos.png"
+    }
+  ],
+  "components": [
+    {
+      "id": "workspace-window",
+      "primitive": "GPUIX div + text + native title bar",
+      "dimensions": {
+        "minWidth": 420,
+        "preferredWidth": 560,
+        "maxWidth": 720,
+        "preferredHeight": 420,
+        "padding": "platform inset + 24px content",
+        "gap": 16
+      },
+      "tokens": {
+        "surface": "color.surface",
+        "componentRadius": "rounded.xl",
+        "outerRadius": "platform",
+        "identityTitle": "typography.title-serif"
+      },
+      "states": [
+        {
+          "name": "normal",
+          "evidence": "captures/platform-window-normal.png",
+          "notes": "Glass reaches the system edge and title identity stays outside the reserved control region."
+        },
+        {
+          "name": "maximized-or-fullscreen",
+          "evidence": "captures/platform-window-expanded.png",
+          "notes": "Outer clipping follows the platform instead of forcing a rounded app card."
+        }
+      ]
+    }
+  ],
+  "motion": [],
+  "materialFallbacks": [
+    {
+      "webEffect": "Per-panel backdrop-filter blur",
+      "gpuixStrategy": "Use supported window blur plus neutral translucent surfaces, edge reflection, and soft depth.",
+      "acceptedDifference": "Per-element background refraction can be flatter than the browser reference."
+    }
+  ],
+  "capabilityFallbacks": [
+    {
+      "webCapability": "A custom toolbar can share the title-bar band while the browser reference owns every inset.",
+      "runtimeFinding": "The pinned GPUIX release does not promise a Windows caption-button rectangle.",
+      "gpuixStrategy": "Retain the native Windows title bar until the runtime exposes the reserved region.",
+      "acceptedDifference": "The Windows surface has less custom product chrome than the browser reference.",
+      "verification": "Capture the normal, maximized, snapped, and inactive window states and verify every application control remains outside the native caption region."
+    }
+  ]
+}

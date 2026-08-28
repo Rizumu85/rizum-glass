@@ -4,6 +4,15 @@ All notable changes to Rizum Glass are documented here.
 
 ## Unreleased
 
+- Refined the motion contract after GPUIX hands-on use: one motion owner per replaceable region, stable shells for coarse feedback, direct updates for manipulated values, bounded busy indicators, immediate overlay dismissal when exit presence is unavailable, and cleanup of superseded feedback timers. Selection controls now disappear when resolved data contains only one meaningful option, with spacing and content-sized window geometry reclaimed.
+- Added a field-tested GPUIX native quality pass covering optical scale calibration, content-sized state variants, alignment grids, native editor geometry, selection and wheel ownership, sensitive fields, bounded asynchronous popovers, unified compact controls, premultiplied material calibration, rounded-child clipping, and deterministic complex-surface fallbacks.
+- Expanded the GPUIX reference contract with required native-calibration, interaction-ownership, and capability-fallback evidence, and added restrained motion degradation rules for keyboard input, reduced motion, coarse status feedback, static continuous-motion fallbacks, and immediate native window resizing.
+- Added five product-neutral application-shell archetypes with single-owner title rules, optional visible product identity, content-driven window sizing, platform-safe title-bar actions, platform-specific menu ownership, and conditional panel navigation.
+- Adopted Bun + TypeScript + React 19 + GPUIX as the default desktop delivery stack, clarified that GPUI is its lower-level Rust renderer, and retired WinUI 3 from active guidance and exports.
+- Added platform-native window-shell rules: Windows and macOS own the outer silhouette and window controls, while Rizum Glass material reaches the real edge and title content respects measured control insets.
+- Added generated GPUIX TypeScript tokens, a platform-aware reference contract, and an unrelated cross-platform window transfer test.
+- Defined a quieter 15-16px `title-serif` role for contextual chrome when a visible window title is useful, while reserving 19px display titles for the current content surface or decision.
+- Standardized ordinary single-line inputs at the compact 30px form density used by the active galleries, while reserving taller input treatment for content-rich composers and multiline writing.
 - Softened the dark quick-input top reflection by replacing its light-mode 50% white inset seam with a low-opacity blurred glass highlight.
 - Flattened the dark search utility onto one continuous glass plane by removing distinct query-bar and footer fills while retaining row hover feedback and compact key hints.
 - Raised required dark-mode captions, metadata, shortcut labels, and inactive option labels onto solid semantic text roles instead of compounding muted greys with light-mode alpha utilities.

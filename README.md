@@ -2,7 +2,7 @@
 
 Rizum Glass is a reusable UI design language for compact software surfaces. It combines neutral liquid glass, paper-like editorial rhythm, restrained pointillist color, and tactile Apple/Arc-inspired motion.
 
-The visual language is reusable across products. The canonical design environment is intentionally specific: **React + TypeScript + Vite + Tailwind CSS + shadcn/ui**. Final products may optionally use the GPUI or WinUI 3 adapter after the web reference is approved; neither native target is required.
+The visual language is reusable across products. Browser references use **React + TypeScript + Vite + Tailwind CSS + shadcn/ui**. New desktop applications use **Bun + TypeScript + React 19 + GPUIX** after the reference is approved. Direct GPUI is the lower-level Rust escape hatch; WinUI 3 is retained only as frozen history for existing consumers.
 
 The active visual references are the product-neutral [Rizum Glass UI Gallery](references/rizum-glass-ui-gallery-v11.html) and its [dark appearance](references/rizum-glass-ui-gallery-dark-v11.html). Archived product prototypes, older gallery snapshots, and transfer tests preserve history but must not guide new interface work.
 
@@ -14,9 +14,10 @@ The active visual references are the product-neutral [Rizum Glass UI Gallery](re
 | [`docs/design-rationale.md`](docs/design-rationale.md) | The taste, priorities, and reasoning behind the rules. |
 | [`docs/implementation.md`](docs/implementation.md) | Adoption, validation, and synchronization workflow. |
 | [`tokens/`](tokens/) | Generated Tailwind v4 and DTCG token exports. |
-| [`adapters/gpui/`](adapters/gpui/) | Optional generated GPUI theme, Rust tokens, translation contract, and component gallery. |
-| [`adapters/winui/`](adapters/winui/) | Optional WinUI 3 resources, motion constants, translation contract, and migration handoff. |
-| [`skills/rizum-glass/`](skills/rizum-glass/) | Reusable Codex skill for web-first design and optional native translation. |
+| [`adapters/gpuix/`](adapters/gpuix/) | Default desktop adapter, generated TypeScript tokens, and platform-aware reference contract. |
+| [`adapters/gpui/`](adapters/gpui/) | Lower-level direct GPUI theme, Rust tokens, translation contract, and component gallery. |
+| [`adapters/winui/`](adapters/winui/) | Frozen legacy WinUI 3 resources for existing consumers; not an active target. |
+| [`skills/rizum-glass/`](skills/rizum-glass/) | Reusable Codex skill for web-first design and GPUIX desktop translation. |
 | [`references/rizum-glass-ui-gallery-v11.html`](references/rizum-glass-ui-gallery-v11.html) | Current curated product-neutral light appearance reference. |
 | [`references/rizum-glass-ui-gallery-dark-v11.html`](references/rizum-glass-ui-gallery-dark-v11.html) | Current curated product-neutral dark appearance reference. |
 | [`references/archive/`](references/archive/) | Historical product snapshots; not active design references. |
@@ -59,9 +60,20 @@ Then invoke it explicitly when useful:
 Use $rizum-glass to design this interface.
 ```
 
-The skill defaults to the web reference stack. It enters GPUI or WinUI 3 translation mode only when the consuming project explicitly chooses that target.
+The skill uses the web reference stack for design and GPUIX for new desktop delivery. It enters direct GPUI mode only for a documented lower-level exception.
 
-## Optional GPUI Delivery
+## GPUIX Desktop Delivery
+
+Approve a working browser reference, capture its dimensions, states, motion, and platform-window decisions, then translate it to the pinned GPUIX package:
+
+```bash
+./scripts/export-tokens.sh
+```
+
+See [`adapters/gpuix/README.md`](adapters/gpuix/README.md) for the stack, generated values, platform-shell boundary, and reference contract.
+The reusable native quality pass is in [`skills/rizum-glass/references/gpuix-translation.md`](skills/rizum-glass/references/gpuix-translation.md); it includes optical scale calibration, interaction ownership, compact-component recipes, and safe fallbacks for missing GPUIX capabilities.
+
+## Direct GPUI Exception
 
 Do not design the native version from scratch. First approve a working web reference, capture its dimensions, states, tokens, and motion in a reference contract, then translate it with `gpui-component` and the generated adapter assets:
 
@@ -73,15 +85,9 @@ cargo run
 
 See [`adapters/gpui/README.md`](adapters/gpui/README.md) for the translation boundary.
 
-## Optional WinUI 3 Delivery
+## Legacy WinUI 3 Material
 
-For a native Windows application, use WinUI 3 on the current stable Windows App SDK. Keep product state in view models and services rather than code-behind, merge the generated XAML resources once, and translate only from an approved web reference:
-
-```bash
-./scripts/export-tokens.sh
-```
-
-See [`adapters/winui/README.md`](adapters/winui/README.md) for integration details and [`adapters/winui/HANDOFF.md`](adapters/winui/HANDOFF.md) for a reusable migration prompt.
+The former WinUI 3 adapter remains in [`adapters/winui/`](adapters/winui/) so existing projects can resolve pinned files and history. It is no longer generated, validated as an active adapter, or recommended for new Rizum Glass work.
 
 ## Evolving The Style
 

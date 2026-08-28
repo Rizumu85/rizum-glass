@@ -35,6 +35,14 @@ Glass is made from translucency, high blur, a white inner highlight, a fine whit
 
 Color behaves like pointillism. Teal, orange, violet, rose, mint, cyan, and yellow appear in dots, icon strokes, small stamps, status fills, and other tiny semantic marks. A large colored button or tinted panel usually spends too much of the color budget at once.
 
+## One Glass Object, Native Window Geometry
+
+A desktop window should read as one glass object, not as a rounded web card floating inside a second rectangular application window. Rizum Glass owns the translucent material, edge reflection, internal hierarchy, and content rhythm. The operating system owns the top-level silhouette, border, shadow, resize behavior, and window controls.
+
+That boundary is both visual and functional. Windows caption buttons carry Snap Layout and system hit targets; macOS traffic lights communicate key and inactive state and participate in standard window behavior. Redrawing either set inside the product replaces a familiar system contract with an imitation that can be proportionally close and still feel wrong.
+
+Platform adaptation therefore changes the space available to the title identity rather than restyling the controls. Windows usually reserves the trailing side of the top frame. macOS reserves the leading side. The icon and compact product identity move within the unobscured band while the working content below keeps the same Rizum Glass hierarchy. Maximized, snapped, tiled, and full-screen states follow the platform silhouette instead of preserving a decorative radius.
+
 ## Typography
 
 Serif type marks authored or editorial moments: titles, panel headings, service labels, mastheads, and occasional paper-like notes. System sans-serif carries dialogue, controls, menus, settings, and operational metadata.

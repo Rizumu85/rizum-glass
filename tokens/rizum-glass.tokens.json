@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
-  "$description": "Reusable Rizum Glass UI style for React + Tailwind CSS + shadcn/ui primitives, with neutral liquid glass, restrained paper rhythm, serif titles, system-sans body text, lively Apple/Arc-style motion, and tiny pointillist accents.",
+  "$description": "Reusable Rizum Glass UI style for GPUIX applications and their React web references, with neutral liquid glass, platform-native window geometry, restrained paper rhythm, serif titles, system-sans body text, lively Apple/Arc-style motion, and tiny pointillist accents.",
   "color": {
     "$type": "color",
     "primary": {

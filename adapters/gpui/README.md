@@ -1,6 +1,6 @@
-# Optional GPUI Adapter
+# Direct GPUI Adapter
 
-GPUI is an optional delivery target for Rizum Glass. It is not the default design environment and does not replace the canonical web reference workflow.
+GPUI is the lower-level Rust framework beneath GPUIX. Use this adapter only when a surface requires direct Rust ownership or a GPUI capability that the pinned GPUIX package does not expose. New desktop interfaces otherwise use `adapters/gpuix/`.
 
 ## Non-Negotiable Order
 

@@ -5,11 +5,12 @@ Rizum Glass is a reusable UI design-language repository, not a product repositor
 - Read `DESIGN.md` before changing any UI guidance.
 - Keep `DESIGN.md` product-neutral. Generalize a lesson before promoting it from a reference snapshot.
 - Keep project files, code, comments, and technical documentation in English.
-- Use React, TypeScript, Vite, Tailwind CSS, and shadcn/ui for canonical generated implementation examples.
-- Treat GPUI and WinUI 3 as optional delivery adapters, never the default design environment.
+- Use React, TypeScript, Vite, Tailwind CSS, and shadcn/ui for canonical browser references.
+- Use Bun, TypeScript, React 19, and the pinned `@gpuix/react` release as the default desktop delivery stack for new Rizum Glass applications.
+- Treat direct GPUI as a lower-level Rust exception. Treat WinUI 3 as a frozen legacy adapter that must not guide new work.
 - Before writing native UI code, require an approved web reference and the target-specific reference contract.
-- Verify unfamiliar GPUI and `gpui-component` APIs against the exact dependency source; both are pre-1.0.
-- Verify unfamiliar WinUI APIs against the consuming project's Windows App SDK version. Keep product state and business logic out of code-behind.
+- Verify unfamiliar GPUIX and GPUI APIs against the exact pinned dependency source; both are pre-1.0 and may change without a stable compatibility promise.
+- Keep system window controls native. Derive title-bar layout from platform insets and window state rather than fixed screenshot measurements.
 - Use `references/rizum-glass-ui-gallery-v11.html` and `references/rizum-glass-ui-gallery-dark-v11.html` as the only active visual references. Never infer missing rules from them, and do not use older galleries, archived Nolnol, or darkroom files to guide new UI.
 - Create a new versioned example or reference file instead of overwriting an earlier snapshot.
 - Validate a design change with an unrelated product-domain transfer test.
@@ -21,9 +22,9 @@ Rizum Glass is a reusable UI design-language repository, not a product repositor
 Verification:
 
 ```bash
-npx @google/design.md lint DESIGN.md
+npx --yes --package=@google/design.md designmd lint DESIGN.md
 sh scripts/export-tokens.sh
 bash scripts/check-repo.sh
 cd adapters/gpui/gallery && cargo check
-# On Windows, also build a consuming WinUI 3 project that links the generated resources.
+# In a GPUIX consumer, run its repository-authorized type or benchmark checks only.
 ```

@@ -12,6 +12,9 @@ CHANGELOG.md
 docs/design-rationale.md
 docs/implementation.md
 examples/README.md
+examples/platform-window-chrome-transfer-v1.html
+examples/window-identity-directions-v5.html
+examples/native-utility-quality-transfer-v2.html
 references/README.md
 references/rizum-glass-ui-gallery-v11.html
 references/rizum-glass-ui-gallery-dark-v11.html
@@ -27,16 +30,15 @@ adapters/gpui/reference-contract.schema.json
 adapters/gpui/reference-contract.example.json
 adapters/gpui/gallery/Cargo.toml
 adapters/gpui/gallery/src/main.rs
+adapters/gpuix/README.md
+adapters/gpuix/generated/rizum-glass-tokens.ts
+adapters/gpuix/reference-contract.schema.json
+adapters/gpuix/reference-contract.example.json
 adapters/winui/README.md
-adapters/winui/HANDOFF.md
-adapters/winui/generated/RizumGlass.Tokens.xaml
-adapters/winui/generated/RizumGlass.Motion.cs
-adapters/winui/reference-contract.schema.json
-adapters/winui/reference-contract.example.json
 skills/rizum-glass/SKILL.md
 skills/rizum-glass/agents/openai.yaml
 skills/rizum-glass/references/DESIGN.md
-skills/rizum-glass/references/winui-translation.md
+skills/rizum-glass/references/gpuix-translation.md
 "
 
 for path in $required_files; do
@@ -76,6 +78,15 @@ for gallery in references/rizum-glass-ui-gallery-v11.html references/rizum-glass
   fi
 done
 
+motion_transfer=examples/native-utility-quality-transfer-v2.html
+if ! grep -Fq 'profileOptions.length > 1' "$motion_transfer" \
+  || ! grep -Fq 'animation: state-enter 140ms' "$motion_transfer" \
+  || ! grep -Fq '.segment:has(button:focus-visible)::before' "$motion_transfer" \
+  || grep -Fq 'transition: height' "$motion_transfer"; then
+  echo "$motion_transfer is missing the approved conditional-choice or native motion fallback behavior" >&2
+  exit 1
+fi
+
 dark_gallery=references/rizum-glass-ui-gallery-dark-v11.html
 if ! grep -Fq 'Dark text uses solid semantic roles' "$dark_gallery" \
   || ! grep -Fq '[class~="text-[#a1a1aa]/30"]' "$dark_gallery" \
@@ -98,13 +109,14 @@ if ! grep -q 'React + TypeScript + Vite + Tailwind CSS + shadcn/ui + Rizum Glass
   exit 1
 fi
 
-if ! grep -q 'GPUI and WinUI 3 as optional' skills/rizum-glass/SKILL.md; then
-  echo "The Rizum Glass Skill no longer marks native adapters as optional" >&2
+if ! grep -q 'Bun + TypeScript + React 19' skills/rizum-glass/SKILL.md; then
+  echo "The Rizum Glass Skill is missing the GPUIX desktop baseline" >&2
   exit 1
 fi
 
-if ! grep -q 'React + TypeScript + Vite + Tailwind CSS + shadcn/ui + Rizum Glass' adapters/winui/reference-contract.schema.json; then
-  echo "The WinUI reference contract no longer enforces the canonical web-first stack" >&2
+if ! grep -q 'outerCornerSource' adapters/gpuix/reference-contract.schema.json \
+  || ! grep -q 'controlOwnership' adapters/gpuix/reference-contract.schema.json; then
+  echo "The GPUIX reference contract is missing the platform-owned window boundary" >&2
   exit 1
 fi
 
@@ -129,26 +141,16 @@ NODE
 
 node <<'NODE'
 const fs = require("node:fs");
-const xaml = fs.readFileSync("adapters/winui/generated/RizumGlass.Tokens.xaml", "utf8");
-if (!xaml.includes('<ResourceDictionary x:Key="Dark">')) {
-  throw new Error("Missing WinUI dark theme resources");
-}
-for (const style of ["RizumGlassButtonStyle", "RizumGlassConfirmButtonStyle", "RizumGlassDismissButtonStyle"]) {
-  if (!xaml.includes(`x:Key="${style}"`)) {
-    throw new Error(`Missing WinUI style: ${style}`);
-  }
-}
-for (const style of ["RizumGlassConfirmButtonStyle", "RizumGlassDismissButtonStyle"]) {
-  const neutralAlias = new RegExp(
-    `<Style\\s+x:Key="${style}"[^>]*BasedOn="\\{StaticResource RizumGlassButtonStyle\\}"\\s*/>`,
-  );
-  if (!neutralAlias.test(xaml)) {
-    throw new Error(`${style} must remain a direct alias of the neutral Rizum Glass button shell`);
-  }
-}
-for (const accent of ["AccentTeal", "AccentCyan", "AccentOrange", "AccentYellow", "AccentViolet", "AccentRose", "AccentMint"]) {
-  if (!xaml.includes(`RizumBrush${accent}`)) {
-    throw new Error(`Missing WinUI pointillist brush: ${accent}`);
+const gpuix = fs.readFileSync("adapters/gpuix/generated/rizum-glass-tokens.ts", "utf8");
+for (const required of [
+  "Bun + TypeScript + React 19 + @gpuix/react",
+  '"outerCornerSource": "platform"',
+  '"controlOwnership": "system"',
+  '"windowsNormalRadiusEpx": 8',
+  '"windowsExpandedRadiusEpx": 0',
+]) {
+  if (!gpuix.includes(required)) {
+    throw new Error(`Missing GPUIX generated window contract value: ${required}`);
   }
 }
 NODE

@@ -1,7 +1,7 @@
 ---
 version: 1.0
 name: Rizum Glass
-description: Reusable Rizum Glass UI style for React + Tailwind CSS + shadcn/ui primitives, with neutral liquid glass, restrained paper rhythm, serif titles, system-sans body text, lively Apple/Arc-style motion, and tiny pointillist accents.
+description: Reusable Rizum Glass UI style for GPUIX applications and their React web references, with neutral liquid glass, platform-native window geometry, restrained paper rhythm, serif titles, system-sans body text, lively Apple/Arc-style motion, and tiny pointillist accents.
 
 colors:
   primary: "#18181b"
@@ -136,9 +136,9 @@ components:
   input-field:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.ink}"
-    typography: "{typography.dialogue-body}"
+    typography: "{typography.label-ui}"
     rounded: "{rounded.sm}"
-    padding: 10px 14px
+    padding: 6px 10px
   quick-input-actions:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.ink-muted}"
@@ -207,9 +207,33 @@ The visual blend has three ingredients:
 
 This document is the source of truth for new pages. When generating new HTML prototypes, use this file first; do not infer missing rules from earlier prototype files.
 
+## Contents
+
+- [Implementation](#implementation)
+- [Colors](#colors)
+- [Motion](#motion)
+- [Typography](#typography)
+- [Layout & Spacing](#layout--spacing)
+- [Elevation & Depth](#elevation--depth)
+- [Shapes](#shapes)
+- [Platform Window Chrome](#platform-window-chrome)
+- [Components](#components)
+- [Do's and Don'ts](#dos-and-donts)
+
 ## Implementation
 
-Use **React + Tailwind CSS + shadcn/ui primitives only** for app UI and generated prototype pages. Compose UI from React components and shadcn-style primitives such as Button, Card, Input, Select, Badge, Tabs, ToggleGroup, Popover, Dialog, ScrollArea, Separator, and Tooltip. Do not hand-roll a separate visual framework with unrelated class names when this design is being tested.
+Use two explicit environments rather than treating browser and desktop code as interchangeable:
+
+- **Reference environment:** React + TypeScript + Vite + Tailwind CSS + shadcn/ui. Use this environment to explore, inspect, and approve layout, component states, material, and motion.
+- **Desktop delivery baseline:** Bun + TypeScript + React 19 + `@gpuix/react`. GPUIX is the default production adapter for new Rizum Glass desktop applications. Pin the exact pre-1.0 GPUIX version and verify unfamiliar props against that version's types and source.
+
+Compose browser references from shadcn-style primitives such as Button, Card, Input, Select, Badge, Tabs, ToggleGroup, Popover, Dialog, ScrollArea, Separator, and Tooltip. Translate the approved behavior into GPUIX host elements and headless components; do not copy DOM, Tailwind, or shadcn APIs into GPUIX by analogy. GPUIX does not use a browser DOM and not every CSS behavior has a native equivalent.
+
+GPUI is the Rust framework beneath GPUIX. Direct GPUI is a lower-level exception for a surface that demonstrably requires Rust-native ownership or a capability GPUIX does not expose; it is not a second name for GPUIX and not the default application stack. Keep non-visual native or performance-critical work outside React when a product needs it, but do not move ordinary presentation state out of React without evidence.
+
+A native translation is an optical calibration, not a numerical copy of browser pixels. Compare the approved reference and the running product at the target operating-system scale, then correct legibility as one coherent system. If the native renderer makes the reference feel materially smaller, scale body typography, control heights, hit targets, content insets, dense control widths, and content-sized window bounds together. Keep border weights, shadow roles, and radii on the established Rizum Glass hierarchy instead of multiplying every value. A quiet contextual title may remain at its approved optical size when enlarging it would upset the title-bar balance. Record the correction, its exceptions, and real-device evidence in the native reference contract.
+
+Do not approve a desktop translation from screenshots alone. Hands-on inspection must cover real text rasterization, pointer reach, caret position, text selection beyond the window boundary, wheel routing, overlay containment, and the perceived size of the complete window. A screenshot can prove geometry and color; it cannot prove interaction ownership or physical legibility.
 
 Static validation pages may be delivered as a single HTML file, but the UI inside the file should still be authored as React components, styled with Tailwind utilities, and shaped like shadcn/ui primitives. Inline CSS is only for design tokens, glass variables, keyframes, and browser setup that Tailwind cannot express cleanly.
 
@@ -272,6 +296,16 @@ Motion rules:
 - Avoid neon glows, spinning loaders, bouncing icons everywhere, or motion that fights readability.
 - Do not add cursor-following glow or spotlight effects to panels or the canvas. Hover feedback belongs to the component being operated and should use the established 1px lift, border, shadow, or neutral surface response.
 
+Motion must explain a state change, preserve spatial continuity, or confirm an action. Do not animate a control merely because the reference environment can. Keyboard-initiated navigation and selection should resolve immediately. Pointer feedback may use the normal motion vocabulary, while the same state change reached by keyboard should skip positional travel.
+
+Use a small shared timing vocabulary instead of component-local guesses: about 100-160ms for press and state feedback, 125-200ms for small popovers, 150-250ms for selects, and about 220ms with `cubic-bezier(.23, 1, .32, 1)` for an occasional named surface entering. Exits are shorter than entrances. Copy, save, login, availability, and other coarse asynchronous states may crossfade their content while the control shell remains fixed. Frequently updating numbers, seek positions, and progress values update directly rather than fading on every poll.
+
+Give each replaceable region one motion owner. Keep the outer field, button, status row, or asynchronous well mounted at its final geometry and animate only the replaceable inner content. Do not fade a whole surface and then fade its nested label or icon again: compounded opacity makes the state look dim, delays legibility, and turns one response into several unrelated beats. A transient busy indicator may use one short entrance beat, but it should not loop indefinitely unless continued movement communicates real ongoing work and the target runtime can present that movement evenly.
+
+Reduced motion is part of the implementation contract. Detect the platform preference and make positional movement, springs, and sliding segmented thumbs immediate while retaining semantic color, icon, and text changes. Do not add a JavaScript timer loop to imitate a missing native animation primitive. When a desktop adapter lacks transforms, repeat animation, or a presentation-synchronized frame callback, prefer a static approved state or a short opacity transition and record the limitation. A stable static preview is better than visibly uneven continuous motion.
+
+Dismissal correctness takes priority over an exit flourish. If an adapter cannot keep a leaving surface mounted without intercepting input, close and unmount it immediately; never leave an opacity-zero menu or popover above the active interface. Temporary copy, save, or success feedback must be replaceable by the newest action and must clear its pending reset when the owning view unmounts.
+
 ## Typography
 
 Use sans-serif UI text for controls, dialogue, settings, menus, and dense operational panels. Dialogue text should be dark enough to read comfortably (`ink-soft` or stronger), never pale grey.
@@ -286,7 +320,8 @@ Use monospace only for file snippets, command-like previews, or markdown note fr
 
 Prototype title rhythm:
 
-- Main panel titles use serif, 19px, bold, `ink`, and tight but not negative tracking.
+- Task and page titles in full panels use serif, 19px, bold, `ink`, and tight but not negative tracking. This role names the current surface or decision, such as Settings, Search, or Choose a model.
+- Window-level contextual titles use the quieter `title-serif` role at about 15-16px and semibold weight. Give the visible title one owner: the platform frame, the shared title-bar band, or the content surface. Do not repeat the same product, document, page, or task title in two of those places. A visible product logo or product name is optional rather than a default requirement; keep an accessible operating-system window title even when the visual chrome does not show product identity. Use the 19px display title for the current content surface or decision, and for a product name only when identity itself is the content, such as a launch, welcome, or brand-only surface.
 - Section subtitles such as settings groups use serif, 11.5px, semibold, `#71717a`. Do not automatically append a decorative dot after labels such as "Active Notifications", "Display", "Voice", or "Connection"; those subtitles should read cleanly on their own. They are not pale captions.
 - Menu service labels use the same 11.5px semibold serif `#71717a` rhythm.
 - Utility labels inside rows use sans-serif 13px for the label and 11px `caption` for numeric values or hints.
@@ -307,6 +342,12 @@ Panel sizing guidance:
 - Mixed pages should look like a cluster of differently sized glass sheets, not a stack of uniform dashboard cards.
 
 Use width tokens as semantic ranges, not fixed mandates: `menu` is narrow but has a minimum comfortable width, `utility` is compact, `dialogue` and `form` are medium, and `editorial` chooses its width from text measure. Generated prototypes must check that no text appears clipped, cramped, or colliding.
+
+Treat every dense settings or utility surface as an explicit alignment grid. Repeated rows use one stable label column, one stable gutter, and one control column; previews, segmented controls, sliders, select triggers, values, and filter chips share the same right edge. In a two-column settings surface, headings, fields, and structural dividers align to the same column boundaries. Do not repair a misaligned component with an isolated margin when the underlying grid is wrong.
+
+Vertical rhythm belongs to sections, not individual leftovers. Define the close between a field and its status, the separation before the next major section, the inset after a divider, and the bottom safe area as a sequence. When inserting a status or action into previously empty space, rebalance the whole section and update the window height; do not merely place the new element into the gap. Keep enough space below the final action row to match the top and side breathing room.
+
+Let compact utility windows follow meaningful content states. A status-only row may stay compact; the same row may grow when it gains an action, progress detail, or error explanation. Increase the content-sized window with that state instead of reserving permanent blank space or clipping the footer. A fixed utility whose complete task fits its window is not a scroll container. If future content no longer fits, introduce one deliberate bounded body or overlay rather than letting wheel events move the entire root surface.
 
 Use separators sparingly, but follow the prototype rhythm when a panel is settings-like.
 
@@ -337,6 +378,8 @@ Glass panels use the prototype glass recipe by default: `rgba(255,255,255,.62)`,
 
 Dark glass panels use `rgba(39,39,42,.76)`, `blur(42px) saturate(145%)`, a `1px solid rgba(255,255,255,.105)` border, `0 1px 0 rgba(255,255,255,.09) inset`, and `0 24px 70px rgba(0,0,0,.34)`. Dark buttons may use `rgba(39,39,42,.86)` with `dark-ink-soft` text and a `dark-surface-line` border. Preserve neutral glass; do not tint panels by module type and do not add cursor lighting.
 
+Alpha values are renderer inputs, not guaranteed visual matches. Native compositors may premultiply color or combine window blur differently from the browser, so calibrate the root panel and shallow control surfaces against the approved visual result rather than copying the same RGBA literal. Record any native-only calibrated value in the reference contract; do not silently change the shared semantic token.
+
 Nested dark utility tiles should remain transparent glass layers rather than outlined boxes. Translate a light tile's soft white fill into roughly 2-4% translucent white over the dark panel, use 22-30px backdrop blur with restrained saturation, add an inset top highlight around 3-5% white, and use a low-contrast depth shadow. Prefer no visible border; if structure truly needs one, keep it below roughly 5% white so transparency and depth establish the grouping first. Blur over a uniform parent has little visible evidence, so preserve the transparent fill and use the tiny edge reflection plus shadow instead of increasing opacity until the tile looks solid. Do not turn every nested dark tile into a medium-grey wireframe rectangle or use bright outlines as the primary separator.
 
 Compact calendars and search/list utilities need the same restraint. Give the outer sheet at most one quiet glass edge; do not outline the selected-day summary, every date cell, the search toolbar, the footer, or each result row. In calendars, leave ordinary dates on the open panel, use a soft translucent fill plus inset highlight for today or selection, and keep status meaning in the tiny pointillist dot. In search panels, keep the query row, grouped results, and keyboard footer on one continuous glass plane at rest: use spacing and typography instead of distinct toolbar or footer fills, full-width rules, or colored left rails. Keyboard hints may keep their tiny neutral keycaps. Result rows stay unboxed at rest and reveal a 2-4% neutral glass fill only on hover, focus, or selection. This preserves hierarchy without turning a compact utility into a wireframe diagram.
@@ -347,15 +390,61 @@ Interactive rows and buttons can lift by 1px on hover and deepen the shadow slig
 
 Liquid card moments, especially draw-card surfaces, may use a stronger glass recipe: higher blur, thin white borders, and a white shine sweep. Highlights should be white, not colored.
 
+When a native adapter does not clip child paint to a rounded parent's path, apply the same radius directly to the painted child or precomposed backdrop. Do not add a dark outline to hide a clipping defect. For a complex deterministic field made from gradients, grain, or other unavailable primitives, pre-render one build asset, clip that asset to the approved path, and keep live native text and controls above it. The fallback must preserve the visual hierarchy without turning the whole interface into rasterized screenshots.
+
 ## Shapes
 
 Default buttons and controls use 8px corners. Panels use 16-20px corners. Compact card rows may use 12px corners.
+
+These component radii do not define the outer radius of a desktop window. The platform owns the top-level window silhouette:
+
+- On Windows 11, retain the system frame, border, shadow, and rounded-corner preference. A normal top-level window generally follows the Windows 11 8 effective-pixel silhouette at 100% scale; do not force that radius when the system removes rounding for maximized, snapped, remote, or other platform states.
+- On macOS, retain the system `NSWindow` shape and standard window buttons. Do not hard-code a macOS outer radius from a screenshot or reproduce the traffic-light controls inside React.
+- Let the root Rizum Glass material reach the platform window edge and clip with the real system silhouette. Do not place a second large rounded app card inside a rectangular native window merely to simulate glass. Preserve the system shadow; use the Rizum Glass border light and inset reflection inside the clipped content surface.
 
 Dialogue bubbles use asymmetric corners, with one tighter corner and three rounder corners, so the bubble feels conversational without needing a tail. If the companion or speaker sits below the bubble, put the tighter corner at the lower-left (`18px 18px 18px 4px`) so the bubble reads as speech coming upward from the character rather than as a floating alert from above.
 
 Do not overuse full pills. Reserve full rounding for tiny dots, progress tracks, and occasional compact counters.
 
 Avoid default toggle switches whenever possible. Switches are visually heavy and usually less charming than the rest of the system. Prefer segmented controls, status chips with pointillist dots, selectable rows, icon buttons, checkable cards, or a creative domain-specific control such as a tiny animated sound-wave for voice on/off.
+
+## Platform Window Chrome
+
+Treat the top frame as platform-owned window chrome, not as an ordinary header row. Share the content hierarchy across platforms, but choose the visible title, navigation, and command arrangement from the application's structure rather than forcing every product into one branded header.
+
+### Shared geometry and ownership
+
+Use the runtime's measured title-bar, safe-area, and window-control geometry whenever it is available. Never guess the caption-button or traffic-light rectangle from a screenshot. If the pinned GPUIX version does not expose enough geometry to keep interactive content clear, use the native title bar on that platform instead of shipping a visually custom but behaviorally broken frame.
+
+The operating system owns the outer silhouette, minimize/maximize/close behavior, traffic lights, hit targets, Snap Layout behavior, inactive appearance, resize behavior, and double-click behavior. Rizum Glass may extend material and product controls into the title-bar band only after reserving the measured system-control rectangles and a useful drag region. System controls are not ordinary padding and must not be recreated as application buttons.
+
+Give visible identity one owner. A contextual title may live in the native frame, the shared title-bar band, or the content surface; do not repeat it in the body just because space is available. Do not add a logo or product name merely to fill an otherwise quiet title bar. The operating-system window title, task switcher entry, accessibility name, and application metadata must still identify the window even when visible chrome omits product identity.
+
+Place leading navigation after the platform's measured leading safe region. Place trailing utility actions against the measured trailing safe region: on Windows, immediately before the caption-button rectangle; on macOS, at the far end of the unobscured title-bar region. A contextual Windows title without leading tools starts with about 16px of product-side inset after the platform-reserved region. A centered macOS title is centered inside the unobscured content-layout region, not the raw window width.
+
+The title-bar background may use the same neutral window-level blur or transparency as the body so the outer silhouette reads as one glass object. Keep a valid draggable region, native window commands, focus and inactive states, keyboard access, high-contrast behavior, and a reduced-transparency fallback. Interactive controls must never overlap a drag region or a platform-reserved control region.
+
+A borderless fixed-size utility may use a documented platform-adapter fallback only when native custom-title-bar geometry is unavailable and the product deliberately does not support resizing or Snap Layout. The React layer may reproduce the standard visual slots while a platform adapter performs drag, minimize, and close operations; unavailable commands such as maximize remain visibly disabled. Record the exact slots, lost platform behavior, and fallback evidence in the reference contract. Never describe this exception as native control ownership, and prefer the real native title bar for resizable or workspace-class windows.
+
+### Platform translation
+
+**Windows:** Keep the native minimize, maximize/restore, and close buttons at the upper-right in left-to-right layouts. In right-to-left layouts, follow the system's reversed reserved region rather than forcing the controls to the right. A contextual title, navigation controls, or an application menu may share the remaining title-bar band, but no application control may enter the caption-button rectangle. Do not reserve a mandatory logo slot.
+
+**macOS:** Keep the native close, minimize, and zoom buttons at the upper-left and use their system key/inactive appearance. Reserve their real leading inset before placing a back action, sidebar trigger, contextual title, or toolbar item. Use the global system menu bar for application menus; do not reproduce that menu as an extra row inside the window. A visible product logo or product name is normally unnecessary because the platform already carries application identity outside the content surface.
+
+### Choose the application shell from its structure
+
+A layout with no sidebar, no menu bar, and no visible logo is a complete shell when the product does not need those elements. Choose the smallest shell that exposes the real navigation and command model:
+
+- **Single-purpose utility:** Use no sidebar or in-window menu bar. Treat the native window plus its root Rizum Glass material as the only full-window surface; do not put the entire interface inside a second large rounded card. Put the current task title in the shared title-bar band when it balances the short window, and do not repeat that title in the body. A rare utility action such as Settings may sit at the trailing safe edge of the same band. Size the window from the form, readable line measure, and status content rather than inheriting a workspace-sized frame.
+- **Back-stack utility:** Use this shell when the user temporarily moves deeper into a short hierarchy but does not need persistent top-level navigation. Put Back in the shared title-bar band at the same vertical level as the platform controls, followed by or balanced with the current contextual title. Keep the body free of a duplicate page header and keep the window content-sized.
+- **Workspace:** Add a persistent sidebar only when at least two top-level destinations are revisited often enough that persistent navigation improves orientation. Put the sidebar trigger and Back action in the shared title-bar band, aligned with the platform controls. A strong current-page heading may remain in the content area when it anchors a larger working surface, but it must not duplicate a title already visible in the chrome. When the sidebar closes, let the workspace reclaim the space without shifting or replacing native window controls.
+- **Menu-driven application:** Use persistent menus only when commands outlive the current page or document. On macOS those commands belong to the global system menu bar. On Windows the application menu may occupy the same top band as the native caption buttons, without an additional visible title row. Add a second local toolbar only for actions on the current document or selection. Never stack a product-title row, menu row, and local toolbar into three layers of top chrome.
+- **Panel canvas:** Do not add a sidebar merely because the surface contains several tools. Put the current canvas or workspace title in the shared title-bar band when the top otherwise lacks context. At wide sizes, show the relevant peer panels together and omit a panel-switcher button. When responsive collapse hides one or more peer panels, show a selector containing the actual available destinations. A switcher requires at least two meaningful targets and a real hidden-content problem; never use one unexplained icon as decorative balance.
+
+These shells have different intrinsic proportions. A short utility should not share the fixed width or height of a workspace, editor, or multi-panel canvas. Choose minimum, preferred, and maximum dimensions per shell from its content and platform constraints. Preserve the user's resized dimensions where appropriate, but do not create empty vertical space merely to keep unrelated examples or application modes the same size.
+
+When navigation changes shell geometry, leave system controls fixed in their platform-owned regions. Sidebar and panel transitions may use the established soft spring with transform and opacity; use layout animation only where the region genuinely changes size, keep it brief, make it interruptible, and remove it under reduced motion.
 
 ## Components
 
@@ -377,6 +466,20 @@ For playful reward, game, inventory, or unlock surfaces, Nieobie's Game Icon Pac
 Every design sample should include at least one paired confirm/cancel or accept/later/dismiss group so the visual language for reversible decisions is represented, but only the emphasized action needs an icon.
 
 **Selects and dropdowns:** Use the shadcn/ui `Select` primitive, or a `Popover` plus a single-selection list when the content requires richer rows. Do not rely on the browser or operating system's native `<select>` popup in canonical references: its expanded surface cannot reliably match Rizum Glass across platforms. Keep compact form triggers around 30px high with 8px corners, 12px regular text, neutral glass fill, a quiet chevron, and no accent-colored field background. The expanded menu should stay close to the trigger, normally match its width, use 4px inner padding and compact options around 28px high with 7px corners, and flip above the trigger when the viewport has insufficient space below. Use a nearly opaque neutral glass surface (`surface` around 94-97% opacity) plus backdrop blur so underlying labels do not visually collide with menu options. Mark the selected option with one small `accent-teal` check; do not color the whole option. Support arrow-key movement, Enter/Space selection, Escape, outside-click close, focus return, and the appropriate `combobox`, `listbox`, and `option` semantics.
+
+Use one select recipe throughout a product: the same trigger height, open-state outline, chevron direction, anchored offset, menu inset, option height, selected check, and entrance timing. Both the trigger and each option own a bounded text region with ellipsis so a long title cannot crowd the chevron or panel edge. The floating surface must be opaque enough that labels beneath it do not show through as a second text layer.
+
+Only show a selection control when the user has at least two meaningful choices. When the resolved data exposes one valid option, omit the label and selector instead of showing a disabled or redundant single-option control. Show that value as static identity only when the user still needs it to recognize the current object; otherwise reclaim the row, rebalance the following spacing, and update a content-sized window to the smaller state.
+
+**Text inputs:** Ordinary single-line form fields for URLs, endpoints, credentials, identifiers, and short settings values use the same compact density as Select triggers: about 30px high, 8px corners, 12px regular text, and 6px 10px internal padding. A small icon-only action may sit inside the trailing edge when it directly operates on that field, such as paste, reveal, or copy; keep the action around 24px and reserve enough right padding so text never runs underneath it. Use taller `dialogue-body` input treatment only for content-rich composers, multiline text, or another surface whose writing task genuinely needs more breathing room. Do not let a short utility workflow inherit the comfortable composer density by default.
+
+In native adapters, treat the visible field shell and the editor as two layers. The shell owns the full control height, border, radius, background, and trailing action; the native editor uses its own measured line box and optical vertical offset. Do not stretch the editor and caret to the entire shell merely because that is the available rectangle. Static interface copy is non-selectable, while editor text explicitly opts into native selection. Selection and drag must continue when the pointer leaves the field and, where the toolkit requires it, the product window; use pointer capture or a narrow platform adapter rather than allowing selection to stop at the window edge.
+
+**Sensitive fields:** Mask credentials by default and use one compact trailing eye action rather than a separate text button. Reserve its width so masked and revealed values never shift the field. Keep plaintext out of persistent presentation state when possible; request stored plaintext from the trusted service only after explicit reveal, clear it again when hidden or when the view resets, and keep secret persistence outside the UI layer.
+
+**Anchored popovers and asynchronous wells:** Constrain every popover to its owning column and the product window at every supported content height. Establish the final footprint of QR codes, thumbnails, or similar asynchronous content before loading begins, then crossfade the placeholder and final content instead of changing the popover's geometry. Floating surfaces enter from their trigger, exit along the same path more quickly, and remain fully usable at the compact window size.
+
+**Status and capability rows:** Keep health, availability, download, and local-persistence messages in one stable row with a small semantic dot. State only the information owned by that row; do not repeat unrelated explanations to fill space. Coarse states such as checking, available, missing, downloading, ready, and failed may change label, detail, and action without changing the surrounding alignment grid. Continuous byte counts or percentages update directly. When an action or detail appears, the row and window grow together and the final footer safe area remains intact.
 
 **Model and provider settings:** Treat task model assignments as one compact grouped control, not as a stack of tall choice cards. Each task row should be about 36-40px high, with a stable short task label column and one compact Select filling the remaining width. Use one quiet grouped surface and inset row separators only when needed; do not wrap every task in its own padded card. Provider and endpoint fields may share a two-column row when both values remain readable. Keep connection actions together at the lower-left, and let content determine the panel width so the form becomes slightly wider and materially shorter than a narrow full-height settings sheet.
 
@@ -402,6 +505,8 @@ Every design sample should include at least one paired confirm/cancel or accept/
 
 Segmented controls that behave like binary switches, such as show/hide or on/off display modes, should animate with a sliding white capsule inside the muted track. Do not rely on a simple fade between selected button backgrounds; the active surface should physically travel to the selected side with a short spring curve. Keep the labels static and only change their grey/ink color as the capsule moves underneath.
 
+Equal segment widths are a default, not a requirement. Give a longer localized label a measured larger share when equal thirds or halves make its side spacing visibly tighter than neighboring options. Keep one label font, weight, and line box across all options, and scale the track wide enough that the longest required label remains relaxed rather than reducing only that label.
+
 If a true toggle is unavoidable, make it small, quiet, and secondary; it should never become the visual focus of a settings panel.
 
 **Sound-wave control:** Voice/sound on-off should use five 2px rounded vertical bars inside a 24px-high tap target with the prototype heights `3px / 7px / 10px / 5px / 8px`. The state difference is color and motion: off bars are pale grey `#d4d4d8` and paused; on bars become visibly darker `#a1a1aa` and animate. The motion should preserve its current frame across toggles: when turning off, keep the current bar heights and pause the wave timeline; when turning back on, hold the paused frame briefly, around 180ms, while the color changes, then continue the same timeline instead of restarting or snapping to a base frame. If CSS animation cannot resume cleanly from the paused frame, drive the heights with a tiny JS timeline that stores elapsed time. This control intentionally gets darker when enabled and softer when disabled. Use the prototype wave rhythm only in the on state: 3px baseline, 10px peak, about 1.2s, staggered by 150ms. Do not use accent colors, opacity tricks, or transform scaling for this control; animate height so the top edge feels like a real equalizer.
@@ -409,6 +514,8 @@ If a true toggle is unavoidable, make it small, quiet, and secondary; it should 
 Place sound-wave controls like the prototype settings row: label text on the left, the sound-wave control aligned to the far right of that row with `justify-between`. It should not sit immediately after the label like an inline icon.
 
 **Range sliders:** Use the prototype slider style for numeric settings such as opacity, speed, volume, intensity, or temperature. Track is 2px high, rounded, `surface-line` grey, with no visible colored fill by default. Thumb is a 12px grey circle (`caption`) with no white border. Its default glow is `0 0 8px 2px rgba(161,161,170,.2)`. On hover, the thumb scales to 1.3 and the glow becomes `0 0 14px 4px rgba(161,161,170,.25)`. Show the current value as muted tabular text on the right of the row. Do not use thick tracks, colored progress fills, or white-ring thumbs unless a specific product state truly requires it.
+
+The visual track and the pointer target are different layers. Preserve the 2px visual line while giving the control a substantially taller hit region, and keep drag updates direct rather than eased. A seek control may place a compact play/pause action in the time row beneath the track so the track keeps its full precision width. Keyboard seeking resolves immediately; pointer clicks may settle briefly only when the native motion path is reliable.
 
 **Draw-card module:** Card-deck interactions should look liquid, layered, and physical. Preserve the card visual language: translucent white glass/paper cards, subtle white shine, soft shadows, rounded corners, and muted black/grey metadata. The motion language does not have to inherit an older prototype; when an animation feels overworked, redesign the choreography from the card style outward. A good default is a fresh redeal sequence: begin as a compact stacked deck, compress once, deal into five visible side-by-side card slots, let cards trade depth during the deal, then settle near the final selection layout before the center card lifts. During shuffle/deal phases, cards should be upright and visually straight, using clean vertical card lanes with `rotate(0deg)`; reserve angled cards for idle fan layouts or selected-card lift beats. Shuffle timing should feel closer to Apple/Arc motion than arcade motion: roughly 1.6-2.0 seconds total, with a small preparation beat, smooth spring-like easing, staggered lanes, and a gentle settle before the selected card lifts. During the moving shuffle itself, every card should look identical: use matching clean glass card backs with no decorative back marks/icons or hidden placeholder elements. Idle and drawn states should also avoid decorative card-back marks: idle can show only "Click to shuffle", drawn can show only "Click to reveal", and result icon/details should appear only after the card is revealed. If the action prompt is already on the card, do not add a second hint below the deck. Card text must match the state while staying quiet: shuffling should hide card-face text; revealed can say "Click to collect" or the domain equivalent. Do not leave idle shuffle copy visible after the deck has already selected a result. Do not make the future center card look pre-selected during the deal; hide result text and avoid a persistent hero-card shadow. The final third of the motion should already be near the dealt layout, so there is no obvious corrective slide into selection position. The selected lift should be a short arced lift with slight rotation and settle, followed by a separate reveal beat. Keep the surrounding card array fixed while the selected card lifts; do not collapse the deck during the draw transition. Do not swap result content while the deal is still resolving. Stagger card motion by a few milliseconds so the deck feels physical rather than synchronized. Keep timing constants grouped near the draw logic so CSS duration and JS reveal timing do not drift. After the user collects the revealed card, remove it from the visible deck and replenish a new card if the interaction repeats.
 
@@ -422,7 +529,7 @@ For Chinese editorial stamps, prefer Chinese numerals when they improve the stam
 
 **Event streams:** Keep event-stream components restrained. For stacked completion prompts, use a single-color SVG checkmark based on the palette, preferably `accent-teal`. Do not fake pointillism by filling one shape and sprinkling random dots on top. Align the checkmark in a fixed 15px icon box.
 
-**Creative panel triggers:** Not every creative panel should appear the same way. Reward-like or card-draw surfaces can be triggered from compact status/reward affordances. Editorial digests should feel occasional and contextual, not like a manual dashboard default. Event streams can appear as time-based or event-based fragments. Utility creative panels should be summonable through a unified panel switcher rather than separate persistent buttons in product UI. The switcher should be very small at first: a compact corner popover that slides out from a lower-left or lower-right anchor, with only small preview choices visible. Prefer a simplified vertical vinyl-record selection feeling over a generic grid menu: use compact square album-sleeve cards with a small liquid-glass record peeking from behind, not plain narrow chips or bare circular discs. Avoid a heavy container, bottom instructions, or extra launcher button inside the switcher; the sleeves/records themselves are the control. Album-sleeve glass must stay neutral and match the rest of the Rizum Glass panels; do not tint the glass itself by panel type. Keep the small color dot as the panel identifier, not only as a pseudo-decoration, so square cards preserve the earlier album-cover text rhythm: dot at the top, title in the middle, short code at the bottom. Do not draw an inner border/ring inside the album sleeve; the sleeve should read as one soft glass square, with only a faint highlight wash if needed. The record should be translucent, mostly grayscale/white, with faint rings and a larger transparent center hole indicated by one subtle neutral grey ring; do not fill the center, do not stack multiple center-ring colors, and do not color the record center with the sleeve accent. Layer the record below the album sleeve glass and text, as if it is sliding out from behind the cover rather than floating above it. Only the centered/selected sleeve should pull its record out visibly; neighboring sleeves keep their records tucked mostly inside the sleeve with lower opacity so the selector reads as a stack of albums, not a row of exposed discs. The centered sleeve is the current selection; neighboring sleeves should still read as real album cards, not tiny background shadows: use modest scale contrast, moderate opacity, and restrained blur/depth. When a selection opens, the glass record may spin subtly to imply activation. The selected panel can then unfold from that same corner into the full glass panel, preserving a clear sense of spatial summoning. The switcher should support direct selection, keyboard arrows, vertical trackpad swipes, and mouse/touch dragging. It must be data-driven so future panels can be added as one more switcher item instead of a new bespoke trigger.
+**Creative panel triggers:** Not every creative panel should appear the same way. Reward-like or card-draw surfaces can be triggered from compact status/reward affordances. Editorial digests should feel occasional and contextual, not like a manual dashboard default. Event streams can appear as time-based or event-based fragments. Utility creative panels may use a unified panel switcher rather than separate persistent buttons, but only when at least two meaningful panels exist and one or more are not already visible. When every target panel is simultaneously visible, omit the switcher. When responsive collapse makes panels unavailable, expose the real destinations by name or recognizable preview; never leave one unexplained generic panel icon in otherwise empty chrome. The switcher should be very small at first: a compact corner popover that slides out from a lower-left or lower-right anchor, with only small preview choices visible. Prefer a simplified vertical vinyl-record selection feeling over a generic grid menu: use compact square album-sleeve cards with a small liquid-glass record peeking from behind, not plain narrow chips or bare circular discs. Avoid a heavy container, bottom instructions, or extra launcher button inside the switcher; the sleeves/records themselves are the control. Album-sleeve glass must stay neutral and match the rest of the Rizum Glass panels; do not tint the glass itself by panel type. Keep the small color dot as the panel identifier, not only as a pseudo-decoration, so square cards preserve the earlier album-cover text rhythm: dot at the top, title in the middle, short code at the bottom. Do not draw an inner border/ring inside the album sleeve; the sleeve should read as one soft glass square, with only a faint highlight wash if needed. The record should be translucent, mostly grayscale/white, with faint rings and a larger transparent center hole indicated by one subtle neutral grey ring; do not fill the center, do not stack multiple center-ring colors, and do not color the record center with the sleeve accent. Layer the record below the album sleeve glass and text, as if it is sliding out from behind the cover rather than floating above it. Only the centered/selected sleeve should pull its record out visibly; neighboring sleeves keep their records tucked mostly inside the sleeve with lower opacity so the selector reads as a stack of albums, not a row of exposed discs. The centered sleeve is the current selection; neighboring sleeves should still read as real album cards, not tiny background shadows: use modest scale contrast, moderate opacity, and restrained blur/depth. When a selection opens, the glass record may spin subtly to imply activation. The selected panel can then unfold from that same corner into the full glass panel, preserving a clear sense of spatial summoning. The switcher should support direct selection, keyboard arrows, vertical trackpad swipes, and mouse/touch dragging. It must be data-driven so future panels can be added as one more switcher item instead of a new bespoke trigger.
 
 **Achievement-like grids:** Avoid achievement walls or badge galleries unless the whole concept is redesigned around calm, editorial restraint. Dense badge grids tend to compete with the softer system style.
 
@@ -439,12 +546,20 @@ For Chinese editorial stamps, prefer Chinese numerals when they improve the stam
 - Leave ordinary buttons text-only unless the icon carries semantic value.
 - Keep sample pages narrow unless a feature genuinely needs a wide canvas.
 - Let each panel hug its own content instead of stretching all panels to the same width.
+- Choose the window shell from the application's real navigation and command structure.
+- Give a contextual title one visible owner and keep the operating-system title accessible.
+- Keep native window controls fixed while application chrome adapts around measured safe regions.
+- Let single-purpose utility windows use the root glass surface and content-driven dimensions.
 - Replace ordinary toggles with segmented controls, chips, clickable rows, or creative state controls.
 - Make chip/toggle alternatives actually interactive in prototypes.
 - Include a range slider sample when documenting numeric settings.
 - Generate real product UI, not explanatory style-demo copy.
 - Create new prototype files with a new version number instead of overwriting older versions.
 - Keep both appearances neutral: the light canvas may use its approved faint ambience, while the dark canvas stays a solid `#111113` with no gradient or cursor glow.
+- Calibrate a native translation at real operating-system scale instead of copying browser pixels blindly.
+- Keep static copy non-selectable, native editors selectable, and wheel ownership explicit.
+- Keep overlays inside the owning column and preserve their final asynchronous content footprint.
+- Record renderer limitations and approved fallbacks in the GPUIX reference contract.
 
 **Don't**
 
@@ -454,6 +569,12 @@ For Chinese editorial stamps, prefer Chinese numerals when they improve the stam
 - Use gradients inside metric or status bars.
 - Stretch a narrow focused interface into a full-width dashboard.
 - Force every panel to share the same width.
+- Force unrelated utility, workspace, editor, and canvas shells to share one window size.
+- Add a product logo, product name, sidebar, or menu bar only to fill empty chrome.
+- Repeat the same title in the title bar and the content surface.
+- Wrap an entire single-purpose window in a second full-window card.
+- Stack a Windows product-title row, application menu row, and local toolbar.
+- Show a panel switcher when every target is already visible or when it has only one target.
 - Default to pill toggle switches for settings.
 - Leave chip-style switches visually static or non-interactive.
 - Animate sound-wave controls with transform scaling instead of height changes.
@@ -464,3 +585,7 @@ For Chinese editorial stamps, prefer Chinese numerals when they improve the stam
 - Put accent color inside recent-item icon frames.
 - Use emoji as production chrome for checks, achievements, or event icons.
 - Reintroduce the achievement wall unless the whole concept is redesigned.
+- Reserve blank space for actions or details that are not present in the current state.
+- Let a fixed utility root scroll when all of its content already fits.
+- Simulate missing transforms or continuous motion with layout-heavy JavaScript timer loops.
+- Hide native clipping defects behind a dark outline or a second rounded app card.
