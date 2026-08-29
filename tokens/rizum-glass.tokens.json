@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
-  "$description": "Reusable Rizum Glass UI style for GPUIX applications and their React web references, with neutral liquid glass, platform-native window geometry, restrained paper rhythm, serif titles, system-sans body text, lively Apple/Arc-style motion, and tiny pointillist accents.",
+  "$description": "Reusable Rizum Glass UI style for GPUIX applications and their React web references, with neutral liquid glass, platform-native window geometry, restrained paper rhythm, serif titles, platform-calibrated body text, lively Apple/Arc-style motion, and tiny pointillist accents.",
   "color": {
     "$type": "color",
     "primary": {
@@ -455,7 +455,7 @@
     "body-ui": {
       "$type": "typography",
       "$value": {
-        "fontFamily": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", system-ui, sans-serif",
+        "fontFamily": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", \"MiSans VF\", system-ui, sans-serif",
         "fontSize": {
           "value": 0.8125,
           "unit": "rem"
@@ -466,7 +466,7 @@
     "dialogue-body": {
       "$type": "typography",
       "$value": {
-        "fontFamily": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", system-ui, sans-serif",
+        "fontFamily": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", \"MiSans VF\", system-ui, sans-serif",
         "fontSize": {
           "value": 0.84375,
           "unit": "rem"
@@ -477,7 +477,7 @@
     "label-ui": {
       "$type": "typography",
       "$value": {
-        "fontFamily": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", system-ui, sans-serif",
+        "fontFamily": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", \"MiSans VF\", system-ui, sans-serif",
         "fontSize": {
           "value": 0.75,
           "unit": "rem"
@@ -488,7 +488,7 @@
     "caption-caps": {
       "$type": "typography",
       "$value": {
-        "fontFamily": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", system-ui, sans-serif",
+        "fontFamily": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", \"MiSans VF\", system-ui, sans-serif",
         "fontSize": {
           "value": 0.6875,
           "unit": "rem"
@@ -503,7 +503,7 @@
     "mono-note": {
       "$type": "typography",
       "$value": {
-        "fontFamily": "\"SF Mono\", \"Fira Code\", Menlo, monospace",
+        "fontFamily": "\"SF Mono\", Menlo, \"Cascadia Mono\", \"Fira Code\", monospace",
         "fontSize": {
           "value": 0.75,
           "unit": "rem"

@@ -32,11 +32,11 @@
   --font-display-serif: "\"New York\", \"Noto Serif SC\", \"Songti SC\", Georgia, serif";
   --font-title-serif: "\"New York\", \"Noto Serif SC\", \"Songti SC\", Georgia, serif";
   --font-subtitle-serif: "\"New York\", \"Noto Serif SC\", \"Songti SC\", Georgia, serif";
-  --font-body-ui: "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", system-ui, sans-serif";
-  --font-dialogue-body: "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", system-ui, sans-serif";
-  --font-label-ui: "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", system-ui, sans-serif";
-  --font-caption-caps: "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", system-ui, sans-serif";
-  --font-mono-note: "\"SF Mono\", \"Fira Code\", Menlo, monospace";
+  --font-body-ui: "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", \"MiSans VF\", system-ui, sans-serif";
+  --font-dialogue-body: "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", \"MiSans VF\", system-ui, sans-serif";
+  --font-label-ui: "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", \"MiSans VF\", system-ui, sans-serif";
+  --font-caption-caps: "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", \"MiSans VF\", system-ui, sans-serif";
+  --font-mono-note: "\"SF Mono\", Menlo, \"Cascadia Mono\", \"Fira Code\", monospace";
   --text-display-serif: 1.1875rem;
   --text-title-serif: 1rem;
   --text-subtitle-serif: 0.71875rem;

@@ -31,6 +31,7 @@ Use the browser implementation as the design instrument and GPUIX as the default
 - Keep color semantic and restrained. Neutral shells come first; pointillist accents identify meaning, not decoration.
 - Verify motion as a sequence of states, not just a final screenshot. Respect reduced-motion settings.
 - Treat native translation as an optical calibration. Verify the running product at the target operating-system scale and record any coherent geometry correction and title exception in the reference contract.
+- For Windows delivery, use the canonical MiSans VF / Noto Serif SC VF / Cascadia Mono role set and bundle the exact font files plus license notices. Register them process-private before the renderer starts; never rely on the development machine's installed fonts.
 - Assign interaction ownership explicitly: static copy, native editor selection, pointer capture, wheel routing, overlays, and sensitive values must not inherit browser assumptions.
 - Keep compact utilities content-sized by named state. When a detail or action appears, update the section rhythm and window bounds together rather than reserving blank space or clipping the footer.
 - Reuse the approved compact field, select, segmented, slider, status-row, and anchored-popover recipes from the GPUIX translation guide before creating local variants.

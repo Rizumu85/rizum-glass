@@ -4,6 +4,7 @@ All notable changes to Rizum Glass are documented here.
 
 ## Unreleased
 
+- Defined the Windows typography contract as bundled MiSans VF UI text, Noto Serif SC VF contextual titles, and Cascadia Mono data text, including license distribution and process-private registration before GPUIX initializes text rendering.
 - Separated immediate actions from persistent modes: future strategies with non-consensus or multi-state choices now require a visibly labeled, fixed-geometry selector with exposed options instead of reusing an action glyph, cycling hidden states, or relying on a tooltip. Added an unrelated audio-cleanup transfer test for the rule.
 - Distinguished compact bottom action areas from bottom-positioned result content, with separate divider, row, and bottom-safe-area rhythms based on semantic ownership rather than visual position.
 - Refined the motion contract after GPUIX hands-on use: one motion owner per replaceable region, stable shells for coarse feedback, direct updates for manipulated values, bounded busy indicators, immediate overlay dismissal when exit presence is unavailable, and cleanup of superseded feedback timers. Selection controls now disappear when resolved data contains only one meaningful option, with spacing and content-sized window geometry reclaimed.

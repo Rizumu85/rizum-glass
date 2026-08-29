@@ -1,7 +1,7 @@
 ---
 version: 1.0
 name: Rizum Glass
-description: Reusable Rizum Glass UI style for GPUIX applications and their React web references, with neutral liquid glass, platform-native window geometry, restrained paper rhythm, serif titles, system-sans body text, lively Apple/Arc-style motion, and tiny pointillist accents.
+description: Reusable Rizum Glass UI style for GPUIX applications and their React web references, with neutral liquid glass, platform-native window geometry, restrained paper rhythm, serif titles, platform-calibrated body text, lively Apple/Arc-style motion, and tiny pointillist accents.
 
 colors:
   primary: "#18181b"
@@ -55,31 +55,31 @@ typography:
     lineHeight: 1.35
     letterSpacing: 0
   body-ui:
-    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", system-ui, sans-serif'
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "MiSans VF", system-ui, sans-serif'
     fontSize: 0.8125rem
     fontWeight: 400
     lineHeight: 1.7
     letterSpacing: 0
   dialogue-body:
-    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", system-ui, sans-serif'
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "MiSans VF", system-ui, sans-serif'
     fontSize: 0.84375rem
     fontWeight: 400
     lineHeight: 1.8
     letterSpacing: 0
   label-ui:
-    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", system-ui, sans-serif'
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "MiSans VF", system-ui, sans-serif'
     fontSize: 0.75rem
     fontWeight: 400
     lineHeight: 1.35
     letterSpacing: 0
   caption-caps:
-    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", system-ui, sans-serif'
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "MiSans VF", system-ui, sans-serif'
     fontSize: 0.6875rem
     fontWeight: 600
     lineHeight: 1.35
     letterSpacing: 0.08em
   mono-note:
-    fontFamily: '"SF Mono", "Fira Code", Menlo, monospace'
+    fontFamily: '"SF Mono", Menlo, "Cascadia Mono", "Fira Code", monospace'
     fontSize: 0.75rem
     fontWeight: 400
     lineHeight: 1.8
@@ -307,6 +307,16 @@ Reduced motion is part of the implementation contract. Detect the platform prefe
 Dismissal correctness takes priority over an exit flourish. If an adapter cannot keep a leaving surface mounted without intercepting input, close and unmount it immediately; never leave an opacity-zero menu or popover above the active interface. Temporary copy, save, or success feedback must be replaceable by the newest action and must clear its pending reset when the owning view unmounts.
 
 ## Typography
+
+Typography is platform-calibrated rather than dependent on whatever fonts happen to be installed on the design machine. Windows GPUIX applications use one fixed three-role family set:
+
+- **UI sans:** `MiSans VF` for controls, dialogue, settings, menus, ordinary metadata, and dense operational text.
+- **Context serif:** `Noto Serif SC` from the unmodified `NotoSerifSC-VF.ttf` file for contextual titles, panel headings, section labels, and the restrained editorial roles defined below.
+- **Monospace:** `Cascadia Mono` for URLs, time values, aligned numeric data, file snippets, and command-like previews. Do not use it for ordinary Chinese status copy.
+
+Every Windows distribution, including a portable ZIP, must ship the exact font files used for these roles and their license notices. Register or load them process-private before GPUIX creates its renderer and text system; do not assume that Windows, Windows Terminal, an IDE, or the user's own font library provides the required files. Keep the family files unmodified unless their license and renamed-family requirements are deliberately handled. If private registration fails, use a documented platform fallback rather than silently accepting an incidental serif or monospace fallback that changes layout.
+
+macOS keeps its platform-owned New York/Songti, SF/PingFang, and SF Mono/Menlo roles. Do not redistribute Apple system fonts. The cross-platform stacks above place each platform's preferred family before its generic fallback; a browser reference that is intended to validate Windows typography must load the same bundled Windows files with `@font-face` instead of relying on the authoring computer.
 
 Use sans-serif UI text for controls, dialogue, settings, menus, and dense operational panels. Dialogue text should be dark enough to read comfortably (`ink-soft` or stronger), never pale grey.
 

@@ -10,6 +10,16 @@ Use this workflow after a Rizum Glass browser reference is approved. GPUIX is th
 - An exact pinned `@gpuix/react` version. Record the version in the reference contract because GPUIX is pre-1.0.
 - GPUI through `@gpuix/native`, supplied by GPUIX. Do not add a second GPUI host unless the application has a documented lower-level boundary.
 
+## Windows Typeface Contract
+
+Use the canonical Windows role set without depending on machine-installed fonts:
+
+- `MiSans VF` for ordinary interface text;
+- `Noto Serif SC` from `NotoSerifSC-VF.ttf` for contextual and section titles;
+- `Cascadia Mono` for URLs, time, aligned data, and code-like text.
+
+Ship the exact font files and their license notices in every installer and portable archive. Register them process-private before the first GPUIX `render()` call so the renderer measures and rasterizes the intended faces from its first frame. Verify the packaged executable on a Windows account or environment that has not installed those families separately. Do not copy the files into the system Fonts directory, require administrator access, or let a developer-machine fallback become part of the approved geometry.
+
 GPUIX is React bindings for GPUI. React owns component composition and presentation state; the GPUIX reconciler sends mutations through the native binding; GPUI lays out and paints the retained native tree. It is not Electron, a web view, or a newer release of GPUI.
 
 ## Required Inputs
