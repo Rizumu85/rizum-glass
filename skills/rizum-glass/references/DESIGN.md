@@ -516,6 +516,12 @@ Equal segment widths are a default, not a requirement. Give a longer localized l
 
 If a true toggle is unavoidable, make it small, quiet, and secondary; it should never become the visual focus of a settings panel.
 
+**Immediate actions and persistent modes:** Separate controls that act now from controls that configure what will happen later, even when they share one toolbar, transport row, or utility footer. Play/pause, mute/unmute, start/stop, and retry are immediate actions. A familiar icon-only button may represent one of these actions when the surrounding context makes its effect unambiguous. Repeat behavior, end behavior, queue order, overwrite policy, and other strategies remain selected until changed and therefore use selection controls. Do not reuse an immediate-action glyph to represent a future strategy: a second pause icon does not become “pause at end” merely because a tooltip explains it.
+
+When a persistent mode has more than two choices or lacks one widely understood symbol, use a compact labeled menu/select or a segmented control. The current mode must remain visible without hover, activation must expose the complete set of choices, and the trigger should be sized from its longest supported localized label so switching modes does not move adjacent controls. Optional leading icons may improve scanning, but visible text owns the meaning. Do not cycle hidden modes from an unlabeled icon button, and do not rely on color or a tooltip as the only explanation. When an immediate action and a persistent mode are colocated, distinguish their temporal scope through control form, label, and spacing rather than accent color alone.
+
+Keep the persistent-mode shell stable while its selected label or supporting icon changes. Pointer-initiated changes may crossfade the replaceable inner content in about 100-140ms; menu motion follows the standard select timing, while keyboard selection and reduced-motion updates resolve immediately.
+
 **Sound-wave control:** Voice/sound on-off should use five 2px rounded vertical bars inside a 24px-high tap target with the prototype heights `3px / 7px / 10px / 5px / 8px`. The state difference is color and motion: off bars are pale grey `#d4d4d8` and paused; on bars become visibly darker `#a1a1aa` and animate. The motion should preserve its current frame across toggles: when turning off, keep the current bar heights and pause the wave timeline; when turning back on, hold the paused frame briefly, around 180ms, while the color changes, then continue the same timeline instead of restarting or snapping to a base frame. If CSS animation cannot resume cleanly from the paused frame, drive the heights with a tiny JS timeline that stores elapsed time. This control intentionally gets darker when enabled and softer when disabled. Use the prototype wave rhythm only in the on state: 3px baseline, 10px peak, about 1.2s, staggered by 150ms. Do not use accent colors, opacity tricks, or transform scaling for this control; animate height so the top edge feels like a real equalizer.
 
 Place sound-wave controls like the prototype settings row: label text on the left, the sound-wave control aligned to the far right of that row with `justify-between`. It should not sit immediately after the label like an inline icon.
@@ -558,6 +564,7 @@ For Chinese editorial stamps, prefer Chinese numerals when they improve the stam
 - Keep native window controls fixed while application chrome adapts around measured safe regions.
 - Let single-purpose utility windows use the root glass surface and content-driven dimensions.
 - Replace ordinary toggles with segmented controls, chips, clickable rows, or creative state controls.
+- Separate immediate actions from persistent mode selectors, and keep the current mode visibly labeled.
 - Make chip/toggle alternatives actually interactive in prototypes.
 - Include a range slider sample when documenting numeric settings.
 - Generate real product UI, not explanatory style-demo copy.
@@ -583,6 +590,7 @@ For Chinese editorial stamps, prefer Chinese numerals when they improve the stam
 - Stack a Windows product-title row, application menu row, and local toolbar.
 - Show a panel switcher when every target is already visible or when it has only one target.
 - Default to pill toggle switches for settings.
+- Reuse an immediate-action icon for a future strategy or hide a multi-state choice behind an unlabeled cycling button.
 - Leave chip-style switches visually static or non-interactive.
 - Animate sound-wave controls with transform scaling instead of height changes.
 - Use outlined star icons where a simple filled shape would do.

@@ -15,6 +15,7 @@ examples/README.md
 examples/platform-window-chrome-transfer-v1.html
 examples/window-identity-directions-v5.html
 examples/native-utility-quality-transfer-v2.html
+examples/native-utility-quality-transfer-v3.html
 references/README.md
 references/rizum-glass-ui-gallery-v11.html
 references/rizum-glass-ui-gallery-dark-v11.html
@@ -84,6 +85,16 @@ if ! grep -Fq 'profileOptions.length > 1' "$motion_transfer" \
   || ! grep -Fq '.segment:has(button:focus-visible)::before' "$motion_transfer" \
   || grep -Fq 'transition: height' "$motion_transfer"; then
   echo "$motion_transfer is missing the approved conditional-choice or native motion fallback behavior" >&2
+  exit 1
+fi
+
+mode_transfer=examples/native-utility-quality-transfer-v3.html
+if ! grep -Fq '"data-role": "immediate-action"' "$mode_transfer" \
+  || ! grep -Fq '"data-role": "persistent-mode"' "$mode_transfer" \
+  || ! grep -Fq '"aria-haspopup": "listbox"' "$mode_transfer" \
+  || ! grep -Fq 'At end:' "$mode_transfer" \
+  || grep -Eiq '(VRC|Bilibili|danmaku|stream key)' "$mode_transfer"; then
+  echo "$mode_transfer is missing temporal-scope separation or contains product-specific naming" >&2
   exit 1
 fi
 
