@@ -4,6 +4,7 @@ All notable changes to Rizum Glass are documented here.
 
 ## Unreleased
 
+- Added GPUIX runtime-query lifecycle guidance: centralize frame-bound geometry and scroll calls, suspend interaction polling around native window lifecycle changes, preserve long-running work when presentation queries are unavailable, and verify native input paths with physical interaction.
 - Defined the Windows typography contract as bundled MiSans VF UI text, Noto Serif SC VF contextual titles, and Cascadia Mono data text, including license distribution and process-private registration before GPUIX initializes text rendering.
 - Separated immediate actions from persistent modes: future strategies with non-consensus or multi-state choices now require a visibly labeled, fixed-geometry selector with exposed options instead of reusing an action glyph, cycling hidden states, or relying on a tooltip. Added an unrelated audio-cleanup transfer test for the rule.
 - Distinguished compact bottom action areas from bottom-positioned result content, with separate divider, row, and bottom-safe-area rhythms based on semantic ownership rather than visual position.

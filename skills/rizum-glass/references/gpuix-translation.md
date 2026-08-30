@@ -58,6 +58,19 @@ Verify at least:
 
 Treat missing behavior as a capability boundary, not an invitation to imitate the browser with polling or layout-heavy timers. Prefer a stable native fallback, document it, and revisit it when the pinned runtime changes.
 
+## Runtime Query Lifecycle Safety
+
+Treat GPUIX geometry, scroll, automation, and window queries as frame-bound capabilities, not permanently available services. A minimized, hidden, closing, or transitioning native window may stop presenting frames while a synchronous binding waits for renderer state. A timeout in an interaction aid must never terminate the Bun process or long-running work that it owns.
+
+- Route `getElementBounds`, `getWindowSize`, `getScrollOffset`, `scrollTo`, and equivalent renderer queries through one project-level adapter. Validate returned geometry and convert runtime exceptions or timeouts into “unavailable this frame.”
+- Keep domain work independent from presentation-query availability. If a query is unavailable, skip that interaction frame, preserve durable work and child processes, and retry only after the relevant window or overlay is renderable again.
+- Before minimizing, hiding, closing, or replacing a native window, release pointer capture, drag state, text-selection extension, and overlay-specific polling. Resume them only after the window is restored and the renderer can answer.
+- Gate timers and pointer polls on native window state. Never call frame-bound renderer queries from an unconditional high-frequency interval.
+- Prefer native or headless component behavior. If a narrow platform adapter is required, keep its polling interruptible, bounded, and disposable; a missing browser-like behavior does not justify an unbounded geometry loop.
+- Apply the same boundary to popovers, selects, custom scrollbars, tooltips, and automation helpers so lifecycle safety does not depend on which component initiated the query.
+
+Verify minimize/restore, hide/show, close during interaction, and overlay dismissal while editable fields and long-running work are active. Use at least one physical pointer and keyboard pass for logic that reads operating-system input state: posted window messages and renderer simulation may not update platform APIs such as Windows `GetAsyncKeyState`, so they cannot be the sole evidence. Confirm that the application and its long-running child work remain alive when presentation is suspended, and that no uncaught query timeout reaches stderr.
+
 ## Optical Native Calibration
 
 Do not apply browser dimensions mechanically. Launch the real window at the target operating-system scale and compare physical legibility with the approved reference.
@@ -185,4 +198,6 @@ Window-state rules:
 - Reduced motion is wired to the platform preference, and continuous motion has a static fallback when the pinned runtime cannot present it smoothly.
 - Floating surfaces remain inside the owning column/window and asynchronous content does not change their footprint unexpectedly.
 - Static UI text is not selectable, editable values remain selectable, and sensitive plaintext does not persist in presentation state.
+- Geometry, scroll, automation, and window queries cross one lifecycle-safe adapter; minimized, hidden, closing, and transitioning states skip an interaction frame instead of throwing.
+- Minimize/restore and close-during-interaction are verified with physical input where native input state is involved, and long-running child work survives presentation suspension.
 - Material and platform capability fallbacks are documented and intentional.

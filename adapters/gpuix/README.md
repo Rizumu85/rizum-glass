@@ -36,6 +36,8 @@ Use measured platform geometry. On Windows, keep content clear of the native cap
 
 GPUIX is pre-1.0. Verify window, style, component, automation, and motion APIs against the consuming project's exact installed package before using them.
 
+Renderer geometry, scroll, automation, and window queries are frame-bound. Route them through one lifecycle-safe project adapter that treats minimized, hidden, closing, and transitioning windows as temporarily unavailable, releases active pointer and overlay work before suspension, and never lets a query timeout terminate long-running application work. Validate native-input behavior with a physical pointer and keyboard pass when the implementation reads operating-system input state; posted messages and renderer simulation alone are not sufficient evidence.
+
 The reference contract must record more than final screenshots. Include the real-device native calibration, static/editable selection ownership, pointer capture and wheel routing, sensitive-value handling, and every material or capability fallback used by the pinned runtime.
 
 ## Primary References
