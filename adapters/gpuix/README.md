@@ -10,7 +10,7 @@ GPUIX is the default desktop delivery stack for new Rizum Glass applications. Th
 - An exact pinned `@gpuix/react` release
 - GPUI through the GPUIX native package
 
-GPUIX and GPUI are related but different layers. GPUI is Zed's Rust UI framework. GPUIX supplies a React reconciler and native binding that render React components through GPUI without Electron or a web view. Direct GPUI remains available under `adapters/gpui/` for justified Rust-native surfaces, not as a second default stack.
+GPUIX and GPUI are related but different layers. GPUI is Zed's Rust UI framework. GPUIX supplies the React reconciler and native binding, while GPUI owns native layout and painting. Direct GPUI remains available under `adapters/gpui/` for justified Rust-native surfaces, not as a second default stack.
 
 ## Contents
 

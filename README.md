@@ -2,7 +2,7 @@
 
 Rizum Glass is a reusable UI design language for compact software surfaces. It combines neutral liquid glass, paper-like editorial rhythm, restrained pointillist color, and tactile Apple/Arc-inspired motion.
 
-The visual language is reusable across products. Browser references use **React + TypeScript + Vite + Tailwind CSS + shadcn/ui**. New desktop applications use **Bun + TypeScript + React 19 + GPUIX** after the reference is approved. Direct GPUI is the lower-level Rust escape hatch; WinUI 3 is retained only as frozen history for existing consumers.
+The visual language is reusable across products. Browser references use **React + TypeScript + Vite + Tailwind CSS + shadcn/ui**. New desktop applications use **Bun + TypeScript + React 19 + GPUIX** after the reference is approved. Direct GPUI is the lower-level Rust path for explicitly justified surfaces.
 
 The active visual references are the product-neutral [Rizum Glass UI Gallery](references/rizum-glass-ui-gallery-v11.html) and its [dark appearance](references/rizum-glass-ui-gallery-dark-v11.html). Archived product prototypes, older gallery snapshots, and transfer tests preserve history but must not guide new interface work.
 
@@ -16,7 +16,6 @@ The active visual references are the product-neutral [Rizum Glass UI Gallery](re
 | [`tokens/`](tokens/) | Generated Tailwind v4 and DTCG token exports. |
 | [`adapters/gpuix/`](adapters/gpuix/) | Default desktop adapter, generated TypeScript tokens, and platform-aware reference contract. |
 | [`adapters/gpui/`](adapters/gpui/) | Lower-level direct GPUI theme, Rust tokens, translation contract, and component gallery. |
-| [`adapters/winui/`](adapters/winui/) | Frozen legacy WinUI 3 resources for existing consumers; not an active target. |
 | [`skills/rizum-glass/`](skills/rizum-glass/) | Reusable Codex skill for web-first design and GPUIX desktop translation. |
 | [`references/rizum-glass-ui-gallery-v11.html`](references/rizum-glass-ui-gallery-v11.html) | Current curated product-neutral light appearance reference. |
 | [`references/rizum-glass-ui-gallery-dark-v11.html`](references/rizum-glass-ui-gallery-dark-v11.html) | Current curated product-neutral dark appearance reference. |
@@ -84,10 +83,6 @@ cargo run
 ```
 
 See [`adapters/gpui/README.md`](adapters/gpui/README.md) for the translation boundary.
-
-## Legacy WinUI 3 Material
-
-The former WinUI 3 adapter remains in [`adapters/winui/`](adapters/winui/) so existing projects can resolve pinned files and history. It is no longer generated, validated as an active adapter, or recommended for new Rizum Glass work.
 
 ## Evolving The Style
 

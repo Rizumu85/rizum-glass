@@ -20,7 +20,7 @@ Use the canonical Windows role set without depending on machine-installed fonts:
 
 Ship the exact font files and their license notices in every installer and portable archive. Register them process-private before the first GPUIX `render()` call so the renderer measures and rasterizes the intended faces from its first frame. Verify the packaged executable on a Windows account or environment that has not installed those families separately. Do not copy the files into the system Fonts directory, require administrator access, or let a developer-machine fallback become part of the approved geometry.
 
-GPUIX is React bindings for GPUI. React owns component composition and presentation state; the GPUIX reconciler sends mutations through the native binding; GPUI lays out and paints the retained native tree. It is not Electron, a web view, or a newer release of GPUI.
+GPUIX provides React bindings for GPUI. React owns component composition and presentation state; the GPUIX reconciler sends mutations through the native binding; GPUI lays out and paints the retained native tree.
 
 ## Required Inputs
 

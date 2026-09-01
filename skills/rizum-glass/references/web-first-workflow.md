@@ -11,7 +11,7 @@ Use this workflow for every new Rizum Glass interface, including interfaces that
 - shadcn/ui
 - Rizum Glass tokens and rules from `DESIGN.md`
 
-This stack is the canonical reference environment because it gives design agents a broad component vocabulary, inspectable computed styles, mature accessibility primitives, and rapid visual iteration. The default desktop runtime is GPUIX, not a browser or web view.
+This stack is the canonical reference environment because it gives design agents a broad component vocabulary, inspectable computed styles, mature accessibility primitives, and rapid visual iteration. GPUIX translates the approved reference into the default native desktop runtime.
 
 ## Sequence
 

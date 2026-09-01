@@ -7,7 +7,7 @@ Rizum Glass is a reusable UI design-language repository, not a product repositor
 - Keep project files, code, comments, and technical documentation in English.
 - Use React, TypeScript, Vite, Tailwind CSS, and shadcn/ui for canonical browser references.
 - Use Bun, TypeScript, React 19, and the pinned `@gpuix/react` release as the default desktop delivery stack for new Rizum Glass applications.
-- Treat direct GPUI as a lower-level Rust exception. Treat WinUI 3 as a frozen legacy adapter that must not guide new work.
+- Treat direct GPUI as a lower-level Rust exception and document that ownership boundary in the reference contract.
 - Before writing native UI code, require an approved web reference and the target-specific reference contract.
 - Verify unfamiliar GPUIX and GPUI APIs against the exact pinned dependency source; both are pre-1.0 and may change without a stable compatibility promise.
 - Keep system window controls native. Derive title-bar layout from platform insets and window state rather than fixed screenshot measurements.

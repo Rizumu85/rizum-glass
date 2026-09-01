@@ -8,7 +8,7 @@
     "expected_output": "Uses the browser reference workflow, selects Bun + TypeScript + React 19 + pinned GPUIX for delivery, keeps outer corners and window controls platform-owned, and treats the running native surface as an optical and interaction calibration rather than a numerical screenshot copy.",
     "files": [],
     "expectations": [
-      "Names GPUIX rather than WinUI 3 as the default desktop target",
+      "Names Bun + TypeScript + React 19 + pinned GPUIX as the default desktop stack",
       "Keeps Windows caption buttons and macOS traffic lights native",
       "Uses measured reserved regions or retains the native title bar when geometry is unavailable",
       "Records coherent native scale corrections and any title exception in the reference contract",

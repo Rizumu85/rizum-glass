@@ -5,7 +5,7 @@ description: Design and implement polished Rizum Glass interfaces. Use when crea
 
 # Rizum Glass
 
-Use the browser implementation as the design instrument and GPUIX as the default desktop delivery stack. GPUI is GPUIX's lower-level Rust renderer, not another name for GPUIX. WinUI 3 is legacy and must not be selected for new work.
+Use the browser implementation as the design instrument and GPUIX as the default desktop delivery stack. GPUI is GPUIX's lower-level Rust renderer, not another name for GPUIX.
 
 ## Start Here
 
@@ -21,7 +21,7 @@ Use the browser implementation as the design instrument and GPUIX as the default
 
 - Default browser references to React + TypeScript + Vite + Tailwind CSS + shadcn/ui + Rizum Glass.
 - Default new desktop delivery to Bun + TypeScript + React 19 + the project's pinned `@gpuix/react` release.
-- Do not migrate an existing product merely because this skill is active. For new Rizum Glass desktop work, do not introduce C# or WinUI 3.
+- Apply the desktop stack default to new applications and explicitly requested migrations; otherwise preserve the consuming product's architecture.
 - Never design a native adapter interface directly from prose, a screenshot, or `DESIGN.md` alone. First produce or locate an approved interactive web reference and its target-specific translation contract.
 - Use shadcn/ui in browser references and GPUIX's supported host/headless components in desktop code before writing custom controls. Custom styling may compose primitives; it should not discard focus, keyboard, selection, or state behavior.
 - Keep product features, domain models, and architecture out of `DESIGN.md`.

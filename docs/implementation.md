@@ -13,7 +13,6 @@ The repository separates canonical rules, derived assets, guidance, evidence, an
 | `tokens/` | Generated Tailwind v4 and DTCG exports | Derived from `DESIGN.md` |
 | `adapters/gpuix/` | Default desktop TypeScript constants and platform-aware reference contract | Derived adapter and delivery guidance |
 | `adapters/gpui/` | Direct GPUI theme, Rust constants, translation contract, and gallery | Lower-level adapter and verification surface |
-| `adapters/winui/` | Former WinUI 3 resources and handoff | Frozen legacy history only |
 | `skills/rizum-glass/` | Reusable agent workflow with a synchronized canonical snapshot | Derived guidance plus workflow |
 | `examples/` | Temporary cross-domain transfer tests | Validation evidence, not references |
 | `references/` | Complete product-neutral gallery plus historical archive | Active visual reference and archived evidence |
@@ -27,7 +26,7 @@ Use React, TypeScript, Vite, Tailwind CSS utilities, and shadcn/ui primitives. P
 
 Static HTML transfer tests are acceptable when they still use React component structure and Tailwind styling. Inline CSS should be limited to tokens, glass recipes, browser setup, and keyframes that utilities cannot express cleanly.
 
-This is the canonical design and reference environment, not the production renderer. The desktop delivery baseline is Bun, TypeScript, React 19, and an exact pinned `@gpuix/react` release. GPUIX renders through GPUI without Electron or a web view. Direct GPUI is reserved for a surface that needs lower-level Rust ownership or an unavailable GPUIX capability.
+This is the canonical design and reference environment, not the production renderer. The desktop delivery baseline is Bun, TypeScript, React 19, and an exact pinned `@gpuix/react` release. GPUIX supplies native React rendering through GPUI. Direct GPUI is reserved for a surface that needs lower-level Rust ownership or an unavailable GPUIX capability.
 
 ## Default GPUIX Path
 
@@ -55,10 +54,6 @@ GPUI must begin from an approved web reference rather than from prose or a scree
 6. Document material differences where browser backdrop filtering cannot map exactly to the target platform.
 
 The adapter pins versions only in its gallery smoke test. Consuming applications own their GPUI dependency versions and must verify APIs against their exact source.
-
-## Frozen WinUI 3 History
-
-`adapters/winui/` is retained so existing consumers can resolve historical resources. The export workflow no longer regenerates it, the Skill no longer routes new work to it, and new desktop applications should use GPUIX.
 
 ## Recommended Adoption: Git Submodule
 
