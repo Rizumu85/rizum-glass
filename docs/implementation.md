@@ -103,7 +103,7 @@ Regenerate implementation tokens and adapter assets after any front-matter chang
 ./scripts/export-tokens.sh
 ```
 
-Do not edit files in `tokens/`, `adapters/gpuix/generated/`, `adapters/gpui/themes/`, or `adapters/gpui/generated/` by hand. They are derived artifacts. The command also synchronizes `DESIGN.md` into the repository-owned Skill. Files under `adapters/winui/generated/` are frozen legacy outputs and are not regenerated.
+Do not edit files in `tokens/`, `adapters/gpuix/generated/`, `adapters/gpui/themes/`, or `adapters/gpui/generated/` by hand. They are derived artifacts. The command also synchronizes `DESIGN.md` into the repository-owned Skill.
 
 Then generate a new transfer test under a domain unrelated to the active gallery. The test should include the component categories affected by the change, such as:
 

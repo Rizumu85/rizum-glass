@@ -13,6 +13,7 @@ All notable changes to Rizum Glass are documented here.
 - Expanded the GPUIX reference contract with required native-calibration, interaction-ownership, and capability-fallback evidence, and added restrained motion degradation rules for keyboard input, reduced motion, coarse status feedback, static continuous-motion fallbacks, and immediate native window resizing.
 - Added five product-neutral application-shell archetypes with single-owner title rules, optional visible product identity, content-driven window sizing, platform-safe title-bar actions, platform-specific menu ownership, and conditional panel navigation.
 - Adopted Bun + TypeScript + React 19 + GPUIX as the default desktop delivery stack, clarified that GPUI is its lower-level Rust renderer, and simplified active guidance to describe the selected stack without retaining comparisons to retired alternatives.
+- Removed retired desktop-adapter artifacts, including their generator, validation entry, and frozen outputs, so the repository carries only current implementation paths.
 - Added platform-native window-shell rules: Windows and macOS own the outer silhouette and window controls, while Rizum Glass material reaches the real edge and title content respects measured control insets.
 - Added generated GPUIX TypeScript tokens, a platform-aware reference contract, and an unrelated cross-platform window transfer test.
 - Defined a quieter 15-16px `title-serif` role for contextual chrome when a visible window title is useful, while reserving 19px display titles for the current content surface or decision.
@@ -29,18 +30,11 @@ All notable changes to Rizum Glass are documented here.
 - Curated the active light and dark galleries by removing the unfinished extension-center family while preserving the earlier snapshots.
 - Rebalanced model and credential settings into a wider, shorter form with compact grouped model rows.
 - Added reusable Rizum Glass Select guidance and adapted light/dark dropdown popovers with compact density, keyboard interaction, collision-aware placement, and neutral glass menus.
-- Added the approved solid-canvas dark appearance, including generated Tailwind, GPUI, and WinUI 3 dark tokens.
+- Added the approved solid-canvas dark appearance, including generated web, GPUIX, and direct GPUI dark tokens.
 - Explicitly excluded cursor-following glow and panel spotlight effects from Rizum Glass.
 - Retired the darkroom transfer-test series and made the complete product-neutral UI galleries the only active visual references.
 - Added a complete product-neutral dark UI gallery with the same component and interaction coverage as the light reference.
 - Added a product-neutral UI reference gallery covering the full set of interface families from the broad Nolnol reference snapshot.
-
-## 1.2.0 - 2026-08-26
-
-- Added an optional WinUI 3 adapter with generated XAML resources and C# motion constants.
-- Added a WinUI reference contract so native Windows surfaces remain translations of approved web references.
-- Added WinUI-specific MVVM, code-behind, material, motion, accessibility, and scale-factor guidance to the reusable Skill.
-- Added a reusable WPF-to-WinUI adoption handoff for coding agents.
 
 ## 1.1.0 - 2026-08-26
 

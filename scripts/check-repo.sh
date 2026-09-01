@@ -35,7 +35,6 @@ adapters/gpuix/README.md
 adapters/gpuix/generated/rizum-glass-tokens.ts
 adapters/gpuix/reference-contract.schema.json
 adapters/gpuix/reference-contract.example.json
-adapters/winui/README.md
 skills/rizum-glass/SKILL.md
 skills/rizum-glass/agents/openai.yaml
 skills/rizum-glass/references/DESIGN.md
