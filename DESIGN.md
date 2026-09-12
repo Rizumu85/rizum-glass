@@ -413,6 +413,8 @@ When a native adapter does not clip child paint to a rounded parent's path, appl
 
 Default buttons and controls use 8px corners. Panels use 16-20px corners. Compact card rows may use 12px corners.
 
+Nest radii concentrically: the outer corner equals the inner corner plus the gap between the two edges. A 7px selected row on 4px sheet padding takes an 11px sheet corner; a 6px menu item on 6px menu padding takes 12px. Apply the rule wherever a painted child sits inside a painted parent — menu rows, list-row hover fills, segmented thumbs, image wells — and keep zero-gap nests at equal radii. A corner rounded to a nearby even number instead of derived from the nest reads as a crooked frame before the eye finds the cause.
+
 These component radii do not define the outer radius of a desktop window. The platform owns the top-level window silhouette:
 
 - On Windows 11, retain the system frame, border, shadow, and rounded-corner preference. A normal top-level window generally follows the Windows 11 8 effective-pixel silhouette at 100% scale; do not force that radius when the system removes rounding for maximized, snapped, remote, or other platform states.
