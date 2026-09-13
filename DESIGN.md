@@ -281,6 +281,16 @@ Accent colors must stay disciplined and small:
 
 Do not create gradients inside metric or status bars. Bars use one solid accent color with slight opacity. Star shapes are not a generic panel decoration. Use stars only where the component is inherently editorial or creative, such as editorial digest stamps, card-draw buttons, or reward/stamp animations. Ordinary settings, queue, menu, status, and utility panels should use no top-right star.
 
+### Keyboard focus
+
+Focus is a state, so it is drawn like one: on the control's own edge, in the accent, with the accent's own wash inside the control so a focused control reads as lit rather than outlined. Never leave a keyboard user without one, and never take the platform's indicator away without replacing it.
+
+- Draw the indicator as a keyline on the control's edge, not as an outer glow, ring, or halo. A ring outside the box fights the material's quiet edges, and on a runtime that paints shadows behind an element it reads as a filled block wherever the control has no surface of its own.
+- Reserve the space the keyline needs, or draw it on an edge the control already has, so nothing moves when focus arrives. Centred content tolerates a border that grows; leading-aligned text does not.
+- The keyline colour has to be measurable against the surface it sits on: hold the accent back to a deeper step of its own hue when the accent itself measures below 3:1 there, and use the accent as it is where the surface already carries it. A focus indicator that cannot be measured is decoration.
+- Show it only after keyboard navigation. A pointer press takes the marker back, so clicking a control never lights it up. Where the runtime has no `:focus-visible`, the application has to tell the two apart itself.
+- One focus treatment per product, identical in both appearances, and applied by the shared control rather than per screen.
+
 ## Motion
 
 Motion should feel like Apple UI and Arc Browser: alive, spatial, and soft, never loud. Use springy easing, subtle overshoot, staggered reveals, hover lift, scale-on-press, menu items cascading top to bottom, and glass surfaces that float into place. Prefer transforms and opacity over layout shifts.
