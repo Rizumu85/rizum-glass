@@ -4,7 +4,6 @@ All notable changes to Rizum Glass are documented here.
 
 ## Unreleased
 
-- Added the fluid-hover rule: a row list, menu, or segmented strip carries hover and cursor feedback in one indicator that moves to the target item instead of a fill painted by every item, shared by pointer and keyboard, travelling with the content it describes, immediate under reduced motion, and explicitly distinguished from cursor-following glow.
 - Added the concentric nesting rule for radii: derive each outer corner from the inner corner plus the gap between the two edges, applied across menu rows, list-row hover fills, segmented thumbs, and image wells, with field evidence from a desktop relay product whose dropdown rows painted flush against their sheet corner.
 - Added GPUIX runtime-query lifecycle guidance: centralize frame-bound geometry and scroll calls, suspend interaction polling around native window lifecycle changes, preserve long-running work when presentation queries are unavailable, and verify native input paths with physical interaction.
 - Defined the Windows typography contract as bundled MiSans VF UI text, Noto Serif SC VF contextual titles, and Cascadia Mono data text, including license distribution and process-private registration before GPUIX initializes text rendering.
