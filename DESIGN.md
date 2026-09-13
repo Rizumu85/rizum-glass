@@ -283,7 +283,7 @@ Do not create gradients inside metric or status bars. Bars use one solid accent 
 
 ### Keyboard focus
 
-Focus is a state, so it is drawn like one: a keyline on the control's own edge, in the accent, and nothing else. The line carries the state; a filled or outlined control reads as selected or as an error, so the focus state adds no fill and no outer ring. Never leave a keyboard user without one, and never take the platform's indicator away without replacing it.
+Focus is a state, so it is drawn like one: on the control's own edge, in the accent, with the accent's own wash inside the control so a focused control reads as lit rather than outlined. Never leave a keyboard user without one, and never take the platform's indicator away without replacing it.
 
 - Draw the indicator as a keyline on the control's edge, not as an outer glow, ring, or halo. A ring outside the box fights the material's quiet edges, and on a runtime that paints shadows behind an element it reads as a filled block wherever the control has no surface of its own.
 - Reserve the space the keyline needs, or draw it on an edge the control already has, so nothing moves when focus arrives. Centred content tolerates a border that grows; leading-aligned text does not.
